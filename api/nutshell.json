@@ -4,6 +4,53 @@
       "id": 1,
       "username": "howard",
       "email": "howard@gmail.com"
+    },
+    {
+      "username": "Bobby",
+      "email": "bbrady91@gmail.com",
+      "id": 2
+    }
+  ],
+  "tasks": [
+    {
+      "id": 1,
+      "userId": 1,
+      "task": "Finish the task list.",
+      "completed": false,
+      "expectedCompletion": "2019-08-16"
+    }
+  ],
+  "news": [
+    {
+      "id": 1,
+      "userId": 1,
+      "url": "news.com",
+      "title": "News article",
+      "synopsis": "This is an article about this."
+    }
+  ],
+  "events": [
+    {
+      "id": 1,
+      "userId": 1,
+      "eventName": "Event Name",
+      "date": "2019-08-16",
+      "location": "1234 Main Street"
+    }
+  ],
+  "friends": [
+    {
+      "id": 1,
+      "userId": 1,
+      "otherFriendId": 2
+    }
+  ],
+  "messages": [
+    {
+      "id": 1,
+      "userId": 1,
+      "message": "This is a message."
     }
   ]
+  
 }
