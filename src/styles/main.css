@@ -1,0 +1,31 @@
+html,body {
+    height: 100%;
+    padding: 0;
+    margin: 0;
+}
+
+.leftSideContainer {
+    width: 49%;
+    height: 90%;
+    float: left;
+    border: solid black 1px;
+    margin: 4px;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+}
+
+.rightSideContainer {
+    width: 49%;
+    height: 90%;
+    float: right;
+    /* border: solid blue 1px; */
+    margin: 4px;
+}
+
+.container {
+    /* border: solid 1px magenta; */
+    height: 24%;
+    margin: 2px;
+    overflow:scroll;
+}
