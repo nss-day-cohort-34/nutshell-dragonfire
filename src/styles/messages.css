@@ -1,0 +1,9 @@
+.messages__container {
+    border: 1px solid goldenrod;
+    height:90%;
+    overflow: scroll;
+}
+
+.messages {
+    /* margin-top: 80%; */
+}
