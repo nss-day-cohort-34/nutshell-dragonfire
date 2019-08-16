@@ -29,10 +29,22 @@
     {
       "id": 1,
       "userId": 1,
-      "date":"2019-08-16",
+      "date": "2019-08-16",
       "url": "news.com",
       "title": "News article",
       "synopsis": "This is an article about this."
+    },
+    {
+      "title": "",
+      "synopsis": "",
+      "url": "",
+      "id": 2
+    },
+    {
+      "title": "testing",
+      "synopsis": "testing",
+      "url": "testin",
+      "id": 3
     }
   ],
   "events": [

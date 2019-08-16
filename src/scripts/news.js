@@ -4,59 +4,81 @@ const getNewsData = () => {
     .then(entries => entries.json())
 }
 
+const saveNewsEntry =
+  function(newNewsEntry ) {
+    return fetch("http://localhost:8088/news",{
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(newNewsEntry)
+    })
+}
 
 
 //* ------------------news---factory.js------------
 const createNewsArticleComponent = (object) => {
     return `<div class="newsArticle--${object.id}">
-              <h3>${object.date}</h3>
               <section>${object.title}</section>
               <section>${object.synopsis}</section>
               <section>URL: ${object.url}</section>
-              <section>Presented By: ${object.userId}</section>
-              <button id="articleSave--${object.id}">Save News Article</button>
+              <section>Submitted By: ${object.userId}</section>
+              <button id="articleSave--${object.id}">Delete News Article</button>
+              <button id="articleEdit--${object.id}">Edit News Article</button>
           </div>`;
   };
 
-  const whereToDisplayNewsInTheDOM = document.querySelector(
-    "#news__container"
-  );
+  
 
   const renderToDOM = (newsArticles) => {
+    const whereToDisplayNewsInTheDOM = document.querySelector("#news__container");
     newsArticles.forEach(object => {
       console.table(object)
       const htmlRepresentation = createNewsArticleComponent(object);
-      console.log(object)
-      console.log(htmlRepresentation)
-      whereToDisplayNewsInTheDOM.innerHTML += htmlRepresentation;
-      }); 
+      whereToDisplayNewsInTheDOM.innerHTML += htmlRepresentation
+      });
   };
 
 
 //* ------------------news---main.js-----------------------------------
 
-getNewsData().then(renderToDOM)
+// getNewsData().then(renderToDOM)
 
 // ------------------Enter News-------------------------
 let newNewsEntry = ""
-document.querySelector("#news__entry").addEventListener("click", event => {
-  //* Capture the new journal entry with a factory function and save them to an array
-  const date = document.querySelector("#newsDate");
-  const title = document.querySelector("#newsTitle");
-  const synopsis = document.querySelector("#newsSynopsis");
-  const url = document.querySelector("#newsURL");
-  
-  
-  newJournalEntry = {
-    date: date.value,
-    concept: concept.value,
-    content: content.value,
-    mood: mood.value, 
-  }
+
+masterContainer.addEventListener("click", () => {
+    if (event.target.id.startsWith("news__entry")) {
+        const title = document.querySelector("#newsTitle");
+        const synopsis = document.querySelector("#newsSynopsis");
+        const url = document.querySelector("#newsURL");
+        newNewsEntry = {
+            title: title.value,
+            synopsis: synopsis.value,
+            url: url.value,
+        }
   //* Display the new journal entry in the DOM
-  saveJournalEntry(newJournalEntry)
-  .then (() => {
-    entries.push({date, concept, content, mood})
-  })
-  
-});
+        saveNewsEntry(newNewsEntry)
+    }
+
+})
+
+
+// document.querySelector("#news__entry").addEventListener("click", () => {
+//   //* Capture the news entry with a factory function and save them to an array
+//   const title = document.querySelector("#newsTitle");
+//   const synopsis = document.querySelector("#newsSynopsis");
+//   const url = document.querySelector("#newsURL");
+//   newNewsEntry = {
+//     title: title.value,
+//     synopsis: synopsis.value,
+//     url: url.value,
+//     }
+//   //* Display the new journal entry in the DOM
+//   saveNewsEntry(newNewsEntry)
+// });
+
+export default {
+    getNewsData, saveNewsEntry, renderToDOM, createNewsArticleComponent
+
+}

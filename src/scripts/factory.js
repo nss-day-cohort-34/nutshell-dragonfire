@@ -37,6 +37,7 @@ const renderHomepage = () => {
 <div class="leftSideContainer">
   <article class="container news__container" id="news__container">
   <h3>News</h3>
+  
   </article>
   <article class="container tasks__container" id="tasks__container">
   <h3>To-Dos</h3>

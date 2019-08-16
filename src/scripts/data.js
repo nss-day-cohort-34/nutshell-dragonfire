@@ -19,6 +19,10 @@ const searchAPI = (username, email) => {
 }
 
 
+
+
+
+
 export default {
     getData, register, searchAPI
 }
