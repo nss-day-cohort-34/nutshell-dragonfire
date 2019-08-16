@@ -4,6 +4,10 @@ html,body {
     margin: 0;
 }
 
+.masterContainer {
+    height: 100%;
+}
+
 .leftSideContainer {
     width: 49%;
     height: 90%;
@@ -19,12 +23,12 @@ html,body {
     width: 49%;
     height: 90%;
     float: right;
-    /* border: solid blue 1px; */
+    border: solid blue 1px;
     margin: 4px;
 }
 
 .container {
-    /* border: solid 1px magenta; */
+    border: solid 1px magenta;
     height: 24%;
     margin: 2px;
     overflow:scroll;
