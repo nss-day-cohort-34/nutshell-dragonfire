@@ -5,15 +5,18 @@ import messages from "./messages.js"
 const masterContainer = document.querySelector("#masterContainer")
 let users = []
 
+masterContainer.innerHTML = factory.renderLogin()
 API.getData().then(parsedData => {
     users.push(parsedData)
 })
-masterContainer.innerHTML = factory.renderLogin()
+
 
 //prevent refresh
 if (sessionStorage.length > 0) {
     masterContainer.innerHTML = ""
     masterContainer.innerHTML = factory.renderHomepage()
+    messages.getAllMessages().then(parsedData => {
+        messages.renderMessage(parsedData)})
 }
 //click login button
 masterContainer.addEventListener("click", () => {
@@ -44,6 +47,8 @@ masterContainer.addEventListener("click", () => {
                 console.log(sessionStorage.userId)
                 masterContainer.innerHTML = ""
                 masterContainer.innerHTML = factory.renderHomepage()
+                messages.getAllMessages().then(parsedData => {
+                    messages.renderMessage(parsedData)})
             }
         })
     }
@@ -66,6 +71,8 @@ masterContainer.addEventListener("click", () => {
                         users.push(parsedData)
                         masterContainer.innerHTML = ""
                         masterContainer.innerHTML = factory.renderHomepage()
+                        messages.getAllMessages().then(parsedData => {
+                            messages.renderMessage(parsedData)})
                     })
                 })
             }
@@ -82,4 +89,19 @@ masterContainer.addEventListener("click", () => {
 })
 //messages
 
+const rightSide = document.querySelector(".rightSideContainer")
+const messagesContainer = document.querySelector("#messages__container")
 
+masterContainer.addEventListener("click", () => {
+    if (event.target.id.startsWith("messages__submit")) {
+        const message = document.querySelector("#messages__input")
+        const id = parseInt(sessionStorage.getItem("userId"))
+        const newMessageObject = messages.makeMessageObject(id, message.value)
+        messages.saveMessage(newMessageObject).then(() => {
+        messages.getAllMessages().then(parsedData => {
+            messages.renderMessage(parsedData)
+        })
+        })
+        message.value = ""
+    }
+})
