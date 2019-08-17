@@ -1,6 +1,5 @@
 {
-  "users": [
-    {
+  "users": [{
       "id": 1,
       "username": "howard",
       "email": "howard@gmail.com"
@@ -16,58 +15,44 @@
       "id": 3
     }
   ],
-  "tasks": [
-    {
-      "id": 1,
-      "userId": 1,
-      "task": "Finish the task list.",
-      "completed": false,
-      "date": "2019-08-16"
+  "tasks": [{
+      "task": "Another task for the future",
+      "date": "2019-08-30",
+      "id": 9
     },
     {
       "task": "This is a new task",
+      "date": "2019-08-19",
+      "id": 10
+    },
+    {
+      "task": "Mow the yard",
       "date": "2019-08-17",
-      "id": 2
+      "id": 11
     },
     {
-      "task": "This is a third test",
-      "date": "2019-08-23",
-      "id": 3
-    },
-    {
-      "task": "This is another task to do ",
-      "date": "",
-      "id": 6
-    },
-    {
-      "task": "This is a Saturday morning test",
-      "date": "2019-08-17",
-      "id": 7
+      "task": "Get a haircut",
+      "date": "2019-08-31",
+      "id": 12
     }
   ],
-  "news": [
-    {
-      "id": 1,
-      "userId": 1,
-      "url": "news.com",
-      "title": "News article",
-      "synopsis": "This is an article about this."
-    }
-  ],
-  "events": [
-    {
-      "id": 1,
-      "userId": 1,
-      "eventName": "Event Name",
-      "date": "2019-08-16",
-      "location": "1234 Main Street"
-    }
-  ],
-  "messages": [
-    {
-      "id": 1,
-      "userId": 1,
-      "message": "This is a message."
-    }
-  ]
+  "news": [{
+    "id": 1,
+    "userId": 1,
+    "url": "news.com",
+    "title": "News article",
+    "synopsis": "This is an article about this."
+  }],
+  "events": [{
+    "id": 1,
+    "userId": 1,
+    "eventName": "Event Name",
+    "date": "2019-08-16",
+    "location": "1234 Main Street"
+  }],
+  "messages": [{
+    "id": 1,
+    "userId": 1,
+    "message": "This is a message."
+  }]
 }

@@ -42,13 +42,13 @@ const renderHomepage = () => {
   <input type="hidden" id="taskID" value="">
   <fieldset>
   <legend>Tasks:</legend>
-  <input type="text" name="tasksText" id="tasksText" size="50" placeholder="Enter task here">
+  <input type="text" name="tasksText" id="tasksText" size="50" placeholder="Enter task here" autofocus>
   </fieldset>
   <fieldset>
   <legend>Due Date:</legend>
   <input type="date" name="dueDate" id="taskDueDate">
   </fieldset>
-  <fieldset><input type="submit" id="submit_button" value="Submit"></fieldset>
+  <fieldset><input type="submit" id="submit_button" value="Add"></fieldset>
   <h3>Your Tasks:</h3></div>
   <div id="tasksRender"
   

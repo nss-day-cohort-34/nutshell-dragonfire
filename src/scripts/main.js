@@ -102,6 +102,13 @@ masterContainer.addEventListener("click", () => {
 
 
 //Tasks
+const taskDueDate = document.querySelector("#taskDueDate")
+const taskText = document.querySelector("#tasksText")
+const deleteAllFields = (tasks) => {
+    taskDueDate.value = ""
+    taskText.value = ""
+}
+
 masterContainer.addEventListener("click", event => {
     if (event.target.id.startsWith("submit_button")) {
         const taskDueDate = document.querySelector("#taskDueDate")
@@ -110,10 +117,14 @@ masterContainer.addEventListener("click", event => {
         const dateValue = taskDueDate.value
         const taskValue = taskText.value
         const newTaskEntry = tasks.makeTasksObject(taskValue, dateValue)
+
         if (hiddenEntryID.value !== "") {
             tasks.editTaskEntry(newTaskEntry, hiddenEntryID.value)
-                .then(tasks.getAllTasks)
-            // .then(deleteAllFields)
+                .then(tasks.getTasksData).then(parsedData => {
+                    tasks.renderTasks(parsedData)
+                })
+                .then(deleteAllFields)
+
         } else {
             const taskDueDate = document.querySelector("#taskDueDate")
             const taskText = document.querySelector("#tasksText")
@@ -121,16 +132,41 @@ masterContainer.addEventListener("click", event => {
             const taskValue = taskText.value
             const newTaskEntry = tasks.makeTasksObject(taskValue, dateValue)
             tasks.postNewTask(newTaskEntry)
-                .then(tasks.getAllTasks)
+                .then(tasks.getTasksData).then(parsedData => {
+                    tasks.renderTasks(parsedData)
+                })
+                .then(deleteAllFields)
 
-            //clear the fields
-            taskDueDate.value = ""
-            taskText.value = ""
         }
     }
 })
 
-//To-Do for Tasks:
-//1. Delete functionality
-//2. Editing functionality
-//3. Completed checkbox that grays out/strikes through or deletes that task
+//tasks edit/delete eventlistener
+
+masterContainer.addEventListener("click", () => {
+    if (event.target.id.startsWith("delete__Task")) {
+        const deleteBtnID = event.target.id.split("--")[1]
+        tasks.deleteTaskEntry(deleteBtnID)
+            .then(tasks.getTasksData).then(parsedData => {
+                tasks.renderTasks(parsedData)
+            })
+    }
+    if (event.target.id.startsWith("edit__Task")) {
+        const entryId = event.target.id.split("--")[1]
+        tasks.updateTaskEditFields(entryId)
+            .then(tasks.getTasksData).then(parsedData => {
+                tasks.renderTasks(parsedData)
+            })
+
+    }
+
+})
+
+//eventListener for task checkbox goes here:
+
+masterContainer.addEventListener("click", (event) => {
+    if (event.target.id.startsWith("completed")) {
+        event.target.classList.toggle("checked");
+        console.log("click")
+    }
+}, false);

@@ -40,14 +40,14 @@ const editTaskEntry = (updatedObject, id) => {
 
 //update task fields
 const updateTaskEditFields = (id) => {
-    const hiddenEntryId = document.querySelector("#entryId")
+    const hiddenEntryID = document.querySelector("#taskID")
     //variables to hold DOM locations for form fields
     const taskDueDate = document.querySelector("#taskDueDate")
     const taskText = document.querySelector("#tasksText")
     return fetch(`http://localhost:8088/tasks/${id}`)
         .then(response => response.json())
         .then(task => {
-            hiddenEntryId.value = task.id
+            hiddenEntryID.value = task.id
             taskDueDate.value = task.date
             taskText.value = task.task
         })
@@ -58,11 +58,11 @@ const updateTaskEditFields = (id) => {
 const tasksHTML = (messageObject) => {
     return `
     <article id="taskField--${messageObject.id}" class="taskField">
-    <input type="checkbox">
-    <span>${messageObject.task}</span>
-    <p>Due Date: ${messageObject.date}</p>
-    <button class="edit-button" id="edit_Entry--${messageObject.id}">Edit Task</button>
-    <button class="delete-button" id="delete_Entry--${messageObject.id}">Delete Task</button>
+    <span id="taskLine"><input name=completed id=completed type=checkbox unchecked>
+    ${messageObject.task}
+    (Due: ${messageObject.date})</span>
+    <button class="edit-button" id="edit__Task--${messageObject.id}">Edit</button>
+    <button class="delete-button" id="delete__Task--${messageObject.id}">Delete</button>
     <br>
     <hr>
     </article>`

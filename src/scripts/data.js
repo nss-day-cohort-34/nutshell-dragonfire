@@ -1,5 +1,5 @@
 const getData = () => {
-    return fetch("http://localhost:8088/users")
+    return fetch("http://localhost:8088/users?_sort=order=date")
         .then(entries => entries.json())
 }
 
