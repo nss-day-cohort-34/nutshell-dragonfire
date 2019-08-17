@@ -1,6 +1,7 @@
 import factory from "./factory.js"
 import API from "./data.js"
 import messages from "./messages.js"
+import tasks from "./tasks.js"
 
 const masterContainer = document.querySelector("#masterContainer")
 let users = []
@@ -14,6 +15,10 @@ masterContainer.innerHTML = factory.renderLogin()
 if (sessionStorage.length > 0) {
     masterContainer.innerHTML = ""
     masterContainer.innerHTML = factory.renderHomepage()
+    tasks.getTasksData().then(parsedData => {
+        tasks.renderTasks(parsedData)
+    })
+
 }
 //click login button
 masterContainer.addEventListener("click", () => {
@@ -21,6 +26,7 @@ masterContainer.addEventListener("click", () => {
         const loginContainer = document.querySelector("#loginContainer")
         loginContainer.innerHTML = ""
         loginContainer.innerHTML = factory.createLogin()
+
     }
 })
 //click register button
@@ -29,6 +35,7 @@ masterContainer.addEventListener("click", () => {
         const loginContainer = document.querySelector("#loginContainer")
         loginContainer.innerHTML = ""
         loginContainer.innerHTML = factory.createRegister()
+
     }
 })
 // verify user in database
@@ -44,6 +51,11 @@ masterContainer.addEventListener("click", () => {
                 console.log(sessionStorage.userId)
                 masterContainer.innerHTML = ""
                 masterContainer.innerHTML = factory.renderHomepage()
+                tasks.getTasksData().then(parsedData => {
+                    tasks.renderTasks(parsedData)
+                })
+
+
             }
         })
     }
@@ -66,6 +78,9 @@ masterContainer.addEventListener("click", () => {
                         users.push(parsedData)
                         masterContainer.innerHTML = ""
                         masterContainer.innerHTML = factory.renderHomepage()
+                        tasks.getTasksData().then(parsedData => {
+                            tasks.renderTasks(parsedData)
+                        })
                     })
                 })
             }
@@ -83,3 +98,39 @@ masterContainer.addEventListener("click", () => {
 //messages
 
 
+//*******************************************/
+
+
+//Tasks
+masterContainer.addEventListener("click", event => {
+    if (event.target.id.startsWith("submit_button")) {
+        const taskDueDate = document.querySelector("#taskDueDate")
+        const taskText = document.querySelector("#tasksText")
+        const hiddenEntryID = document.querySelector("#taskID")
+        const dateValue = taskDueDate.value
+        const taskValue = taskText.value
+        const newTaskEntry = tasks.makeTasksObject(taskValue, dateValue)
+        if (hiddenEntryID.value !== "") {
+            tasks.editTaskEntry(newTaskEntry, hiddenEntryID.value)
+                .then(tasks.getAllTasks)
+            // .then(deleteAllFields)
+        } else {
+            const taskDueDate = document.querySelector("#taskDueDate")
+            const taskText = document.querySelector("#tasksText")
+            const dateValue = taskDueDate.value
+            const taskValue = taskText.value
+            const newTaskEntry = tasks.makeTasksObject(taskValue, dateValue)
+            tasks.postNewTask(newTaskEntry)
+                .then(tasks.getAllTasks)
+
+            //clear the fields
+            taskDueDate.value = ""
+            taskText.value = ""
+        }
+    }
+})
+
+//To-Do for Tasks:
+//1. Delete functionality
+//2. Editing functionality
+//3. Completed checkbox that grays out/strikes through or deletes that task

@@ -22,7 +22,27 @@
       "userId": 1,
       "task": "Finish the task list.",
       "completed": false,
-      "expectedCompletion": "2019-08-16"
+      "date": "2019-08-16"
+    },
+    {
+      "task": "This is a new task",
+      "date": "2019-08-17",
+      "id": 2
+    },
+    {
+      "task": "This is a third test",
+      "date": "2019-08-23",
+      "id": 3
+    },
+    {
+      "task": "This is another task to do ",
+      "date": "",
+      "id": 6
+    },
+    {
+      "task": "This is a Saturday morning test",
+      "date": "2019-08-17",
+      "id": 7
     }
   ],
   "news": [
@@ -41,13 +61,6 @@
       "eventName": "Event Name",
       "date": "2019-08-16",
       "location": "1234 Main Street"
-    }
-  ],
-  "friends": [
-    {
-      "id": 1,
-      "userId": 1,
-      "otherFriendId": 2
     }
   ],
   "messages": [

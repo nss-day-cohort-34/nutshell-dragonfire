@@ -1,7 +1,5 @@
-
-
 const createLogin = () => {
-    return ` <section>
+  return ` <section>
     <h2>Please Login</h2>
     <input type="text" placeholder="Username" id = "loginUsername">
     <input type="text" placeholder="Email" id = "loginEmail">
@@ -10,7 +8,7 @@ const createLogin = () => {
 }
 
 const createRegister = () => {
-    return ` <section>
+  return ` <section>
     <h2>Please Register</h2>
     <input type="text" placeholder="Enter a Username" id = "registerUsername">
     <input type="text" placeholder="Enter an Email" id = "registerEmail">
@@ -19,10 +17,10 @@ const createRegister = () => {
 }
 
 const makeUserObject = (username, email) => {
-    return {
-        username: username,
-        email: email
-    }
+  return {
+    username: username,
+    email: email
+  }
 }
 
 const renderHomepage = () => {
@@ -40,6 +38,21 @@ const renderHomepage = () => {
   </article>
   <article class="container tasks__container" id="tasks__container">
   <h3>To-Dos</h3>
+  <div id="tasksFormField">
+  <input type="hidden" id="taskID" value="">
+  <fieldset>
+  <legend>Tasks:</legend>
+  <input type="text" name="tasksText" id="tasksText" size="50" placeholder="Enter task here">
+  </fieldset>
+  <fieldset>
+  <legend>Due Date:</legend>
+  <input type="date" name="dueDate" id="taskDueDate">
+  </fieldset>
+  <fieldset><input type="submit" id="submit_button" value="Submit"></fieldset>
+  <h3>Your Tasks:</h3></div>
+  <div id="tasksRender"
+  
+  </div>
   </article>
   <article class="container events__container" id="events__container">
   <h3>Events</h3>
@@ -58,6 +71,48 @@ const renderLogin = () => {
   </article>`
 }
 
+//Tasks Functionality Here
+
+// const createFormField = () => {
+
+//   return `
+//   <div id="tasksFormField">
+//   <fieldset>
+//   <legend>Tasks:</legend>
+//   <input type="text" name="tasksText" id="tasksText" size="50" placeholder="Enter task here">
+//   </fieldset>
+//   <fieldset>
+//   <legend>Due Date:</legend>
+//   <input type="date" name="dueDate" id="taskDueDate">
+//   </fieldset>
+//   <fieldset><input type="submit" class="submit_button" value="Submit"></fieldset>
+//   </div>`
+// }
+
+// const tasksHTML = (id, task, date) => {
+//   return `
+//   <article id="taskField--${id}" class="taskField">
+//   <input type="checkbox">
+//   <span>${task}</span>
+//   <p>Due Date: ${date}</p>
+//   <button class="edit-button" id="edit_Entry--${id}">Edit Task</button>
+//   <button class="delete-button" id="delete_Entry--${id}">Delete Task</button>
+//   <br>
+//   <hr>
+//   </article>`
+// }
+
+// const makeTasksObject = (task, date) => {
+//   return {
+//     task: task,
+//     date: date
+//   }
+// }
+
 export default {
-    createLogin, createRegister, makeUserObject, renderHomepage, renderLogin
+  createLogin,
+  createRegister,
+  makeUserObject,
+  renderHomepage,
+  renderLogin
 }
