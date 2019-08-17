@@ -24,7 +24,17 @@ const makeMessageObject = (userId, message) => {
 
 const makeMessageComponent = (messageObject) => {
     return ` <p>${messageObject.user.username} - ${messageObject.message}</p>
-    <button class="edit__button" id="edit--${messageObject.id}">Edit</button>`
+    <button class="edit__button" id="messageEdit--${messageObject.id}">Edit</button>
+    <dialog class = "modal" id="modal--${messageObject.id}">
+    <input class="editMessageInput" id="messageInput--${messageObject.id}" type="text">
+    <button class="save__button" id="messages--save--${messageObject.id}">Save</button>
+    <button class="cancel__button" id="cancelMessage--${messageObject.id}">Cancel</button>
+    </dialog>`
+}
+
+const getOneMessage = (id) => {
+    return fetch(`http://localhost:8088/messages?id=${id}`)
+    .then(entries => entries.json())
 }
 
 const getAllMessages = () => {
@@ -42,9 +52,33 @@ const renderMessage = (entries) => {
     messagesContainer.scrollTop = messagesContainer.scrollHeight
 }
 
+let updatedObject = {}
+const edit = (nameOfArray, ID, locationID) => {
+    if (nameOfArray === "messages") {
+        updatedObject = messagesEdit(locationID)
+    }
+    return fetch(`http://localhost:8088/${nameOfArray}/${ID}`, {
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(updatedObject)
+    }).then(data => data.json())
+        .then(() => {
+        })
+}
+
+const messagesEdit = (messageID) => {
+    const message = document.querySelector(`#${messageID}`)
+    const id = parseInt(sessionStorage.getItem("userId"))
+    const updatedObject = makeMessageObject(id, message.value)
+    return updatedObject
+}
+
+
 
 
 
 export default {
-    saveMessage, makeMessageObject, renderMessage, getAllMessages
+    saveMessage, makeMessageObject, renderMessage, getAllMessages, edit, getOneMessage
 }

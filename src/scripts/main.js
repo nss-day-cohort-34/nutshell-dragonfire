@@ -16,7 +16,8 @@ if (sessionStorage.length > 0) {
     masterContainer.innerHTML = ""
     masterContainer.innerHTML = factory.renderHomepage()
     messages.getAllMessages().then(parsedData => {
-        messages.renderMessage(parsedData)})
+        messages.renderMessage(parsedData)
+    })
 }
 //click login button
 masterContainer.addEventListener("click", () => {
@@ -48,7 +49,8 @@ masterContainer.addEventListener("click", () => {
                 masterContainer.innerHTML = ""
                 masterContainer.innerHTML = factory.renderHomepage()
                 messages.getAllMessages().then(parsedData => {
-                    messages.renderMessage(parsedData)})
+                    messages.renderMessage(parsedData)
+                })
             }
         })
     }
@@ -72,7 +74,8 @@ masterContainer.addEventListener("click", () => {
                         masterContainer.innerHTML = ""
                         masterContainer.innerHTML = factory.renderHomepage()
                         messages.getAllMessages().then(parsedData => {
-                            messages.renderMessage(parsedData)})
+                            messages.renderMessage(parsedData)
+                        })
                     })
                 })
             }
@@ -89,19 +92,57 @@ masterContainer.addEventListener("click", () => {
 })
 //messages
 
-const rightSide = document.querySelector(".rightSideContainer")
-const messagesContainer = document.querySelector("#messages__container")
-
+//submit new message
 masterContainer.addEventListener("click", () => {
     if (event.target.id.startsWith("messages__submit")) {
         const message = document.querySelector("#messages__input")
         const id = parseInt(sessionStorage.getItem("userId"))
         const newMessageObject = messages.makeMessageObject(id, message.value)
         messages.saveMessage(newMessageObject).then(() => {
-        messages.getAllMessages().then(parsedData => {
-            messages.renderMessage(parsedData)
-        })
+            messages.getAllMessages().then(parsedData => {
+                messages.renderMessage(parsedData)
+            })
         })
         message.value = ""
+    }
+})
+
+// open edit window
+masterContainer.addEventListener("click", () => {
+    if (event.target.id.startsWith("messageEdit")) {
+        const id = event.target.id.split("--")[1]
+        const sessionId = parseInt(sessionStorage.getItem("userId"))
+        messages.getOneMessage(id).then(parsedData => {
+            if (parseInt(parsedData[0].userId) === sessionId) {
+                const modal = document.querySelector(`#modal--${id}`)
+                modal.showModal()
+                const modalInput = document.querySelector(`#messageInput--${id}`)
+                modalInput.value = parsedData[0].message
+            }
+        })
+    }
+})
+//save edit to database and re-render
+masterContainer.addEventListener("click", () => {
+    const nameOfArray = event.target.id.split("--")[0]
+    const ifParameter = `${nameOfArray}--save`
+    if (event.target.id.startsWith(ifParameter)) {
+        const id = event.target.id.split("--")[2]
+        const locationID = `messageInput--${id}`
+        messages.edit(nameOfArray, id, locationID).then(() => {
+            messages.getAllMessages().then(parsedData => {
+                messages.renderMessage(parsedData)
+                const modal = document.querySelector(`#modal--${id}`)
+                modal.close()
+            })
+        })
+    }
+})
+//close the dialog box
+masterContainer.addEventListener("click", () => {
+    if (event.target.id.startsWith("cancelMessage")) {
+        const id = event.target.id.split("--")[1]
+        const modal = document.querySelector(`#modal--${id}`)
+        modal.close()
     }
 })
