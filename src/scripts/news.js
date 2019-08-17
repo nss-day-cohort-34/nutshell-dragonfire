@@ -28,7 +28,7 @@ const createNewsArticleComponent = (object) => {
           </div>`;
   };
 
-  
+
 
   const renderToDOM = (newsArticles) => {
     const whereToDisplayNewsInTheDOM = document.querySelector("#news__container");
