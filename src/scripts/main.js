@@ -17,6 +17,11 @@ if (sessionStorage.length > 0) {
     masterContainer.innerHTML = factory.renderHomepage()
     messages.getAllMessages().then(parsedData => {
         messages.renderMessage(parsedData)
+        parsedData.forEach(data => {
+            if (data.userId !== parseInt(sessionStorage.getItem("userId")) ) {
+                document.getElementById(`messageEdit--${data.id}`).style.visibility = "hidden"
+            }
+        })
     })
 }
 //click login button
@@ -50,6 +55,11 @@ masterContainer.addEventListener("click", () => {
                 masterContainer.innerHTML = factory.renderHomepage()
                 messages.getAllMessages().then(parsedData => {
                     messages.renderMessage(parsedData)
+                    parsedData.forEach(data => {
+                        if (data.userId !== parseInt(sessionStorage.getItem("userId")) ) {
+                            document.getElementById(`messageEdit--${data.id}`).style.visibility = "hidden"
+                        }
+                    })
                 })
             }
         })
@@ -75,6 +85,11 @@ masterContainer.addEventListener("click", () => {
                         masterContainer.innerHTML = factory.renderHomepage()
                         messages.getAllMessages().then(parsedData => {
                             messages.renderMessage(parsedData)
+                            parsedData.forEach(data => {
+                                if (data.userId !== parseInt(sessionStorage.getItem("userId")) ) {
+                                    document.getElementById(`messageEdit--${data.id}`).style.visibility = "hidden"
+                                }
+                            })
                         })
                     })
                 })
@@ -101,6 +116,11 @@ masterContainer.addEventListener("click", () => {
         messages.saveMessage(newMessageObject).then(() => {
             messages.getAllMessages().then(parsedData => {
                 messages.renderMessage(parsedData)
+                parsedData.forEach(data => {
+                    if (data.userId !== parseInt(sessionStorage.getItem("userId")) ) {
+                        document.getElementById(`messageEdit--${data.id}`).style.visibility = "hidden"
+                    }
+                })
             })
         })
         message.value = ""
@@ -132,6 +152,11 @@ masterContainer.addEventListener("click", () => {
         messages.edit(nameOfArray, id, locationID).then(() => {
             messages.getAllMessages().then(parsedData => {
                 messages.renderMessage(parsedData)
+                parsedData.forEach(data => {
+                    if (data.userId !== parseInt(sessionStorage.getItem("userId")) ) {
+                        document.getElementById(`messageEdit--${data.id}`).style.visibility = "hidden"
+                    }
+                })
                 const modal = document.querySelector(`#modal--${id}`)
                 modal.close()
             })
@@ -146,3 +171,5 @@ masterContainer.addEventListener("click", () => {
         modal.close()
     }
 })
+
+// hide edit buttons

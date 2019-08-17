@@ -9,6 +9,11 @@
       "username": "Bobby",
       "email": "bbrady91@gmail.com",
       "id": 2
+    },
+    {
+      "username": "ted",
+      "email": "ted@mail.com",
+      "id": 3
     }
   ],
   "tasks": [
@@ -195,6 +200,16 @@
       "userId": 2,
       "message": "This is a test",
       "id": 30
+    },
+    {
+      "userId": 3,
+      "message": "This is a test",
+      "id": 31
+    },
+    {
+      "userId": 3,
+      "message": "This is a test g",
+      "id": 32
     }
   ]
 }
