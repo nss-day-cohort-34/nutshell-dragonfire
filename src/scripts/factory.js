@@ -48,7 +48,9 @@ const renderHomepage = () => {
   <legend>Due Date:</legend>
   <input type="date" name="dueDate" id="taskDueDate">
   </fieldset>
-  <fieldset><input type="submit" id="submit_button" value="Add"></fieldset>
+  <fieldset><input type="submit" id="submit_button" value="Add">
+    <input type="submit" id="delete_completed" value="Clear Completed">
+  </fieldset>
   <h3>Your Tasks:</h3></div>
   <div id="tasksRender"
   
@@ -70,44 +72,6 @@ const renderLogin = () => {
     <button id="registerButton" class="button">Register</button>
   </article>`
 }
-
-//Tasks Functionality Here
-
-// const createFormField = () => {
-
-//   return `
-//   <div id="tasksFormField">
-//   <fieldset>
-//   <legend>Tasks:</legend>
-//   <input type="text" name="tasksText" id="tasksText" size="50" placeholder="Enter task here">
-//   </fieldset>
-//   <fieldset>
-//   <legend>Due Date:</legend>
-//   <input type="date" name="dueDate" id="taskDueDate">
-//   </fieldset>
-//   <fieldset><input type="submit" class="submit_button" value="Submit"></fieldset>
-//   </div>`
-// }
-
-// const tasksHTML = (id, task, date) => {
-//   return `
-//   <article id="taskField--${id}" class="taskField">
-//   <input type="checkbox">
-//   <span>${task}</span>
-//   <p>Due Date: ${date}</p>
-//   <button class="edit-button" id="edit_Entry--${id}">Edit Task</button>
-//   <button class="delete-button" id="delete_Entry--${id}">Delete Task</button>
-//   <br>
-//   <hr>
-//   </article>`
-// }
-
-// const makeTasksObject = (task, date) => {
-//   return {
-//     task: task,
-//     date: date
-//   }
-// }
 
 export default {
   createLogin,

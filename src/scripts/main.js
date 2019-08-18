@@ -109,14 +109,18 @@ const deleteAllFields = (tasks) => {
     taskText.value = ""
 }
 
+
 masterContainer.addEventListener("click", event => {
     if (event.target.id.startsWith("submit_button")) {
+        const checkbox = document.querySelector(".completed").checked
+        console.log(checkbox)
+        // const checkboxValue = checkbox.value
         const taskDueDate = document.querySelector("#taskDueDate")
         const taskText = document.querySelector("#tasksText")
         const hiddenEntryID = document.querySelector("#taskID")
         const dateValue = taskDueDate.value
         const taskValue = taskText.value
-        const newTaskEntry = tasks.makeTasksObject(taskValue, dateValue)
+        const newTaskEntry = tasks.makeTasksObject(taskValue, dateValue, checkbox)
 
         if (hiddenEntryID.value !== "") {
             tasks.editTaskEntry(newTaskEntry, hiddenEntryID.value)
@@ -126,11 +130,14 @@ masterContainer.addEventListener("click", event => {
                 .then(deleteAllFields)
 
         } else {
+            const checkbox = document.querySelector(".completed").checked
+
+            // const checkboxValue = checkbox.value
             const taskDueDate = document.querySelector("#taskDueDate")
             const taskText = document.querySelector("#tasksText")
             const dateValue = taskDueDate.value
             const taskValue = taskText.value
-            const newTaskEntry = tasks.makeTasksObject(taskValue, dateValue)
+            const newTaskEntry = tasks.makeTasksObject(taskValue, dateValue, checkbox)
             tasks.postNewTask(newTaskEntry)
                 .then(tasks.getTasksData).then(parsedData => {
                     tasks.renderTasks(parsedData)
@@ -157,16 +164,41 @@ masterContainer.addEventListener("click", () => {
             .then(tasks.getTasksData).then(parsedData => {
                 tasks.renderTasks(parsedData)
             })
-
     }
-
 })
 
-//eventListener for task checkbox goes here:
+//Need a function that turns task from completed: false to completed: true
+// const taskCompleted = () => {
+//     const checkbox = document.querySelector(".completed").checked
+//     if (checkbox === true) {
+//         tasks.getTasksData().then(parsedData => {
+//             tasks.renderTasks(parsedData)
+//             if () {
 
+//             }
+//         })
+//     }
+// }
+
+//this targets the item we want to mark completed and adds "checked" class to it that strike-throughs and lowers opacity
 masterContainer.addEventListener("click", (event) => {
     if (event.target.id.startsWith("completed")) {
-        event.target.classList.toggle("checked");
-        console.log("click")
+        const checkbox = document.querySelector("#completed")
+        const id = event.target.id.split("--")[1]
+        const newID = `#taskLine--${id}`
+        document.querySelector(newID).classList.toggle("checked")
+
+
+
+        // taskCompleted()
     }
-}, false);
+});
+
+// masterContainer.addEventListener("click", (event) => {
+//     if (event.target.id.startsWith("delete_completed")) {
+//         const completedTasks = document.querySelector("taskLine")
+//         const tasksToClear = completedTasks.classList.contains("checked")
+//         document.querySelector(tasksToClear).style.display = "none"
+//     }
+
+// })

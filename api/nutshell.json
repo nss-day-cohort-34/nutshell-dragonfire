@@ -16,24 +16,40 @@
     }
   ],
   "tasks": [{
-      "task": "Another task for the future",
-      "date": "2019-08-30",
-      "id": 9
+      "task": "Get a haircut for Ben",
+      "date": "2019-08-18",
+      "completed": false,
+      "id": 1
     },
     {
-      "task": "This is a new task",
-      "date": "2019-08-19",
-      "id": 10
+      "task": "Mow the front and back yard",
+      "date": "2019-08-18",
+      "completed": false,
+      "id": 2
     },
     {
-      "task": "Mow the yard",
-      "date": "2019-08-17",
-      "id": 11
+      "task": "Repair the downstairs toilet",
+      "date": "2019-08-23",
+      "completed": false,
+      "id": 3
     },
     {
-      "task": "Get a haircut",
-      "date": "2019-08-31",
-      "id": 12
+      "task": "Clean upstairs bathroom",
+      "date": "2019-08-22",
+      "completed": false,
+      "id": 4
+    },
+    {
+      "task": "Plant flowers",
+      "date": "2019-08-22",
+      "completed": false,
+      "id": 5
+    },
+    {
+      "task": "Vacuum living room",
+      "date": "2019-08-21",
+      "completed": false,
+      "id": 6
     }
   ],
   "news": [{

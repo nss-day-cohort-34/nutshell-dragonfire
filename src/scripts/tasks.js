@@ -1,4 +1,4 @@
-//Tasks API data here
+//Tasks API data here -- Brian Wilson
 
 //get all tasks
 const getTasksData = () => {
@@ -41,6 +41,7 @@ const editTaskEntry = (updatedObject, id) => {
 //update task fields
 const updateTaskEditFields = (id) => {
     const hiddenEntryID = document.querySelector("#taskID")
+    const checkbox = document.querySelector(".completed").checked
     //variables to hold DOM locations for form fields
     const taskDueDate = document.querySelector("#taskDueDate")
     const taskText = document.querySelector("#tasksText")
@@ -57,8 +58,8 @@ const updateTaskEditFields = (id) => {
 
 const tasksHTML = (messageObject) => {
     return `
-    <article id="taskField--${messageObject.id}" class="taskField">
-    <span id="taskLine"><input name=completed id=completed type=checkbox unchecked>
+    <article id="taskField" class="taskField">
+    <span id="taskLine--${messageObject.id}"><input type=checkbox class="completed" name=completed id=completed--${messageObject.id}  value="yes">
     ${messageObject.task}
     (Due: ${messageObject.date})</span>
     <button class="edit-button" id="edit__Task--${messageObject.id}">Edit</button>
@@ -69,10 +70,13 @@ const tasksHTML = (messageObject) => {
 }
 
 //object for tasks
-const makeTasksObject = (task, date) => {
+const makeTasksObject = (userId, task, date, result) => {
     return {
+        userId: userId,
         task: task,
-        date: date
+        date: date,
+        completed: result
+
     }
 }
 
