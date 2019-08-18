@@ -90,4 +90,43 @@ masterContainer.addEventListener("click", () => {
 
 //* -----------------Begin News--------------------
 
+
+// ------------------Enter News-------------------------
+let newNewsEntry = ""
+
+masterContainer.addEventListener("click", () => {
+    if (event.target.id.startsWith("newsSubmit")) {
+        const title = document.querySelector("#newsTitle");
+        const synopsis = document.querySelector("#newsSynopsis");
+        const url = document.querySelector("#newsURL");
+        const newsUserID = sessionStorage.userId
+        console.log(newsUserID)
+        console.log(title)
+        newNewsEntry = {
+            title: title.value,
+            synopsis: synopsis.value,
+            url: url.value,
+            userID: newsUserID,
+        }
+  //* Display the new journal entry in the DOM
+        news.saveNewsEntry(newNewsEntry)
+    }
+})
+
+// --------------------Delete News--------------------------
+masterContainer.addEventListener("click", () => {
+    if (event.target.id.startsWith("NewsArticleDelete")) {
+        const newsArticleToDelete = event.target.id.split("--")[1]
+        console.log(newsArticleToDelete);
+        //* to clear the DOM
+        document.querySelector("#news__articles").innerHTML = "";
+        news.deleteNewsEntry(newsArticleToDelete)
+        news.getNewsData().then(news.renderToDOM)
+    }
+})
+
+
+
+
+
 //* -----------------End News----------------------
