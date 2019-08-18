@@ -23,7 +23,7 @@ const makeMessageObject = (userId, message) => {
 }
 
 const makeMessageComponent = (messageObject) => {
-    return ` <p>${messageObject.user.username} - ${messageObject.message}</p>
+    return ` <p><button class = "invisibleButton" id = "invisibleButton--${messageObject.userId}">${messageObject.user.username}</button> - ${messageObject.message}</p>
     <button class="edit__button" id="messageEdit--${messageObject.id}">Edit</button>
     <dialog class = "modal" id="modal--${messageObject.id}">
     <input class="editMessageInput" id="messageInput--${messageObject.id}" type="text">

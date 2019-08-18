@@ -47,7 +47,14 @@
     {
       "id": 1,
       "userId": 1,
-      "otherFriendId": 2
+      "otherFriendId": 2,
+      "areFriends": true
+    },
+    {
+      "userId": 3,
+      "otherFriendId": 2,
+      "areFriends": false,
+      "id": 2
     }
   ],
   "messages": [
@@ -188,28 +195,33 @@
     },
     {
       "userId": 1,
-      "message": "fuck you too",
+      "message": "8989",
       "id": 28
     },
     {
       "userId": 2,
-      "message": "New message",
+      "message": "New message 12",
       "id": 29
     },
     {
       "userId": 2,
-      "message": "This is a test",
+      "message": "This is a test yes it is",
       "id": 30
     },
     {
       "userId": 3,
-      "message": "This is a test",
+      "message": "This is a test 4",
       "id": 31
     },
     {
       "userId": 3,
       "message": "This is a test g",
       "id": 32
+    },
+    {
+      "userId": 3,
+      "message": "No its not",
+      "id": 33
     }
   ]
 }

@@ -31,6 +31,7 @@ const renderHomepage = () => {
 </header>
 <div class="rightSideContainer">
 <h3>Messages</h3>
+<div id="friendDialogBox"></div>
   <article class="messages__container" id="messages__container">
   </article>
   <section class="messages" id="messages">
@@ -48,8 +49,9 @@ const renderHomepage = () => {
   <article class="container events__container" id="events__container">
   <h3>Events</h3>
   </article>
-  <article class="container friends__container" id="friends__container">
+  <article class="container friends__container">
   <h3>Friends</h3>
+  <ul id="friends__container"></ul>
   </article>
 </div>`
 }
