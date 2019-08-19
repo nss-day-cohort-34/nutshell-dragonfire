@@ -1,40 +1,63 @@
 import factory from "./factory.js"
 import API from "./data.js"
+import messages from "./messages.js"
 
-const loginButton = document.querySelector("#loginButton")
-const registerButton = document.querySelector("#registerButton")
-const loginContainer = document.querySelector("#loginContainer")
+
+
+const masterContainer = document.querySelector("#masterContainer")
 let users = []
-let currentUser = 0
 
 API.getData().then(parsedData => {
     users.push(parsedData)
 })
-loginButton.addEventListener("click", () => {
-    loginContainer.innerHTML = ""
-    loginContainer.innerHTML = factory.createLogin()
-})
+masterContainer.innerHTML = factory.renderLogin()
 
-registerButton.addEventListener("click", () => {
-    loginContainer.innerHTML = ""
-    loginContainer.innerHTML = factory.createRegister()
+//prevent refresh
+if (sessionStorage.length > 0) {
+    masterContainer.innerHTML = ""
+    masterContainer.innerHTML = factory.renderHomepage()
+    API.getEventsData().then(parsedData => {
+        factory.renderEvents(parsedData)
+    })
+}
+//click login button
+masterContainer.addEventListener("click", () => {
+    if (event.target.id.startsWith("loginButton")) {
+        const loginContainer = document.querySelector("#loginContainer")
+        loginContainer.innerHTML = ""
+        loginContainer.innerHTML = factory.createLogin()
+    }
 })
-
-loginContainer.addEventListener("click", () => {
-    if (event.target.id.startsWith("sign")) {
+//click register button
+masterContainer.addEventListener("click", () => {
+    if (event.target.id.startsWith("registerButton")) {
+        const loginContainer = document.querySelector("#loginContainer")
+        loginContainer.innerHTML = ""
+        loginContainer.innerHTML = factory.createRegister()
+    }
+})
+// verify user in database
+masterContainer.addEventListener("click", () => {
+    if (event.target.id.startsWith("signOnUser")) {
         const username = document.querySelector("#loginUsername")
         const email = document.querySelector("#loginEmail")
         API.searchAPI(username.value, email.value).then(data => {
             if (data.length === 0) {
                 window.alert("Not a vaild Login")
             } else if (data.length > 0) {
-                window.location.href = "src/homepage.html"
+                sessionStorage.setItem("userId", JSON.stringify(data[0].id))
+                console.log(sessionStorage.userId)
+                masterContainer.innerHTML = ""
+                masterContainer.innerHTML = factory.renderHomepage()
+                API.getEventsData().then(parsedData => {
+                    factory.renderEvents(parsedData)
+                })
             }
         })
     }
 })
-
-loginContainer.addEventListener("click", () => {
+//verify it is a new user and register
+masterContainer.addEventListener("click", () => {
     if (event.target.id.startsWith("create")) {
         const username = document.querySelector("#registerUsername")
         const email = document.querySelector("#registerEmail")
@@ -45,9 +68,15 @@ loginContainer.addEventListener("click", () => {
             } else if (data.length === 0) {
                 API.register(userObject).then(() => {
                     API.getData().then(parsedData => {
+                        const registeredUser = parsedData.find(item => item.username === username.value)
+                        sessionStorage.setItem("userId", JSON.stringify(registeredUser.id))
                         users = []
                         users.push(parsedData)
-                        window.location.href = "src/homepage.html"
+                        masterContainer.innerHTML = ""
+                        masterContainer.innerHTML = factory.renderHomepage()
+                        API.getEventsData().then(parsedData => {
+                            factory.renderEvents(parsedData)
+                        })
                     })
                 })
             }
@@ -55,3 +84,75 @@ loginContainer.addEventListener("click", () => {
     }
 })
 
+masterContainer.addEventListener("click", () => {
+    if (event.target.id.startsWith("signOut")) {
+        sessionStorage.clear()
+        masterContainer.innerHTML = ""
+        masterContainer.innerHTML = factory.renderLogin()
+    }
+})
+
+//messages
+
+
+
+// event Doms and main.j
+
+
+
+const clearForm = () => {
+    eventName.value = ""
+    location.value = ""
+}
+
+document.querySelector("#submitButton").addEventListener("click", event => {
+
+    const date = document.querySelector("#eventDate").value
+    const userId = parseInt(sessionStorage.getItem("userId"))
+    const eventName = document.querySelector("#eventName").value
+    const location = document.querySelector("#eventLocation").value
+    const hiddenInputId = document.querySelector("#eventsId")
+    console.log("I'm POSTING")
+    const newEventEntry = {
+        date: date,
+        userId: userId,
+        eventName: eventName,
+        location: location
+    };
+
+    if (hiddenInputId.value !== "") {
+        API.editEvents(newEventEntry, hiddenInputId.value).then(() => {
+            API.getEventsData(data => {
+                factory.renderEvents(data)
+            })
+        })
+    } else {
+        API.saveEventsData(newEventEntry)
+            .then(API.getEventsData).then(parsedData => {
+                factory.renderEvents(parsedData)
+            }).then(clearForm)
+    }
+})
+
+
+
+
+
+masterContainer.addEventListener("click", () => {
+    if (event.target.id.startsWith("deleteEvent--")) {
+        const deleteEntry = event.target.id.split("--")[1]
+        console.log("deleteId", deleteEntry)
+
+        API.deleteEvent(deleteEntry).then(API.getEventsData).then(parsedData => {
+            factory.renderEvents(parsedData)
+        }).then(clearForm)
+    }
+})
+
+masterContainer.addEventListener("click", () => {
+            if (event.target.id.startsWith("editEvent")) {
+                const editEventEntry = event.target.id.split("--")[1]
+                console.log("hi im edit", editEventEntry)
+                API.updateFormFields(editEventEntry)
+            }
+            })

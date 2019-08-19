@@ -9,6 +9,11 @@
       "username": "Bobby",
       "email": "bbrady91@gmail.com",
       "id": 2
+    },
+    {
+      "username": "ted",
+      "email": "ted@mail.com",
+      "id": 3
     }
   ],
   "tasks": [
@@ -31,11 +36,39 @@
   ],
   "events": [
     {
-      "id": 1,
+      "date": "2019-08-16",
       "userId": 1,
       "eventName": "Event Name",
+      "location": "1234 Main Street ",
+      "id": 1
+    },
+    {
+      "id": 2,
+      "userId": 1,
+      "eventName": "Nutshell",
       "date": "2019-08-16",
-      "location": "1234 Main Street"
+      "location": "1234 South Street"
+    },
+    {
+      "date": "2019-08-20",
+      "userId": 1,
+      "eventName": "NSS",
+      "location": "NSS",
+      "id": 3
+    },
+    {
+      "date": "2019-08-19",
+      "userId": 1,
+      "eventName": "Nutshell",
+      "location": "NUT",
+      "id": 4
+    },
+    {
+      "date": "2019-08-19",
+      "userId": 1,
+      "eventName": "nash",
+      "location": "nash",
+      "id": 5
     }
   ],
   "friends": [
@@ -52,5 +85,4 @@
       "message": "This is a message."
     }
   ]
-  
 }
