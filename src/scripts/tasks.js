@@ -6,6 +6,12 @@ const getTasksData = () => {
         .then(data => data.json())
 }
 
+//get one task
+const getOneTask = (id) => {
+    return fetch(`http://localhost:8088/tasks?id=${id}`)
+        .then(data => data.json())
+}
+
 //post new task
 const postNewTask = (task) => {
     return fetch("http://localhost:8088/tasks", {
@@ -61,9 +67,23 @@ const tasksHTML = (messageObject) => {
     <article id="taskField" class="taskField">
     <span id="taskLine--${messageObject.id}"><input type=checkbox class="completed" name=completed id=completed--${messageObject.id}  value="yes">
     ${messageObject.task}
-    (Due: ${messageObject.date})</span>
+    (Due: ${messageObject.date})
     <button class="edit-button" id="edit__Task--${messageObject.id}">Edit</button>
     <button class="delete-button" id="delete__Task--${messageObject.id}">Delete</button>
+    </span>
+    <br>
+    <hr>
+    </article>`
+}
+
+const tasksHTMLChecked = (messageObject) => {
+    return `
+    <article id="taskField" class="taskField">
+    <span id="taskLine--${messageObject.id}" class="checked"><input type=checkbox class="completed" name=completed id=completed--${messageObject.id}  value="yes" checked>
+    ${messageObject.task}
+    (Due: ${messageObject.date})
+    <button class="edit-button" id="edit__Task--${messageObject.id}">Edit</button>
+    <button class="delete-button" id="delete__Task--${messageObject.id}">Delete</button></span>
     <br>
     <hr>
     </article>`
@@ -76,6 +96,15 @@ const makeTasksObject = (userId, task, date, result) => {
         task: task,
         date: date,
         completed: result
+
+    }
+}
+const makeTaskTrue = (userId, task, date, boolean) => {
+    return {
+        userId: userId,
+        task: task,
+        date: date,
+        completed: boolean
 
     }
 }
@@ -92,6 +121,15 @@ const renderTasks = (tasks) => {
     });
 }
 
+const renderCompletedTasks = (tasks) => {
+    const tasksHTMLRender = document.querySelector("#completedTasks")
+    tasksHTMLRender.innerHTML = ""
+    tasks.forEach(task => {
+        const convertedTask = tasksHTMLChecked(task)
+        tasksHTMLRender.innerHTML += convertedTask
+    });
+}
+
 
 export default {
     getTasksData,
@@ -101,5 +139,8 @@ export default {
     updateTaskEditFields,
     tasksHTML,
     makeTasksObject,
-    renderTasks
+    renderTasks,
+    getOneTask,
+    renderCompletedTasks,
+    makeTaskTrue
 }

@@ -2,9 +2,10 @@
     /* display: none; */
     text-decoration: line-through;
     opacity: 0.5;
+    display: none;
+    width: 0px;
 }
 
 .hidden {
-    display: none;
-    width: 0px;
+    display: inline;
 }

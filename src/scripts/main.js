@@ -11,13 +11,40 @@ API.getData().then(parsedData => {
 })
 masterContainer.innerHTML = factory.renderLogin()
 
+//Tasks filtering by UserId
+//make new array with data that I need and pass in to the renderTasks function
+const getRenderTasks = () => {
+    tasks.getTasksData().then(parsedData => {
+        const tasksHTMLRender = document.querySelector("#tasksRender")
+        const tasksHTMLRenderCompleted = document.querySelector("#completedTasks")
+        let usersTasks = []
+        let completedTasks = []
+        const userId = parseInt(sessionStorage.getItem("userId"))
+        parsedData.forEach(task => {
+            if (task.completed === false && task.userId === userId) {
+                usersTasks.push(task)
+                tasks.renderTasks(usersTasks)
+            } else if (task.completed === true && task.userId === userId) {
+                completedTasks.push(task)
+                tasks.renderCompletedTasks(completedTasks)
+            } else if (completedTasks.length === 0) {
+                console.log(completedTasks.length)
+                tasksHTMLRender.innerHTML = ""
+                console.log(completedTasks)
+            } else if (usersTasks.length === 0) {
+                tasksHTMLRenderCompleted.innerHTML = ""
+            }
+        });
+    })
+}
+
+
+
 //prevent refresh
 if (sessionStorage.length > 0) {
     masterContainer.innerHTML = ""
     masterContainer.innerHTML = factory.renderHomepage()
-    tasks.getTasksData().then(parsedData => {
-        tasks.renderTasks(parsedData)
-    })
+    getRenderTasks()
 
 }
 //click login button
@@ -51,9 +78,7 @@ masterContainer.addEventListener("click", () => {
                 console.log(sessionStorage.userId)
                 masterContainer.innerHTML = ""
                 masterContainer.innerHTML = factory.renderHomepage()
-                tasks.getTasksData().then(parsedData => {
-                    tasks.renderTasks(parsedData)
-                })
+                getRenderTasks()
 
 
             }
@@ -78,9 +103,7 @@ masterContainer.addEventListener("click", () => {
                         users.push(parsedData)
                         masterContainer.innerHTML = ""
                         masterContainer.innerHTML = factory.renderHomepage()
-                        tasks.getTasksData().then(parsedData => {
-                            tasks.renderTasks(parsedData)
-                        })
+                        getRenderTasks()
                     })
                 })
             }
@@ -104,6 +127,7 @@ masterContainer.addEventListener("click", () => {
 //Tasks
 const taskDueDate = document.querySelector("#taskDueDate")
 const taskText = document.querySelector("#tasksText")
+
 const deleteAllFields = (tasks) => {
     taskDueDate.value = ""
     taskText.value = ""
@@ -120,13 +144,12 @@ masterContainer.addEventListener("click", event => {
         const hiddenEntryID = document.querySelector("#taskID")
         const dateValue = taskDueDate.value
         const taskValue = taskText.value
-        const newTaskEntry = tasks.makeTasksObject(taskValue, dateValue, checkbox)
+        const userId = parseInt(sessionStorage.getItem("userId"))
+        const newTaskEntry = tasks.makeTasksObject(userId, taskValue, dateValue, checkbox)
 
         if (hiddenEntryID.value !== "") {
-            tasks.editTaskEntry(newTaskEntry, hiddenEntryID.value)
-                .then(tasks.getTasksData).then(parsedData => {
-                    tasks.renderTasks(parsedData)
-                })
+            tasks.editTaskEntry(userId, newTaskEntry, hiddenEntryID.value)
+            getRenderTasks()
                 .then(deleteAllFields)
 
         } else {
@@ -134,15 +157,15 @@ masterContainer.addEventListener("click", event => {
 
             // const checkboxValue = checkbox.value
             const taskDueDate = document.querySelector("#taskDueDate")
+            const userId = parseInt(sessionStorage.getItem("userId"))
             const taskText = document.querySelector("#tasksText")
             const dateValue = taskDueDate.value
             const taskValue = taskText.value
-            const newTaskEntry = tasks.makeTasksObject(taskValue, dateValue, checkbox)
-            tasks.postNewTask(newTaskEntry)
-                .then(tasks.getTasksData).then(parsedData => {
-                    tasks.renderTasks(parsedData)
-                })
-                .then(deleteAllFields)
+            const newTaskEntry = tasks.makeTasksObject(userId, taskValue, dateValue, checkbox)
+            tasks.postNewTask(newTaskEntry).then(() => {
+                getRenderTasks()
+            })
+            deleteAllFields()
 
         }
     }
@@ -154,31 +177,14 @@ masterContainer.addEventListener("click", () => {
     if (event.target.id.startsWith("delete__Task")) {
         const deleteBtnID = event.target.id.split("--")[1]
         tasks.deleteTaskEntry(deleteBtnID)
-            .then(tasks.getTasksData).then(parsedData => {
-                tasks.renderTasks(parsedData)
-            })
+        getRenderTasks()
     }
     if (event.target.id.startsWith("edit__Task")) {
         const entryId = event.target.id.split("--")[1]
         tasks.updateTaskEditFields(entryId)
-            .then(tasks.getTasksData).then(parsedData => {
-                tasks.renderTasks(parsedData)
-            })
+        getRenderTasks()
     }
 })
-
-//Need a function that turns task from completed: false to completed: true
-// const taskCompleted = () => {
-//     const checkbox = document.querySelector(".completed").checked
-//     if (checkbox === true) {
-//         tasks.getTasksData().then(parsedData => {
-//             tasks.renderTasks(parsedData)
-//             if () {
-
-//             }
-//         })
-//     }
-// }
 
 //this targets the item we want to mark completed and adds "checked" class to it that strike-throughs and lowers opacity
 masterContainer.addEventListener("click", (event) => {
@@ -186,19 +192,31 @@ masterContainer.addEventListener("click", (event) => {
         const checkbox = document.querySelector("#completed")
         const id = event.target.id.split("--")[1]
         const newID = `#taskLine--${id}`
-        document.querySelector(newID).classList.toggle("checked")
-
+        tasks.getOneTask(id).then(data => {
+            if (data[0].completed === false) {
+                const trueDataObject = tasks.makeTaskTrue(data[0].userId, data[0].task, data[0].date, true)
+                tasks.editTaskEntry(trueDataObject, id).then(() => {
+                    // document.querySelector(newID).classList.toggle("checked")
+                    getRenderTasks()
+                })
+            } else {
+                const trueDataObject = tasks.makeTaskTrue(data[0].userId, data[0].task, data[0].date, false)
+                tasks.editTaskEntry(trueDataObject, id).then(() => {
+                    getRenderTasks()
+                })
+            }
+        })
 
 
         // taskCompleted()
     }
 });
 
-// masterContainer.addEventListener("click", (event) => {
-//     if (event.target.id.startsWith("delete_completed")) {
-//         const completedTasks = document.querySelector("taskLine")
-//         const tasksToClear = completedTasks.classList.contains("checked")
-//         document.querySelector(tasksToClear).style.display = "none"
-//     }
+masterContainer.addEventListener("click", (event) => {
+    if (event.target.id.startsWith("delete_completed")) {
+        const completedTasks = document.querySelectorAll(".checked")
+        console.log(completedTasks)
+        completedTasks[0].classList.toggle("hidden")
+    }
 
-// })
+})

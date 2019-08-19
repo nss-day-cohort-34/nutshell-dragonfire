@@ -50,6 +50,34 @@
       "date": "2019-08-21",
       "completed": false,
       "id": 6
+    },
+    {
+      "userId": 1,
+      "task": "Test the HVAC",
+      "date": "2019-08-19",
+      "completed": false,
+      "id": 7
+    },
+    {
+      "userId": 1,
+      "task": "Take Jonny to the dentist",
+      "date": "2019-08-27",
+      "completed": false,
+      "id": 8
+    },
+    {
+      "userId": 1,
+      "task": "Hire someone to clean gutters",
+      "date": "2019-08-20",
+      "completed": false,
+      "id": 9
+    },
+    {
+      "userId": 1,
+      "task": "Get downstairs bath mirror fixes",
+      "date": "2019-08-21",
+      "completed": false,
+      "id": 10
     }
   ],
   "news": [{

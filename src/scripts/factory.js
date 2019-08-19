@@ -36,6 +36,7 @@ const renderHomepage = () => {
   <article class="container news__container" id="news__container">
   <h3>News</h3>
   </article>
+
   <article class="container tasks__container" id="tasks__container">
   <h3>To-Dos</h3>
   <div id="tasksFormField">
@@ -49,13 +50,15 @@ const renderHomepage = () => {
   <input type="date" name="dueDate" id="taskDueDate">
   </fieldset>
   <fieldset><input type="submit" id="submit_button" value="Add">
-    <input type="submit" id="delete_completed" value="Clear Completed">
+    <input type="submit" id="delete_completed" value="Toggle Completed">
   </fieldset>
   <h3>Your Tasks:</h3></div>
-  <div id="tasksRender"
-  
+
+  <div id="tasksRender">
   </div>
+  <div id="completedTasks"></div>
   </article>
+
   <article class="container events__container" id="events__container">
   <h3>Events</h3>
   </article>
