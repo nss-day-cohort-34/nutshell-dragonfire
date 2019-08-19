@@ -35,9 +35,6 @@
       "synopsis": "This is an article about this."
     },
     {
-      "title": "testing",
-      "synopsis": "testing",
-      "url": "testing",
       "id": 2
     },
     {
@@ -47,10 +44,58 @@
       "id": 3
     },
     {
-      "title": "Article Title",
-      "synopsis": "Article Synopsis",
-      "url": "Article URL",
-      "id": 4
+      "title": "New Article on Monday",
+      "synopsis": "New Article on Monday",
+      "url": "New Article on Monday",
+      "userID": "1",
+      "id": 5
+    },
+    {
+      "title": "New Articlke",
+      "synopsis": "New Article",
+      "url": ".com",
+      "userID": "1",
+      "id": 6
+    },
+    {
+      "title": "testing1018",
+      "synopsis": "test",
+      "url": "test",
+      "userID": "1",
+      "date": "Mon Aug 19 2019 10:19:45 GMT-0500 (Central Daylight Time)",
+      "id": 7
+    },
+    {
+      "title": "test",
+      "synopsis": "test",
+      "url": "test",
+      "userID": "1",
+      "date": "",
+      "id": 8
+    },
+    {
+      "title": "test for Ted",
+      "synopsis": "test for Ted",
+      "url": "test for Ted",
+      "userID": "3",
+      "date": "",
+      "id": 9
+    },
+    {
+      "title": "test1050",
+      "synopsis": "test",
+      "url": "test",
+      "userID": "3",
+      "date": "",
+      "id": 10
+    },
+    {
+      "title": "test",
+      "synopsis": "rwSDfsdf",
+      "url": "asdfadf",
+      "userID": "3",
+      "date": "",
+      "id": 11
     }
   ],
   "events": [

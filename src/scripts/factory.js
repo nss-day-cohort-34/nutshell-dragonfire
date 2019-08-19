@@ -35,9 +35,11 @@ const renderHomepage = () => {
 <div class="leftSideContainer">
   <article class="container news__container" id="news__container">
   <h3>News</h3>
+    <div id="newsModal"></div>
     <section id="news__entry">
     <form action="">
         <fieldset>
+            <input type="hidden" id="newsHiddenid" value=""/>
             Title<input name = "newsTitle" input type = "text" id="newsTitle">
             Synopsis<textarea wrap="soft" name="newsSynopsis" id="newsSynopsis"></textarea>
             URL<input name = "newsURL" input type = "text" id="newsURL">

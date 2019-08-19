@@ -90,53 +90,94 @@ masterContainer.addEventListener("click", () => {
 
 //* -----------------Begin News--------------------
 // ------------------Enter new News Article-------------------------
-let newNewsEntry = ""
+let newNewsEntry = "";
 
 masterContainer.addEventListener("click", () => {
-    if (event.target.id.startsWith("newsSubmit")) {
-        const title = document.querySelector("#newsTitle");
-        const synopsis = document.querySelector("#newsSynopsis");
-        const url = document.querySelector("#newsURL");
-        const newsUserID = sessionStorage.userId
-        console.log(newsUserID)
-        console.log(title)
-        newNewsEntry = {
-            title: title.value,
-            synopsis: synopsis.value,
-            url: url.value,
-            userID: newsUserID,
-        }
-  //* Display the new journal entry in the DOM
-        news.saveNewsEntry(newNewsEntry)
-    }
-})
+  if (event.target.id.startsWith("newsSubmit")) {
+    const title = document.querySelector("#newsTitle");
+    const synopsis = document.querySelector("#newsSynopsis");
+    const url = document.querySelector("#newsURL");
+    const newsUserID = parseInt(sessionStorage.getItem("user"));
+    const newsDateSubmitted = "";
+    console.log(newsUserID);
+    console.log(title);
+    newNewsEntry = {
+      title: title.value,
+      synopsis: synopsis.value,
+      url: url.value,
+      userID: newsUserID,
+      date: newsDateSubmitted
+    };
+    //* Display the new journal entry in the DOM
+    news.saveNewsEntry(newNewsEntry);
+  }
+});
 
 // --------------------Delete News Article--------------------------
 masterContainer.addEventListener("click", () => {
-    if (event.target.id.startsWith("NewsArticleDelete")) {
-        const newsArticleToDelete = event.target.id.split("--")[1]
-        console.log(newsArticleToDelete);
-        //* to clear the DOM
-        document.querySelector("#news__articles").innerHTML = "";
-        //* delete article
-        news.deleteNewsEntry(newsArticleToDelete)
-        //* render json news array to DOM
-        news.getNewsData().then(news.renderToDOM)
-    }
-})
+  if (event.target.id.startsWith("NewsArticleDelete")) {
+    const newsArticleToDelete = event.target.id.split("--")[1];
+    console.log(newsArticleToDelete);
+    //* to clear the DOM
+    document.querySelector("#news__articles").innerHTML = "";
+    //* delete article
+    news.deleteNewsEntry(newsArticleToDelete);
+    //* render json news array to DOM
+    news.getNewsData().then(news.renderToDOM);
+  }
+});
 
 // --------------------Edit News Article----------------------------
 masterContainer.addEventListener("click", () => {
-    if (event.target.id.startsWith("NewsArticleEdit")) {
-        const newsArticleToEdit = event.target.id.split("--")[1];
-        console.log(newsArticleToEdit);
-        news.retrieveNewsEntry(newsArticleToEdit)
-        .then((newsArticleObjectToEdit) => {
-            console.table(newsArticleObjectToEdit)
-            //need to add functionality here to edit
-        })
-    }
-})
+  const modal = document.querySelector("#newsModal");
+  const modalButton = document.querySelector("#editNewsSubmit");
+  if (event.target.id.startsWith("NewsArticleEdit")) {
+    const newsArticleToEdit = event.target.id.split("--")[1];
+    console.log("newsArticleToEdit  ", newsArticleToEdit);
+    console.log(modalNewsEdit())
+    const newsModal = document.querySelector("#newsModal");
+    newsModal.innerHTML = modalNewsEdit();
+    const newsModalBox = document.querySelector("#newsModalBox");
+    newsModalBox.showModal();
+    news.retrieveNewsEntry(newsArticleToEdit)
+    .then(newsArticleObjectToEdit => {
+        const newsTitle = document.querySelector("#editNewsTitle");
+        const newsSynopsis = document.querySelector("#editNewsSynopsis");
+        const newsUrl = document.querySelector("#editNewsURL");
+        console.table(newsArticleObjectToEdit);
+        console.log(newsTitle)
+        newsTitle.value = newsArticleObjectToEdit.title;
+        newsSynopsis.value = newsArticleObjectToEdit.synopsis;
+        newsUrl.value = newsArticleObjectToEdit.url;
+        console.log(newsArticleObjectToEdit.title);
+      })
+      .then(
+        masterContainer.addEventListener("click", () => {
+          if (event.target.id.startsWith("editNewsSave")) {
+            const updatedNewsObject = {
+                id: newsArticleToEdit,
+                title: document.querySelector("#editNewsTitle").value,
+                synopsis: document.querySelector("#editNewsSynopsis").value,
+                url: document.querySelector("#editNewsURL")
+            }
+            console.log(updatedNewsObject)
+            console.log(newsArticleToEdit)
 
+            news.saveEditedNewsEntry(newsArticleToEdit)
+          }
+        })
+      );
+  }
+});
+
+const modalNewsEdit = () => {
+  return `<dialog id="newsModalBox">
+        <input name = "editNewsTitle" type = "text" id="editNewsTitle">
+        <label for="editNewsTitle">Title</label>
+        <textarea wrap="soft" name="editNewsSynopsis" id="editNewsSynopsis"></textarea>
+        <input name = "editNewsURL" input type = "text" id="editNewsURL">
+        <button id="editNewsSave" type="submit" value="Record News Entry">Save</button>
+    </dialog>`
+};
 
 //* -----------------End News----------------------
