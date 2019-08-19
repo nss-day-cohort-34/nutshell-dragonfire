@@ -1,6 +1,6 @@
 // const rightSide = document.querySelector(".rightSideContainer")
 
-
+import friends from "./friends.js"
 
 //factory function to render input field
 
@@ -57,6 +57,9 @@ const edit = (nameOfArray, ID, locationID) => {
     if (nameOfArray === "messages") {
         updatedObject = messagesEdit(locationID)
     }
+    if (nameOfArray === "friends") {
+        updatedObject = friendAccept(locationID)
+    }
     return fetch(`http://localhost:8088/${nameOfArray}/${ID}`, {
         method: "PUT",
         headers: {
@@ -72,6 +75,12 @@ const messagesEdit = (messageID) => {
     const message = document.querySelector(`#${messageID}`)
     const id = parseInt(sessionStorage.getItem("userId"))
     const updatedObject = makeMessageObject(id, message.value)
+    return updatedObject
+}
+
+const friendAccept = (otherFriendID) => {
+    const id = parseInt(sessionStorage.getItem("userId"))
+    const updatedObject = friends.makeFriendObject(id, otherFriendID, true)
     return updatedObject
 }
 

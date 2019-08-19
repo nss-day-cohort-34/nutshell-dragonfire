@@ -26,34 +26,50 @@ const getRenderFriends = () => {
     friends.getAllFriends().then(data => {
         const friendsArray = []
         const usernameArray = []
-        const pendingUsername =[]
+        const pendingUsername = []
         const finalPendingArray = []
+        const pendingUsernameAcceptButton = []
+        const finalPendingArrayAcceptButton = []
         const userId = parseInt(sessionStorage.getItem("userId"))
         data.forEach(friend => {
-            if (friend.userId === userId && friend.areFriends === true) {
-                friendsArray.push(friend.otherFriendId)
-            } else if (friend.otherFriendId === userId && friend.areFriends === true) {
-                friendsArray.push(friend.userId)
-            } else if (friend.userId === userId && friend.areFriends === false) {
-                pendingUsername.push(friend.otherFriendId)
-            } else if (friend.otherFriendId === userId && friend.areFriends === false) {
-                pendingUsername.push(friend.userId)
+            if (friend.userId === userId) {
+                if (friend.areFriends === true) {
+                    friendsArray.push(friend.otherFriendId)
+                } else if (friend.areFriends === false) {
+                    pendingUsername.push(friend.otherFriendId)
+                }
+                friendsArray.forEach(friend => {
+                    const idea = users[0].find(user => user.id === friend)
+                    console.log(idea)
+                    usernameArray.push(idea.username)
+                });
+                pendingUsername.forEach(friend => {
+                    const idea = users[0].find(user => user.id === friend)
+                    finalPendingArray.push(idea.username)
+                });
+                const usernameSet = new Set(usernameArray)
+                const pendingSet = new Set(finalPendingArray)
+                friends.renderFriendsList(usernameSet, friend.id)
+                friends.renderFriendsListPending(pendingSet, friend.id)
+            } else if (friend.otherFriendId === userId) {
+                if (friend.areFriends === true) {
+                    friendsArray.push(friend.userId)
+                } else if (friend.areFriends === false) {
+                    pendingUsernameAcceptButton.push(friend.userId)
+                }
+                friendsArray.forEach(friend => {
+                    const idea = users[0].find(user => user.id === friend)
+                    usernameArray.push(idea.username)
+                });
+                pendingUsernameAcceptButton.forEach(friend => {
+                    const idea = users[0].find(user => user.id === friend)
+                    finalPendingArrayAcceptButton.push(idea.username)
+                });
+                const usernameSet = new Set(usernameArray)
+                const pendingSet = new Set(finalPendingArrayAcceptButton)
+                friends.renderFriendsList(usernameSet, friend.id)
+                friends.renderFriendsListAcceptButton(pendingSet, friend.id)
             }
-            friendsArray.forEach(friend => {
-                const idea = users[0].find(user => user.id === friend)
-                usernameArray.push(idea.username)
-            });
-            pendingUsername.forEach(friend => {
-                const idea = users[0].find(user => user.id === friend)
-                finalPendingArray.push(idea.username)
-            });
-            const usernameSet = new Set(usernameArray)
-            const pendingSet = new Set(finalPendingArray)
-            if (userId === ) {
-                
-            }
-            friends.renderFriendsList(usernameSet)
-            friends.renderFriendsListPending(pendingSet)
         })
     })
 }
@@ -210,7 +226,7 @@ masterContainer.addEventListener("click", () => {
 masterContainer.addEventListener("click", () => {
     if (event.target.id.startsWith("friends--add")) {
         const userId = parseInt(sessionStorage.getItem("userId"))
-        const newFriendObject = friends.makeFriendObject(userId, clickedID)
+        const newFriendObject = friends.makeFriendObject(userId, clickedID, false)
         friends.addFriend(newFriendObject).then(data => {
             const modal = document.querySelector("#friendModal")
             modal.close()
@@ -226,4 +242,17 @@ masterContainer.addEventListener("click", () => {
         modal.close()
     }
 })
-
+//accept friend
+masterContainer.addEventListener("click", () => {
+    if (event.target.id.startsWith("friends--acceptFriend")) {
+        const nameOfArray = event.target.id.split("--")[0]
+        const id = event.target.id.split("--")[2]
+        friends.getOneFriend(id).then(friendship => {
+            console.log(friendship[0])
+            const otherFriendId = friendship[0].userId
+            messages.edit(nameOfArray, id, otherFriendId).then(() => {
+                getRenderFriends()
+            })
+        })
+    }
+})

@@ -45,15 +45,15 @@
   ],
   "friends": [
     {
-      "id": 1,
       "userId": 1,
       "otherFriendId": 2,
-      "areFriends": true
+      "areFriends": true,
+      "id": 1
     },
     {
       "userId": 3,
-      "otherFriendId": 2,
-      "areFriends": false,
+      "otherFriendId": 1,
+      "areFriends": true,
       "id": 2
     }
   ],

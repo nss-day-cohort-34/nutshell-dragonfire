@@ -29,50 +29,57 @@ const addFriend = (friendObject) => {
     })
 }
 
-const makeFriendObject = (userId, otherFriendId) => {
+const makeFriendObject = (userId, otherFriendId, boolean) => {
     return {
         userId: userId,
         otherFriendId: otherFriendId,
-        areFriends: false
+        areFriends: boolean
     }
 }
 
-const renderFriendsList = (friendsArray) => {
+const renderFriendsList = (friendsArray, friendId) => {
     const friendsContainer = document.querySelector("#friends__container")
     friendsContainer.innerHTML = ""
     friendsArray.forEach(friend => {
-        const convertedUsername = makeFriendComponent(friend)
+        const convertedUsername = makeFriendComponent(friend, friendId)
         friendsContainer.innerHTML += convertedUsername
     });
 }
 
-const renderFriendsListPending = (friendsArray) => {
+const renderFriendsListPending = (friendsArray, friendId) => {
     const friendsContainer = document.querySelector("#friends__container")
     friendsArray.forEach(friend => {
-        const convertedUsername = makeFriendComponenPending(friend)
+        const convertedUsername = makeFriendComponenPending(friend, friendId)
         friendsContainer.innerHTML += convertedUsername
     });
 }
-const renderFriendsListAcceptButton = (friendsArray) => {
+const renderFriendsListAcceptButton = (friendsArray, friendId) => {
     const friendsContainer = document.querySelector("#friends__container")
     friendsArray.forEach(friend => {
-        const convertedUsername = makeFriendComponentAcceptButton(friend)
+        const convertedUsername = makeFriendComponentAcceptButton(friend, friendId)
         friendsContainer.innerHTML += convertedUsername
     });
 }
 
-const makeFriendComponent = (friendUsername) => {
-    return `<li>${friendUsername}<button>Delete</button></li>`
+const makeFriendComponent = (friendUsername, friendId) => {
+    return `<li>${friendUsername}<button id="deleteFriend--${friendId}">Delete</button></li>`
 }
-const makeFriendComponenPending = (friendUsername) => {
-    return `<li>${friendUsername} <i>Pending</i><button>Delete</button></li>`
+const makeFriendComponenPending = (friendUsername, friendId) => {
+    return `<li>${friendUsername} <i>Pending</i><button id= "deleteFriendPending--${friendId}">Delete</button></li>`
 }
 
-const makeFriendComponentAcceptButton = (friendUsername) => {
-    return `<li>${friendUsername} <i>Pending</i><button>Accept</button><button>Deny</button></li>`
+const makeFriendComponentAcceptButton = (friendUsername, friendId) => {
+    return `<li>${friendUsername} <i>Pending</i><button id="friends--acceptFriend--${friendId}">Accept</button><button id="denyFriend--${friendId}">Deny</button></li>`
 }
+
+const getOneFriend = (id) => {
+    return fetch(`http://localhost:8088/friends?id=${id}`)
+    .then(entries => entries.json())
+}
+
+
 
 
 export default {
-    getAllFriends, friendDialogBox, renderFriendDialogBox, addFriend, makeFriendObject, renderFriendsList, renderFriendsListPending, renderFriendsListAcceptButton
+    getAllFriends, friendDialogBox, renderFriendDialogBox, addFriend, makeFriendObject, renderFriendsList, renderFriendsListPending, renderFriendsListAcceptButton, getOneFriend
 }
