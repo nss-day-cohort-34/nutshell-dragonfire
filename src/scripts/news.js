@@ -23,6 +23,13 @@ const deleteNewsEntry = (id) => {
     .then(response => response.json())
   }
 
+//* Retrieve the specific news article for editing
+const retrieveNewsEntry = (id) => {
+    return fetch(`http://localhost:8088/news/${id}`)
+    .then(response => response.json())
+  }
+
+
 //* ------------------news---factory.js------------
 const createNewsArticleComponent = (object) => {
     return `
@@ -38,15 +45,18 @@ const createNewsArticleComponent = (object) => {
 
 
 
-  const renderToDOM = (newsArticles) => {
-    const whereToDisplayNewsInTheDOM = document.querySelector("#news__articles");
-    newsArticles.forEach(object => {
-    //   console.table(object)
-      const htmlRepresentation = createNewsArticleComponent(object);
-      whereToDisplayNewsInTheDOM.innerHTML += htmlRepresentation
-      });
-  };
+const renderToDOM = (newsArticles) => {
+const whereToDisplayNewsInTheDOM = document.querySelector("#news__articles");
+newsArticles.forEach(object => {
+//   console.table(object)
+    const htmlRepresentation = createNewsArticleComponent(object);
+    whereToDisplayNewsInTheDOM.innerHTML += htmlRepresentation
+    });
+};
 
+const renderEditToDOM = (newsArticleObjectToEdit) => {
+//stopping here for tonight
+}
 
 //* ------------------news---main.js-----------------------------------
 
@@ -87,6 +97,6 @@ const createNewsArticleComponent = (object) => {
 // });
 
 export default {
-    getNewsData, saveNewsEntry, deleteNewsEntry, renderToDOM, createNewsArticleComponent
+    getNewsData, saveNewsEntry, deleteNewsEntry, retrieveNewsEntry, renderToDOM, createNewsArticleComponent
 
 }

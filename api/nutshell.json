@@ -51,25 +51,6 @@
       "synopsis": "Article Synopsis",
       "url": "Article URL",
       "id": 4
-    },
-    {
-      "title": "tedt",
-      "synopsis": "tedt",
-      "url": "tedt",
-      "id": 5
-    },
-    {
-      "title": "testing4",
-      "synopsis": "testing",
-      "url": "testing",
-      "id": 6
-    },
-    {
-      "title": "hkjhkjhkj",
-      "synopsis": "jhkjhkjhkjhk",
-      "url": "jhkhkjhkh",
-      "userID": "1",
-      "id": 8
     }
   ],
   "events": [

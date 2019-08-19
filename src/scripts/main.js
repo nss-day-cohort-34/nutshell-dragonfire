@@ -89,9 +89,7 @@ masterContainer.addEventListener("click", () => {
 //messages
 
 //* -----------------Begin News--------------------
-
-
-// ------------------Enter News-------------------------
+// ------------------Enter new News Article-------------------------
 let newNewsEntry = ""
 
 masterContainer.addEventListener("click", () => {
@@ -113,20 +111,32 @@ masterContainer.addEventListener("click", () => {
     }
 })
 
-// --------------------Delete News--------------------------
+// --------------------Delete News Article--------------------------
 masterContainer.addEventListener("click", () => {
     if (event.target.id.startsWith("NewsArticleDelete")) {
         const newsArticleToDelete = event.target.id.split("--")[1]
         console.log(newsArticleToDelete);
         //* to clear the DOM
         document.querySelector("#news__articles").innerHTML = "";
+        //* delete article
         news.deleteNewsEntry(newsArticleToDelete)
+        //* render json news array to DOM
         news.getNewsData().then(news.renderToDOM)
     }
 })
 
-
-
+// --------------------Edit News Article----------------------------
+masterContainer.addEventListener("click", () => {
+    if (event.target.id.startsWith("NewsArticleEdit")) {
+        const newsArticleToEdit = event.target.id.split("--")[1];
+        console.log(newsArticleToEdit);
+        news.retrieveNewsEntry(newsArticleToEdit)
+        .then((newsArticleObjectToEdit) => {
+            console.table(newsArticleObjectToEdit)
+            //need to add functionality here to edit
+        })
+    }
+})
 
 
 //* -----------------End News----------------------

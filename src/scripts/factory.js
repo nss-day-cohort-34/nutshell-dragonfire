@@ -35,9 +35,6 @@ const renderHomepage = () => {
 <div class="leftSideContainer">
   <article class="container news__container" id="news__container">
   <h3>News</h3>
-    <section>
-      <button id="newArticle" class="newArticle">New Article</button>
-    </section>
     <section id="news__entry">
     <form action="">
         <fieldset>
