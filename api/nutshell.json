@@ -18,11 +18,82 @@
   ],
   "tasks": [
     {
-      "id": 1,
-      "userId": 1,
-      "task": "Finish the task list.",
+      "task": "Get a haircut for Ben",
+      "date": "2019-08-18",
       "completed": false,
-      "expectedCompletion": "2019-08-16"
+      "id": 1
+    },
+    {
+      "task": "Mow the front and back yard",
+      "date": "2019-08-18",
+      "completed": false,
+      "id": 2
+    },
+    {
+      "task": "Repair the downstairs toilet",
+      "date": "2019-08-23",
+      "completed": false,
+      "id": 3
+    },
+    {
+      "task": "Clean upstairs bathroom",
+      "date": "2019-08-22",
+      "completed": false,
+      "id": 4
+    },
+    {
+      "task": "Plant flowers",
+      "date": "2019-08-22",
+      "completed": false,
+      "id": 5
+    },
+    {
+      "task": "Vacuum living room",
+      "date": "2019-08-21",
+      "completed": false,
+      "id": 6
+    },
+    {
+      "userId": 1,
+      "task": "Test the HVAC2",
+      "date": "2019-08-19",
+      "completed": false,
+      "id": 7
+    },
+    {
+      "userId": 1,
+      "task": "Take Jonny to the dentist",
+      "date": "2019-08-27",
+      "completed": false,
+      "id": 8
+    },
+    {
+      "userId": 1,
+      "task": "Hire someone to clean gutters",
+      "date": "2019-08-20",
+      "completed": false,
+      "id": 9
+    },
+    {
+      "userId": 1,
+      "task": "Get downstairs bath mirror fixes",
+      "date": "2019-08-21",
+      "completed": false,
+      "id": 10
+    },
+    {
+      "userId": 1,
+      "task": "Stop by the grocery store",
+      "date": "2019-08-19",
+      "completed": false,
+      "id": 11
+    },
+    {
+      "userId": 1,
+      "task": "Mow the yard",
+      "date": "2019-08-20",
+      "completed": false,
+      "id": 12
     }
   ],
   "news": [
@@ -41,13 +112,6 @@
       "eventName": "Event Name",
       "date": "2019-08-16",
       "location": "1234 Main Street"
-    }
-  ],
-  "friends": [
-    {
-      "id": 1,
-      "userId": 1,
-      "otherFriendId": 2
     }
   ],
   "messages": [
