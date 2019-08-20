@@ -26,6 +26,7 @@ const getEventsData = () => {
     .then(entries => entries.json())
 }
 
+
 // fetch that saves the events
 const saveEventsData = (registerEvent) => {
     return fetch("http://localhost:8088/events", {

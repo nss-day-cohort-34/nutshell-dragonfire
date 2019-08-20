@@ -10,15 +10,23 @@ let users = []
 API.getData().then(parsedData => {
     users.push(parsedData)
 })
+
+const getEventsByDate = () => {
+    API.getEventsData().then(parsedData => {
+        const savedSortArray = parsedData.sort((a, b) => {
+             const dateA = new Date(a.date), dateB = new Date(b.date)
+             return dateA - dateB
+            })
+         factory.renderEvents(savedSortArray)
+     })
+    }
 masterContainer.innerHTML = factory.renderLogin()
 
 //prevent refresh
 if (sessionStorage.length > 0) {
     masterContainer.innerHTML = ""
     masterContainer.innerHTML = factory.renderHomepage()
-    API.getEventsData().then(parsedData => {
-        factory.renderEvents(parsedData)
-    })
+    getEventsByDate()
 }
 //click login button
 masterContainer.addEventListener("click", () => {
@@ -49,9 +57,7 @@ masterContainer.addEventListener("click", () => {
                 console.log(sessionStorage.userId)
                 masterContainer.innerHTML = ""
                 masterContainer.innerHTML = factory.renderHomepage()
-                API.getEventsData().then(parsedData => {
-                    factory.renderEvents(parsedData)
-                })
+                getEventsByDate()
             }
         })
     }
@@ -74,9 +80,7 @@ masterContainer.addEventListener("click", () => {
                         users.push(parsedData)
                         masterContainer.innerHTML = ""
                         masterContainer.innerHTML = factory.renderHomepage()
-                        API.getEventsData().then(parsedData => {
-                            factory.renderEvents(parsedData)
-                        })
+                        getEventsByDate()
                     })
                 })
             }
@@ -94,11 +98,16 @@ masterContainer.addEventListener("click", () => {
 
 //messages
 
+    const date = document.querySelector("#eventDate")
+    const eventName = document.querySelector("#eventName")
+    const location = document.querySelector("#eventLocation")
 
+const clearForm = () => {
+    date.value = ""
+    eventName.value = ""
+    location.value = ""
+  }
 
-
-
-//events section
 
 //created a event listener with a function that will target the save button and targeted the input fields
 masterContainer.addEventListener("click", () => {
@@ -109,8 +118,7 @@ masterContainer.addEventListener("click", () => {
         const location = document.querySelector("#eventLocation").value
         const hiddenInputId = document.querySelector("#eventsId")
         console.log("I'm POSTING")
-
-    //created an object referencing the input fields
+        //created an object referencing the input fields
         const newEventEntry = {
             date: date,
             userId: userId,
@@ -118,23 +126,15 @@ masterContainer.addEventListener("click", () => {
             location: location
         };
         //clear form function that will clear the input fields
-           const clearForm = () => {
-            eventName.value = ""
-            location.value = ""
-        }
         // returns the fetch data parses the data and renders it to the DOM also made an if statement
         // that will target the hidden input Id and if is not an empty string it will edit the event entry else it will save it as new entry
         if (hiddenInputId.value !== "") {
             API.editEvents(newEventEntry, hiddenInputId.value).then(() => {
-                API.getEventsData(data => {
-                    factory.renderEvents(data)
-                })
-            })
+                console.log(hiddenInputId.value)
+                getEventsByDate()
+            }).then(clearForm())
         } else {
-            API.saveEventsData(newEventEntry)
-                .then(API.getEventsData).then(parsedData => {
-                    factory.renderEvents(parsedData)
-                }).then(clearForm)
+            API.saveEventsData(newEventEntry).then(getEventsByDate()).then(clearForm())
         }
     }
 })
@@ -146,11 +146,9 @@ masterContainer.addEventListener("click", () => {
 masterContainer.addEventListener("click", () => {
     if (event.target.id.startsWith("deleteEvent--")) {
         const deleteEntry = event.target.id.split("--")[1]
-        console.log("deleteId", deleteEntry)
-
-        API.deleteEvent(deleteEntry).then(API.getEventsData).then(parsedData => {
+            API.deleteEvent(deleteEntry).then(API.getEventsData).then(parsedData => {
             factory.renderEvents(parsedData)
-        }).then(clearForm)
+        })
     }
 })
 
@@ -159,8 +157,7 @@ masterContainer.addEventListener("click", () => {
 masterContainer.addEventListener("click", () => {
     if (event.target.id.startsWith("editEvent")) {
         const editEventEntry = event.target.id.split("--")[1]
-        console.log("hi im edit", editEventEntry)
-        API.updateFormFields(editEventEntry)
+            API.updateFormFields(editEventEntry)
     }
 })
 

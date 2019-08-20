@@ -36,95 +36,25 @@
   ],
   "events": [
     {
-      "date": "2019-08-16",
+      "date": "2019-08-17",
       "userId": 1,
-      "eventName": "Event Name",
-      "location": "1234 Main Street ",
-      "id": 1
-    },
-    {
-      "date": "2019-08-16",
-      "userId": 1,
-      "eventName": "Nutshell",
-      "location": "1234 South Street",
+      "eventName": "Titans vs Patriots ",
+      "location": "Nashville",
       "id": 2
     },
     {
-      "date": "2019-08-20",
+      "date": "2019-08-19",
       "userId": 1,
-      "eventName": "NSS",
-      "location": "NSS",
+      "eventName": "Nashville Farmers Market",
+      "location": "Nashville TN",
       "id": 3
     },
     {
-      "date": "2019-08-19",
-      "userId": 1,
-      "eventName": "Nutshell",
-      "location": "NUT",
-      "id": 4
-    },
-    {
-      "date": "2019-08-19",
-      "userId": 1,
-      "eventName": "Eagles Game",
-      "location": "TN",
-      "id": 5
-    },
-    {
-      "date": "2019-08-19",
-      "userId": 1,
-      "eventName": "Nashsh",
-      "location": "naa",
-      "id": 6
-    },
-    {
-      "date": "2019-08-19",
-      "userId": 1,
-      "eventName": "Target",
-      "location": "Target",
-      "id": 7
-    },
-    {
-      "date": "2019-08-20",
+      "date": "2019-08-22",
       "userId": 1,
       "eventName": "Nutshell Project",
-      "location": "Nashville",
-      "id": 8
-    },
-    {
-      "date": "",
-      "userId": 1,
-      "eventName": "",
-      "location": "",
-      "id": 9
-    },
-    {
-      "date": "2019-08-19",
-      "userId": 1,
-      "eventName": "daNG IT",
-      "location": "Dng it",
-      "id": 10
-    },
-    {
-      "date": "2019-08-19",
-      "userId": 1,
-      "eventName": "hey",
-      "location": "hey",
-      "id": 11
-    },
-    {
-      "date": "",
-      "userId": 1,
-      "eventName": "",
-      "location": "",
-      "id": 12
-    },
-    {
-      "date": "2019-08-20",
-      "userId": 1,
-      "eventName": "nash",
-      "location": "nash",
-      "id": 13
+      "location": "NSS Nashville",
+      "id": 4
     }
   ],
   "friends": [

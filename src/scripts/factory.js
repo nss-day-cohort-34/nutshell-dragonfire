@@ -46,7 +46,6 @@ const renderHomepage = () => {
   <h3>Events</h3>
   <div id="eventsFormField">
   <input type="hidden" value="" id="eventsId">
-  <form>
     <fieldset>
         <label for="eventDate">Event Date</label>
         <input type="date" name="eventDate" id="eventDate">
@@ -60,7 +59,6 @@ const renderHomepage = () => {
         <input type="text" name="eventName" id="eventLocation" placeholder="Enter the Event Location">
     </fieldset>
     <button id="submitButton">Save</button>
-    </form>
     </div>
     <div id="eventRender"></div>
   </article>
@@ -81,15 +79,16 @@ const renderLogin = () => {
 //events factory function that will create the object into the DOM
 const createEventsHTML = (eventObject) => {
   return ` <section id="eventRenderContainer">
-  <div id="customDiv--${eventObject.id}">
+<div id="">
   <h1>Event Name: ${eventObject.eventName}</h1>
   <p>Date: ${eventObject.date}</p>
   <p>Location: ${eventObject.location}</p>
   <button id="deleteEvent--${eventObject.id}">Delete Event</button>
   <button id="editEvent--${eventObject.id}">Edit Event</button>
-  </div>
 </section>`
 }
+
+//events clear form function
 
 
 //events render function that will display the events object into the DOM
