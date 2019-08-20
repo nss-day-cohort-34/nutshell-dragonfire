@@ -77,9 +77,18 @@ const getOneFriend = (id) => {
     .then(entries => entries.json())
 }
 
+const deleteFriend = (entryID) => {
+    return fetch(`http://localhost:8088/friends/${entryID}`,
+        {
+            method: "DELETE",
+
+        })
+        .then(data => data.json())
+}
+
 
 
 
 export default {
-    getAllFriends, friendDialogBox, renderFriendDialogBox, addFriend, makeFriendObject, renderFriendsList, renderFriendsListPending, renderFriendsListAcceptButton, getOneFriend
+    getAllFriends, friendDialogBox, renderFriendDialogBox, addFriend, makeFriendObject, renderFriendsList, renderFriendsListPending, renderFriendsListAcceptButton, getOneFriend, deleteFriend
 }

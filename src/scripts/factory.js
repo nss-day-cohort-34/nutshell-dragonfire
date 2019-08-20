@@ -50,7 +50,10 @@ const renderHomepage = () => {
   <h3>Events</h3>
   </article>
   <article class="container friends__container">
+  <header>
   <h3>Friends</h3>
+  <button id="searchFriend">Add Friend</button>
+  </header>
   <ul id="friends__container"></ul>
   </article>
 </div>`

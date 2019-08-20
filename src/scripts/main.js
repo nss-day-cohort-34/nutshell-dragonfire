@@ -40,7 +40,6 @@ const getRenderFriends = () => {
                 }
                 friendsArray.forEach(friend => {
                     const idea = users[0].find(user => user.id === friend)
-                    console.log(idea)
                     usernameArray.push(idea.username)
                 });
                 pendingUsername.forEach(friend => {
@@ -248,11 +247,17 @@ masterContainer.addEventListener("click", () => {
         const nameOfArray = event.target.id.split("--")[0]
         const id = event.target.id.split("--")[2]
         friends.getOneFriend(id).then(friendship => {
-            console.log(friendship[0])
             const otherFriendId = friendship[0].userId
             messages.edit(nameOfArray, id, otherFriendId).then(() => {
                 getRenderFriends()
             })
         })
+    }
+})
+
+//delete friend
+masterContainer.addEventListener("click", () => {
+    if (event.target.id.startsWith("deleteFriend")) {
+        console.log("sidjnfg")
     }
 })
