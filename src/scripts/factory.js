@@ -79,7 +79,6 @@ const renderLogin = () => {
 //events factory function that will create the object into the DOM
 const createEventsHTML = (eventObject) => {
   return ` <section id="eventRenderContainer">
-<div id="">
   <h1>Event Name: ${eventObject.eventName}</h1>
   <p>Date: ${eventObject.date}</p>
   <p>Location: ${eventObject.location}</p>
@@ -88,7 +87,7 @@ const createEventsHTML = (eventObject) => {
 </section>`
 }
 
-//events clear form function
+
 
 
 //events render function that will display the events object into the DOM

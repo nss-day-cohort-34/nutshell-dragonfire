@@ -96,8 +96,8 @@ masterContainer.addEventListener("click", () => {
     }
 })
 
-//messages
 
+// declared constants to select input fields and created a clear form function to clear inputs
     const date = document.querySelector("#eventDate")
     const eventName = document.querySelector("#eventName")
     const location = document.querySelector("#eventLocation")
@@ -117,7 +117,7 @@ masterContainer.addEventListener("click", () => {
         const eventName = document.querySelector("#eventName").value
         const location = document.querySelector("#eventLocation").value
         const hiddenInputId = document.querySelector("#eventsId")
-        console.log("I'm POSTING")
+
         //created an object referencing the input fields
         const newEventEntry = {
             date: date,
@@ -130,7 +130,6 @@ masterContainer.addEventListener("click", () => {
         // that will target the hidden input Id and if is not an empty string it will edit the event entry else it will save it as new entry
         if (hiddenInputId.value !== "") {
             API.editEvents(newEventEntry, hiddenInputId.value).then(() => {
-                console.log(hiddenInputId.value)
                 getEventsByDate()
             }).then(clearForm())
         } else {
