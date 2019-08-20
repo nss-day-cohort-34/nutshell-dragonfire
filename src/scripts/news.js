@@ -53,12 +53,10 @@ const createNewsArticleComponent = (object) => {
               <button id="NewsArticleEdit--${object.id}">Edit News Article</button>
             </div>`;
 };
+//-------------------------------
 
-const sortedArray = (newsArticles) => {
-
-
-}
-
+// news.sort(compare)
+//----------------------------------
 const renderToDOM = (newsArticles) => {
 const whereToDisplayNewsInTheDOM = document.querySelector("#news__articles");
 newsArticles.forEach(object => {

@@ -9,13 +9,25 @@ let users = [];
 API.getData().then(parsedData => {
   users.push(parsedData);
 });
+
+const getNewsByDate = () => {
+    news.getNewsData().then(parsedData => {
+        const savedNewsArray = parsedData.sort((a,b) => {
+            const newsDateA = new Date(a.date), newsDateB = new Date(b.date)
+            return newsDateB - newsDateA
+        })
+            news.renderToDOM(savedNewsArray)
+            console.log(savedNewsArray)
+        })
+    }
+
 masterContainer.innerHTML = factory.renderLogin();
 
 //prevent refresh
 if (sessionStorage.length > 0) {
   masterContainer.innerHTML = "";
   masterContainer.innerHTML = factory.renderHomepage();
-  news.getNewsData().then(news.renderToDOM);
+  getNewsByDate()
 }
 //click login button
 masterContainer.addEventListener("click", () => {
@@ -99,6 +111,7 @@ masterContainer.addEventListener("click", () => {
     const url = document.querySelector("#newsURL");
     const newsUserID = parseInt(sessionStorage.getItem("userId"));
     const currentDate = new Date();
+
 
 
     const newsDateSubmitted = currentDate;
@@ -196,3 +209,4 @@ const modalNewsEdit = () => {
 };
 
 //* -----------------End News----------------------
+
