@@ -1,6 +1,6 @@
 const getData = () => {
-    return fetch("http://localhost:8088/users")
-    .then(entries => entries.json())
+    return fetch("http://localhost:8088/users?_sort=order=date")
+        .then(entries => entries.json())
 }
 
 const register = (registerObject) => {
@@ -15,10 +15,11 @@ const register = (registerObject) => {
 
 const searchAPI = (username, email) => {
     return fetch(`http://localhost:8088/users?username=${username}&email=${email}`)
-    .then(entries => entries.json())
+        .then(entries => entries.json())
 }
 
-
 export default {
-    getData, register, searchAPI
+    getData,
+    register,
+    searchAPI
 }
