@@ -97,19 +97,26 @@ masterContainer.addEventListener("click", () => {
     const title = document.querySelector("#newsTitle");
     const synopsis = document.querySelector("#newsSynopsis");
     const url = document.querySelector("#newsURL");
-    const newsUserID = parseInt(sessionStorage.getItem("user"));
-    const newsDateSubmitted = "";
-    console.log(newsUserID);
-    console.log(title);
+    const newsUserID = parseInt(sessionStorage.getItem("userId"));
+    const currentDate = new Date();
+
+
+    const newsDateSubmitted = currentDate;
+
+    console.log(newsDateSubmitted);
+    // console.log(title);
     newNewsEntry = {
       title: title.value,
       synopsis: synopsis.value,
       url: url.value,
-      userID: newsUserID,
-      date: newsDateSubmitted
+      userId: newsUserID,
+      date: newsDateSubmitted,
     };
+    // console.log(newNewsEntry)
     //* Display the new journal entry in the DOM
     news.saveNewsEntry(newNewsEntry);
+    document.querySelector("#news__articles").innerHTML=""
+    news.getNewsData().then(news.renderToDOM);
   }
 });
 
@@ -117,7 +124,7 @@ masterContainer.addEventListener("click", () => {
 masterContainer.addEventListener("click", () => {
   if (event.target.id.startsWith("NewsArticleDelete")) {
     const newsArticleToDelete = event.target.id.split("--")[1];
-    console.log(newsArticleToDelete);
+    // console.log(newsArticleToDelete);
     //* to clear the DOM
     document.querySelector("#news__articles").innerHTML = "";
     //* delete article
@@ -133,8 +140,6 @@ masterContainer.addEventListener("click", () => {
   const modalButton = document.querySelector("#editNewsSubmit");
   if (event.target.id.startsWith("NewsArticleEdit")) {
     const newsArticleToEdit = event.target.id.split("--")[1];
-    console.log("newsArticleToEdit  ", newsArticleToEdit);
-    console.log(modalNewsEdit())
     const newsModal = document.querySelector("#newsModal");
     newsModal.innerHTML = modalNewsEdit();
     const newsModalBox = document.querySelector("#newsModalBox");
@@ -159,16 +164,19 @@ masterContainer.addEventListener("click", () => {
         masterContainer.addEventListener("click", () => {
           if (event.target.id.startsWith("editNewsSave")) {
             const updatedNewsObject = {
-                date: document.querySelector("#editNewsDate"),
-                userId: document.querySelector("#editNewsUserId"),
+                date: document.querySelector("#editNewsDate").value,
+                userId: document.querySelector("#editNewsUserId").value,
                 title: document.querySelector("#editNewsTitle").value,
                 synopsis: document.querySelector("#editNewsSynopsis").value,
-                url: document.querySelector("#editNewsURL")
+                url: document.querySelector("#editNewsURL").value,
             }
-            console.log(updatedNewsObject)
-            console.log(newsArticleToEdit)
+            // console.log(updatedNewsObject)
+            // console.log(newsArticleToEdit)
 
-            news.saveEditedNewsEntry(updatedNewsObject, newsArticleToEdit)
+            news.saveEditedNewsEntry(updatedNewsObject, newsArticleToEdit);
+            const newsModalBox = document.querySelector("#newsModalBox");
+            newsModalBox.close();
+            news.getNewsData().then(news.renderToDOM);
           }
         })
       );

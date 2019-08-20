@@ -35,52 +35,44 @@
       "synopsis": "This is an article about this."
     },
     {
-      "date": {},
-      "userId": {},
-      "title": "testing1018",
-      "synopsis": "test on 7",
-      "url": {},
-      "id": 7
+      "title": "test@1132",
+      "synopsis": "test",
+      "url": "testing",
+      "userId": 3,
+      "date": "2019-08-20T16:32:18.842Z",
+      "id": 2
+    },
+    {
+      "title": "test@1136",
+      "synopsis": "test",
+      "url": "testing",
+      "userId": 3,
+      "date": "2019-08-20T16:36:57.394Z",
+      "id": 3
+    },
+    {
+      "title": "",
+      "synopsis": "",
+      "url": "",
+      "userId": 3,
+      "date": "2019-08-20T16:37:03.461Z",
+      "id": 4
+    },
+    {
+      "title": "test@1138",
+      "synopsis": "test",
+      "url": "test",
+      "userId": 3,
+      "date": "2019-08-20T16:38:48.337Z",
+      "id": 5
     },
     {
       "title": "test",
       "synopsis": "test",
       "url": "test",
-      "userID": "1",
-      "date": "2019-08-16",
-      "id": 8
-    },
-    {
-      "title": "test for Ted",
-      "synopsis": "test for Ted",
-      "url": "test for Ted",
-      "userID": "3",
-      "date": "2019-08-16",
-      "id": 9
-    },
-    {
-      "title": "test1050",
-      "synopsis": "test",
-      "url": "test",
-      "userID": "3",
-      "date": "2019-08-16",
-      "id": 10
-    },
-    {
-      "title": "test",
-      "synopsis": "rwSDfsdf",
-      "url": "asdfadf",
-      "userID": "3",
-      "date": "2019-08-16",
-      "id": 11
-    },
-    {
-      "title": "New Article",
-      "synopsis": "this is a new artickew",
-      "url": "www.new.com",
-      "userID": "3",
-      "date": "2019-08-16",
-      "id": 12
+      "userId": 3,
+      "date": "2019-08-20T16:52:44.320Z",
+      "id": 6
     }
   ],
   "events": [
