@@ -123,9 +123,9 @@
     },
     {
       "userId": 3,
-      "otherFriendId": 1,
+      "otherFriendId": 2,
       "areFriends": true,
-      "id": 2
+      "id": 3
     }
   ],
   "messages": [
@@ -293,6 +293,21 @@
       "userId": 3,
       "message": "No its not",
       "id": 33
+    },
+    {
+      "userId": 1,
+      "message": "This is a test",
+      "id": 34
+    },
+    {
+      "userId": 3,
+      "message": "This is a test",
+      "id": 35
+    },
+    {
+      "userId": 2,
+      "message": "No its not",
+      "id": 36
     }
   ]
 }

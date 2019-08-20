@@ -6,11 +6,35 @@ import tasks from "./tasks.js"
 
 const masterContainer = document.querySelector("#masterContainer")
 let users = []
-
+let friendArray = []
+let messagesArray = []
 masterContainer.innerHTML = factory.renderLogin()
+
 API.getData().then(parsedData => {
     users.push(parsedData)
 })
+friends.getAllFriends().then(data => {
+    friendArray.push(data)
+})
+messages.getAllMessages().then(data => {
+    messagesArray.push(data)
+})
+const friendInterval = () => {
+    friends.getAllFriends().then(data => {
+        if (friendArray.length !== data.length) {
+            getRenderFriends()
+        }
+    })
+}
+const messageInterval = () => {
+    friends.getAllFriends().then(data => {
+        if (messagesArray.length !== data.length) {
+            getRenderMessage()
+        }
+    })
+}
+setInterval(friendInterval, 3000)
+setInterval(messageInterval, 3000)
 //condense code for getting and rendering messages
 const getRenderMessage = () => {
     messages.getAllMessages().then(parsedData => {
@@ -397,19 +421,6 @@ masterContainer.addEventListener("click", () => {
         getRenderTasks()
     }
 })
-
-// const editButton = document.querySelector("edit__Task")
-// editButton.addEventListener("keyup", (event) => {
-//     if (event.keyCode === 13) {
-//         // Cancel the default action, if needed
-//         event.preventDefault();
-//         // Trigger the button element with a click
-//         document.getElementById("edit__Task").click();
-//         console.log("keyup")
-//     }
-// });
-
-
 
 //this targets the item we want to mark completed and adds "checked" class to it that strike-throughs and lowers opacity
 masterContainer.addEventListener("click", (event) => {
