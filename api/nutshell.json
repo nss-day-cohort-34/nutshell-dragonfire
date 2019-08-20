@@ -55,13 +55,6 @@
     },
     {
       "userId": 1,
-      "task": "Test the HVAC2",
-      "date": "2019-08-19",
-      "completed": false,
-      "id": 7
-    },
-    {
-      "userId": 1,
       "task": "Take Jonny to the dentist",
       "date": "2019-08-27",
       "completed": false,

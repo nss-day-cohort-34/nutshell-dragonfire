@@ -1,35 +1,125 @@
-html,body {
+html,
+body {
     height: 100%;
     padding: 0;
     margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #444;
+}
+
+#loginContainer {
+    display: flex;
+    justify-content: center;
+
+}
+
+#welcome_h1 {
+    margin-bottom: 0px;
+    color: lightgray;
+}
+
+.Login_Text {
+    text-align: center;
+}
+
+#welcome_page {
+    margin: auto;
+    text-align: center;
 }
 
 .masterContainer {
     height: 100%;
+
+}
+
+#flex_container {
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    height: 90%;
+    /* justify-content: space-between; */
+}
+
+legend {
+    font-size: 13px;
 }
 
 .leftSideContainer {
-    width: 49%;
-    height: 90%;
-    float: left;
-    border: solid black 1px;
+    flex-basis: 48%;
+    /* height: 90%; */
+    /* border: solid black 1px; */
     margin: 4px;
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
+    padding-left: 2px;
+    /* max-width: 40%; */
+    margin-top: 0px;
+    border-radius: 10px;
 }
 
 .rightSideContainer {
-    width: 49%;
-    height: 90%;
-    float: right;
-    border: solid blue 1px;
+    /* display: flex; */
+    flex-basis: 48%;
+    /* height: 90%; */
+    border-radius: 10px;
+    /* border: solid blue 1px; */
     margin: 4px;
+    background-color: rgb(218, 218, 218);
+    /* max-width: 40%; */
+    border-radius: 10px;
+    padding-left: 10px;
+}
+
+.completed {
+    font-size: 13px;
 }
 
 .container {
-    border: solid 1px magenta;
+    /* border: solid 1px black; */
     height: 24%;
-    margin: 2px;
-    overflow:scroll;
+    margin: 4px;
+    margin-bottom: 10px;
+    overflow: scroll;
+    background-color: rgb(218, 218, 218);
+    border-radius: 10px;
+    padding-left: 10px;
+
+}
+
+#Page_Title {
+    margin-left: 5px;
+    margin-bottom: 5px;
+    color: lightgray;
+}
+
+#signOut {
+    margin-left: 5px;
+    margin-right: 10px;
+    margin-top: 14px;
+    float: right;
+    background-color: #ab742c;
+    border: none;
+    color: white;
+    padding: 12px 12px;
+    text-align: center;
+    text-decoration: none;
+
+    font-size: 14px;
+}
+
+.button {
+    background-color: #ab742c;
+    border: none;
+    color: white;
+    padding: 15px 20px;
+    text-align: center;
+    text-decoration: none;
+    align-content: center;
+    font-size: 14px;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+h3 {
+    margin-left: 5px;
+    margin-bottom: 10px;
+    margin-top: 5px;
 }

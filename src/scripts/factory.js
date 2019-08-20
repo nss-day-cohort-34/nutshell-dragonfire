@@ -1,6 +1,6 @@
 const createLogin = () => {
   return ` <section>
-    <h2>Please Login</h2>
+    <h2 class="Login_Text">Please Login</h2>
     <input type="text" placeholder="Username" id = "loginUsername">
     <input type="text" placeholder="Email" id = "loginEmail">
     <button id="signOnUser">Login</button>
@@ -9,7 +9,7 @@ const createLogin = () => {
 
 const createRegister = () => {
   return ` <section>
-    <h2>Please Register</h2>
+    <h2 class="Login_Text">Please Register</h2>
     <input type="text" placeholder="Enter a Username" id = "registerUsername">
     <input type="text" placeholder="Enter an Email" id = "registerEmail">
     <button id = "createUser">Submit</button>
@@ -25,18 +25,14 @@ const makeUserObject = (username, email) => {
 
 const renderHomepage = () => {
   return `<header>
-  <h1>Nutshell</h1> <button id="signOut" class="signOut">Log Out</button>
+  <img src="src/img/Nutshell_logo.png" ALT="some text" WIDTH=230 HEIGHT=60><button id="signOut" class="signOut">Log Out</button>
 </header>
-<div class="rightSideContainer">
-  <article class="messages__container" id="messages__container">
-  <h3>Messages</h3>
-  </article>
-</div>
+<div id="flex_container">
+
 <div class="leftSideContainer">
   <article class="container news__container" id="news__container">
   <h3>News</h3>
   </article>
-
   <article class="container tasks__container" id="tasks__container">
   <h3>To-Dos</h3>
   <div id="tasksFormField">
@@ -52,7 +48,7 @@ const renderHomepage = () => {
   <fieldset><input type="submit" id="submit_button" value="Add">
     <input type="submit" id="delete_completed" value="Toggle Completed">
   </fieldset>
-  <h3>Your Tasks:</h3></div>
+  <h4>Your Tasks:</h4></div>
 
   <div id="tasksRender">
   </div>
@@ -64,12 +60,20 @@ const renderHomepage = () => {
   </article>
   <article class="container friends__container" id="friends__container">
   <h3>Friends</h3>
+
   </article>
+</div>
+<div class="rightSideContainer">
+  <article class="messages__container" id="messages__container">
+  <h3>Messages</h3>
+  </article>
+</div>
 </div>`
+
 }
 
 const renderLogin = () => {
-  return `<h1>Welcome to Nutshell!</h1>
+  return `<header id="welcome_page"><h1 id="welcome_h1">Welcome to</h1><img src="src/img/Nutshell_logo.png" ALT="some text" width=600 height=160></header>
   <article id="loginContainer">
     <button id="loginButton" class="button">Login</button>
     <button id="registerButton" class="button">Register</button>
