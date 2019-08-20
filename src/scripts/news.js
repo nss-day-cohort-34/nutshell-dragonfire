@@ -47,18 +47,22 @@ const createNewsArticleComponent = (object) => {
               <section>${object.title}</section>
               <section>${object.synopsis}</section>
               <section>URL: ${object.url}</section>
-              <section>Submitted By: ${object.userId}</section>
               <input type="hidden" id="hiddenId" value=""/>
               <button id="NewsArticleDelete--${object.id}">Delete News Article</button>
               <button id="NewsArticleEdit--${object.id}">Edit News Article</button>
             </div>`;
 };
-//-------------------------------
 
-// news.sort(compare)
-//----------------------------------
+const clearForm = () => {
+    document.querySelector("#newsTitle").value = "";
+    document.querySelector("#newsSynopsis").value = "";
+    document.querySelector("#newsURL").value = "";
+}
+
 const renderToDOM = (newsArticles) => {
 const whereToDisplayNewsInTheDOM = document.querySelector("#news__articles");
+whereToDisplayNewsInTheDOM.innerHTML="";
+clearForm();
 newsArticles.forEach(object => {
 //   console.table(object)
     const htmlRepresentation = createNewsArticleComponent(object);

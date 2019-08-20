@@ -37,15 +37,13 @@ const renderHomepage = () => {
   <h3>News</h3>
     <div id="newsModal"></div>
     <section id="news__entry">
-    <form action="">
-        <fieldset>
-            <input type="hidden" id="newsHiddenid" value=""/>
-            Title<input name = "newsTitle" input type = "text" id="newsTitle">
-            Synopsis<textarea wrap="soft" name="newsSynopsis" id="newsSynopsis"></textarea>
-            URL<input name = "newsURL" input type = "text" id="newsURL">
-            <button id="newsSubmit" type="submit" value="Record News Entry">Submit</button>
-        </fieldset>
-    </form>
+      <fieldset>
+        <input type="hidden" id="newsHiddenid" value=""/>
+        Title<input name = "newsTitle" input type = "text" id="newsTitle">
+        Synopsis<textarea wrap="soft" name="newsSynopsis" id="newsSynopsis"></textarea>
+        URL<input name = "newsURL" input type = "text" id="newsURL">
+        <button id="newsSubmit" type="submit" value="Record News Entry">Submit</button>
+      </fieldset>
     </section>
     <section id="news__articles"></section>
   </article>

@@ -17,7 +17,7 @@ const getNewsByDate = () => {
             return newsDateB - newsDateA
         })
             news.renderToDOM(savedNewsArray)
-            console.log(savedNewsArray)
+            // console.log(savedNewsArray)
         })
     }
 
@@ -111,12 +111,7 @@ masterContainer.addEventListener("click", () => {
     const url = document.querySelector("#newsURL");
     const newsUserID = parseInt(sessionStorage.getItem("userId"));
     const currentDate = new Date();
-
-
-
     const newsDateSubmitted = currentDate;
-
-    console.log(newsDateSubmitted);
     // console.log(title);
     newNewsEntry = {
       title: title.value,
@@ -127,9 +122,9 @@ masterContainer.addEventListener("click", () => {
     };
     // console.log(newNewsEntry)
     //* Display the new journal entry in the DOM
-    news.saveNewsEntry(newNewsEntry);
-    document.querySelector("#news__articles").innerHTML=""
-    news.getNewsData().then(news.renderToDOM);
+    news.saveNewsEntry(newNewsEntry).then(() => {
+        getNewsByDate()
+    })
   }
 });
 
@@ -164,14 +159,12 @@ masterContainer.addEventListener("click", () => {
         const newsUrl = document.querySelector("#editNewsURL");
         const newsDate = document.querySelector("#editNewsDate");
         const newsUserId = document.querySelector("#editNewsUserId");
-        console.table(newsArticleObjectToEdit);
-        console.log(newsArticleObjectToEdit.date)
+        // console.table(newsArticleObjectToEdit);
         newsTitle.value = newsArticleObjectToEdit.title;
         newsSynopsis.value = newsArticleObjectToEdit.synopsis;
         newsUrl.value = newsArticleObjectToEdit.url;
         newsDate.value = newsArticleObjectToEdit.date;
         newsUserId.value = newsArticleObjectToEdit.userId;
-        console.log(newsArticleObjectToEdit);
       })
       .then(
         masterContainer.addEventListener("click", () => {
@@ -183,13 +176,9 @@ masterContainer.addEventListener("click", () => {
                 synopsis: document.querySelector("#editNewsSynopsis").value,
                 url: document.querySelector("#editNewsURL").value,
             }
-            // console.log(updatedNewsObject)
-            // console.log(newsArticleToEdit)
-
-            news.saveEditedNewsEntry(updatedNewsObject, newsArticleToEdit);
+            news.saveEditedNewsEntry(updatedNewsObject, newsArticleToEdit).then(getNewsByDate);
             const newsModalBox = document.querySelector("#newsModalBox");
             newsModalBox.close();
-            news.getNewsData().then(news.renderToDOM);
           }
         })
       );
