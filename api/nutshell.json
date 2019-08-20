@@ -1,5 +1,6 @@
 {
-  "users": [{
+  "users": [
+    {
       "id": 1,
       "username": "howard",
       "email": "howard@gmail.com"
@@ -15,7 +16,8 @@
       "id": 3
     }
   ],
-  "tasks": [{
+  "tasks": [
+    {
       "task": "Get a haircut for Ben",
       "date": "2019-08-18",
       "completed": false,
@@ -53,7 +55,7 @@
     },
     {
       "userId": 1,
-      "task": "Test the HVAC",
+      "task": "Test the HVAC2",
       "date": "2019-08-19",
       "completed": false,
       "id": 7
@@ -78,25 +80,45 @@
       "date": "2019-08-21",
       "completed": false,
       "id": 10
+    },
+    {
+      "userId": 1,
+      "task": "Stop by the grocery store",
+      "date": "2019-08-19",
+      "completed": false,
+      "id": 11
+    },
+    {
+      "userId": 1,
+      "task": "Mow the yard",
+      "date": "2019-08-20",
+      "completed": false,
+      "id": 12
     }
   ],
-  "news": [{
-    "id": 1,
-    "userId": 1,
-    "url": "news.com",
-    "title": "News article",
-    "synopsis": "This is an article about this."
-  }],
-  "events": [{
-    "id": 1,
-    "userId": 1,
-    "eventName": "Event Name",
-    "date": "2019-08-16",
-    "location": "1234 Main Street"
-  }],
-  "messages": [{
-    "id": 1,
-    "userId": 1,
-    "message": "This is a message."
-  }]
+  "news": [
+    {
+      "id": 1,
+      "userId": 1,
+      "url": "news.com",
+      "title": "News article",
+      "synopsis": "This is an article about this."
+    }
+  ],
+  "events": [
+    {
+      "id": 1,
+      "userId": 1,
+      "eventName": "Event Name",
+      "date": "2019-08-16",
+      "location": "1234 Main Street"
+    }
+  ],
+  "messages": [
+    {
+      "id": 1,
+      "userId": 1,
+      "message": "This is a message."
+    }
+  ]
 }

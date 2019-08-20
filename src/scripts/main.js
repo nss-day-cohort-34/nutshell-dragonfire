@@ -148,9 +148,11 @@ masterContainer.addEventListener("click", event => {
         const newTaskEntry = tasks.makeTasksObject(userId, taskValue, dateValue, checkbox)
 
         if (hiddenEntryID.value !== "") {
-            tasks.editTaskEntry(userId, newTaskEntry, hiddenEntryID.value)
-            getRenderTasks()
-                .then(deleteAllFields)
+            tasks.editTaskEntry(newTaskEntry, hiddenEntryID.value).then(() => {
+                getRenderTasks()
+                deleteAllFields()
+            })
+
 
         } else {
             const checkbox = document.querySelector(".completed").checked
@@ -164,14 +166,16 @@ masterContainer.addEventListener("click", event => {
             const newTaskEntry = tasks.makeTasksObject(userId, taskValue, dateValue, checkbox)
             tasks.postNewTask(newTaskEntry).then(() => {
                 getRenderTasks()
+                deleteAllFields()
             })
-            deleteAllFields()
+
 
         }
     }
 })
 
-//tasks edit/delete eventlistener
+//tasks delete eventlistener
+
 
 masterContainer.addEventListener("click", () => {
     if (event.target.id.startsWith("delete__Task")) {
@@ -181,10 +185,24 @@ masterContainer.addEventListener("click", () => {
     }
     if (event.target.id.startsWith("edit__Task")) {
         const entryId = event.target.id.split("--")[1]
+        console.log("click")
         tasks.updateTaskEditFields(entryId)
         getRenderTasks()
     }
 })
+
+// const editButton = document.querySelector("edit__Task")
+// editButton.addEventListener("keyup", (event) => {
+//     if (event.keyCode === 13) {
+//         // Cancel the default action, if needed
+//         event.preventDefault();
+//         // Trigger the button element with a click
+//         document.getElementById("edit__Task").click();
+//         console.log("keyup")
+//     }
+// });
+
+
 
 //this targets the item we want to mark completed and adds "checked" class to it that strike-throughs and lowers opacity
 masterContainer.addEventListener("click", (event) => {
