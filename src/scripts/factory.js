@@ -28,9 +28,14 @@ const renderHomepage = () => {
   <h1>Nutshell</h1> <button id="signOut" class="signOut">Log Out</button>
 </header>
 <div class="rightSideContainer">
+<h3>Messages</h3>
+<div id="friendDialogBox"></div>
   <article class="messages__container" id="messages__container">
-  <h3>Messages</h3>
   </article>
+  <section class="messages" id="messages">
+    <input class="messages__input" id="messages__input" type="text" placeholder="Enter a Message">
+    <button class="messages__submit" id="messages__submit">Submit</button>
+</section>
 </div>
 <div class="leftSideContainer">
   <article class="container news__container" id="news__container">
@@ -62,8 +67,13 @@ const renderHomepage = () => {
   <article class="container events__container" id="events__container">
   <h3>Events</h3>
   </article>
-  <article class="container friends__container" id="friends__container">
+  <article class="container friends__container">
+  <header id="friendHeader">
   <h3>Friends</h3>
+  <div id="addFriendContainer"></div>
+  <button id="searchFriend">Add Friend</button>
+  </header>
+  <ul id="friends__container"></ul>
   </article>
 </div>`
 }
