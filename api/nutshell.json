@@ -92,7 +92,7 @@
       "userId": 1,
       "task": "Mow the yard",
       "date": "2019-08-20",
-      "completed": false,
+      "completed": true,
       "id": 12
     }
   ],
@@ -116,22 +116,16 @@
   ],
   "friends": [
     {
-      "userId": 1,
-      "otherFriendId": 2,
+      "userId": 2,
+      "otherFriendId": 1,
       "areFriends": true,
       "id": 1
     },
     {
-      "userId": 2,
-      "otherFriendId": 3,
-      "areFriends": true,
-      "id": 2
-    },
-    {
       "userId": 3,
       "otherFriendId": 1,
-      "areFriends": false,
-      "id": 3
+      "areFriends": true,
+      "id": 2
     }
   ],
   "messages": [
@@ -282,17 +276,17 @@
     },
     {
       "userId": 2,
-      "message": "a;osdfjnv;aodfjndva",
+      "message": "hhhh",
       "id": 30
     },
     {
       "userId": 3,
-      "message": "This is a test 4",
+      "message": "This is a hhhh",
       "id": 31
     },
     {
       "userId": 3,
-      "message": "This is a test g",
+      "message": "This is a test khg",
       "id": 32
     },
     {

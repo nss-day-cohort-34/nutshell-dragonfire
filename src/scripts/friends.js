@@ -2,7 +2,7 @@
 
 const getAllFriends = () => {
     return fetch("http://localhost:8088/friends")
-    .then(entries => entries.json())
+        .then(entries => entries.json())
 }
 
 const friendDialogBox = (username) => {
@@ -13,10 +13,17 @@ const friendDialogBox = (username) => {
     </dialog>`
 }
 
-const renderFriendDialogBox = (friendHTML) => {
-    const friendBoxLocation = document.querySelector("#friendDialogBox")
-    friendBoxLocation.innerHTML = ""
-    friendBoxLocation.innerHTML = friendHTML
+const addFriendDialogBox = () => {
+    return `<dialog class = "modal" id="addFriendModal">
+    <p>Search for a friend</p><input type="text" placeholder = "search" id = "searchFriend">
+    <button class="search__button" id="friends--search">Search</button>
+    <button class="cancel__button" id="CancelFriendSearch">Cancel</button>
+    </dialog>`
+}
+
+const renderFriendDialogBox = (friendHTML, location) => {
+    location.innerHTML = ""
+    location.innerHTML = friendHTML
 }
 
 const addFriend = (friendObject) => {
@@ -37,28 +44,21 @@ const makeFriendObject = (userId, otherFriendId, boolean) => {
     }
 }
 
-const renderFriendsList = (friendsArray, friendId) => {
+const renderFriendsList = (friend, friendId) => {
     const friendsContainer = document.querySelector("#friends__container")
-    friendsContainer.innerHTML = ""
-    friendsArray.forEach(friend => {
-        const convertedUsername = makeFriendComponent(friend, friendId)
-        friendsContainer.innerHTML += convertedUsername
-    });
+    const convertedUsername = makeFriendComponent(friend, friendId)
+    friendsContainer.innerHTML += convertedUsername
 }
 
-const renderFriendsListPending = (friendsArray, friendId) => {
+const renderFriendsListPending = (friend, friendId) => {
     const friendsContainer = document.querySelector("#friends__container")
-    friendsArray.forEach(friend => {
-        const convertedUsername = makeFriendComponenPending(friend, friendId)
-        friendsContainer.innerHTML += convertedUsername
-    });
+    const convertedUsername = makeFriendComponenPending(friend, friendId)
+    friendsContainer.innerHTML += convertedUsername
 }
-const renderFriendsListAcceptButton = (friendsArray, friendId) => {
+const renderFriendsListAcceptButton = (friend, friendId) => {
     const friendsContainer = document.querySelector("#friends__container")
-    friendsArray.forEach(friend => {
         const convertedUsername = makeFriendComponentAcceptButton(friend, friendId)
         friendsContainer.innerHTML += convertedUsername
-    });
 }
 
 const makeFriendComponent = (friendUsername, friendId) => {
@@ -74,7 +74,7 @@ const makeFriendComponentAcceptButton = (friendUsername, friendId) => {
 
 const getOneFriend = (id) => {
     return fetch(`http://localhost:8088/friends?id=${id}`)
-    .then(entries => entries.json())
+        .then(entries => entries.json())
 }
 
 const deleteFriend = (entryID) => {
@@ -90,5 +90,5 @@ const deleteFriend = (entryID) => {
 
 
 export default {
-    getAllFriends, friendDialogBox, renderFriendDialogBox, addFriend, makeFriendObject, renderFriendsList, renderFriendsListPending, renderFriendsListAcceptButton, getOneFriend, deleteFriend
+    getAllFriends, friendDialogBox, renderFriendDialogBox, addFriend, makeFriendObject, renderFriendsList, renderFriendsListPending, renderFriendsListAcceptButton, getOneFriend, deleteFriend, addFriendDialogBox
 }

@@ -25,50 +25,26 @@ const getRenderMessage = () => {
 //to get all friends on load
 const getRenderFriends = () => {
     friends.getAllFriends().then(data => {
-        const friendsArray = []
-        const usernameArray = []
-        const pendingUsername = []
-        const finalPendingArray = []
-        const pendingUsernameAcceptButton = []
-        const finalPendingArrayAcceptButton = []
         const userId = parseInt(sessionStorage.getItem("userId"))
+        const friendsContainer = document.querySelector("#friends__container")
+        friendsContainer.innerHTML = ""
         data.forEach(friend => {
             if (friend.userId === userId) {
                 if (friend.areFriends === true) {
-                    friendsArray.push(friend.otherFriendId)
+                    const idea = users[0].find(user => user.id === friend.otherFriendId)
+                    friends.renderFriendsList(idea.username, friend.id)
                 } else if (friend.areFriends === false) {
-                    pendingUsername.push(friend.otherFriendId)
+                    const idea = users[0].find(user => user.id === friend.otherFriendId)
+                    friends.renderFriendsListPending(idea.username, friend.id)
                 }
-                friendsArray.forEach(friend => {
-                    const idea = users[0].find(user => user.id === friend)
-                    usernameArray.push(idea.username)
-                });
-                pendingUsername.forEach(friend => {
-                    const idea = users[0].find(user => user.id === friend)
-                    finalPendingArray.push(idea.username)
-                });
-                const usernameSet = new Set(usernameArray)
-                const pendingSet = new Set(finalPendingArray)
-                friends.renderFriendsList(usernameSet, friend.id)
-                friends.renderFriendsListPending(pendingSet, friend.id)
             } else if (friend.otherFriendId === userId) {
                 if (friend.areFriends === true) {
-                    friendsArray.push(friend.userId)
+                    const idea = users[0].find(user => user.id === friend.userId)
+                    friends.renderFriendsList(idea.username, friend.id)
                 } else if (friend.areFriends === false) {
-                    pendingUsernameAcceptButton.push(friend.userId)
+                    const idea = users[0].find(user => user.id === friend.userId)
+                    friends.renderFriendsListAcceptButton(idea.username, friend.id)
                 }
-                friendsArray.forEach(friend => {
-                    const idea = users[0].find(user => user.id === friend)
-                    usernameArray.push(idea.username)
-                });
-                pendingUsernameAcceptButton.forEach(friend => {
-                    const idea = users[0].find(user => user.id === friend)
-                    finalPendingArrayAcceptButton.push(idea.username)
-                });
-                const usernameSet = new Set(usernameArray)
-                const pendingSet = new Set(finalPendingArrayAcceptButton)
-                friends.renderFriendsList(usernameSet, friend.id)
-                friends.renderFriendsListAcceptButton(pendingSet, friend.id)
             }
         })
     })
@@ -91,9 +67,9 @@ const getRenderTasks = () => {
                 completedTasks.push(task)
                 tasks.renderCompletedTasks(completedTasks)
             } else if (completedTasks.length === 0) {
-                console.log(completedTasks.length)
+                // console.log(completedTasks.length)
                 tasksHTMLRender.innerHTML = ""
-                console.log(completedTasks)
+                // console.log(completedTasks)
             } else if (usersTasks.length === 0) {
                 tasksHTMLRenderCompleted.innerHTML = ""
             }
@@ -253,7 +229,8 @@ masterContainer.addEventListener("click", () => {
             if (filteredData.length < 1 && userId !== clickedID) {
                 const usernameObject = users[0].find(user => user.id === clickedID)
                 const friendHTML = friends.friendDialogBox(usernameObject)
-                friends.renderFriendDialogBox(friendHTML)
+                const friendBoxLocation = document.querySelector("#friendDialogBox")
+                friends.renderFriendDialogBox(friendHTML, friendBoxLocation)
                 const modal = document.querySelector("#friendModal")
                 modal.showModal()
             }
@@ -298,7 +275,57 @@ masterContainer.addEventListener("click", () => {
 //delete friend
 masterContainer.addEventListener("click", () => {
     if (event.target.id.startsWith("deleteFriend")) {
-        console.log("sidjnfg")
+        const deleteId = event.target.id.split("--")[1]
+        friends.deleteFriend(deleteId).then(() => {
+            getRenderFriends()
+        })
+    } else if (event.target.id.startsWith("denyFriend")) {
+        const deleteId = event.target.id.split("--")[1]
+        friends.deleteFriend(deleteId).then(() => {
+            getRenderFriends()
+        })
+    }
+})
+
+//add friend search
+masterContainer.addEventListener("click", () => {
+    if (event.target.id.startsWith("searchFriend")) {
+        const friendsDialogBox = friends.addFriendDialogBox()
+        const friendDialogBoxLocation = document.querySelector("#addFriendContainer")
+        friends.renderFriendDialogBox(friendsDialogBox, friendDialogBoxLocation)
+        const modal = document.querySelector("#addFriendModal")
+        modal.showModal()
+    }
+})
+
+//cancel modal
+masterContainer.addEventListener("click", () => {
+    if (event.target.id.startsWith("CancelFriendSearch")) {
+        const modal = document.querySelector("#addFriendModal")
+        modal.close()
+    }
+})
+
+//search for friend
+masterContainer.addEventListener("click", () => {
+    if (event.target.id.startsWith("friends--search")) {
+        const modal2 = document.querySelector("#addFriendModal")
+        modal2.close()
+        const textValue = document.querySelector("#searchFriend")
+        const userId = parseInt(sessionStorage.getItem("userId"))
+        const desiredFriendId = users[0].find(user => user.username === textValue.value)
+        clickedID = desiredFriendId.id
+        friends.getAllFriends().then(data => {
+            const filteredData = data.filter(friend => (friend.userId === userId || friend.otherFriendId === userId) && (friend.userId === desiredFriendId.id || friend.otherFriendId === desiredFriendId.id) && userId !== desiredFriendId.id)
+            if (filteredData.length < 1 && userId !== desiredFriendId.id) {
+                const usernameObject = users[0].find(user => user.id === desiredFriendId.id)
+                const friendHTML = friends.friendDialogBox(usernameObject)
+                const friendBoxLocation = document.querySelector("#friendDialogBox")
+                friends.renderFriendDialogBox(friendHTML, friendBoxLocation)
+                const modal = document.querySelector("#friendModal")
+                modal.showModal()
+            }
+        })
     }
 })
 //*******************************************/
@@ -317,7 +344,7 @@ const deleteAllFields = (tasks) => {
 masterContainer.addEventListener("click", event => {
     if (event.target.id.startsWith("submit_button")) {
         const checkbox = document.querySelector(".completed").checked
-        console.log(checkbox)
+        // console.log(checkbox)
         // const checkboxValue = checkbox.value
         const taskDueDate = document.querySelector("#taskDueDate")
         const taskText = document.querySelector("#tasksText")

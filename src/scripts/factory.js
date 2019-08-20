@@ -68,8 +68,9 @@ const renderHomepage = () => {
   <h3>Events</h3>
   </article>
   <article class="container friends__container">
-  <header>
+  <header id="friendHeader">
   <h3>Friends</h3>
+  <div id="addFriendContainer"></div>
   <button id="searchFriend">Add Friend</button>
   </header>
   <ul id="friends__container"></ul>
