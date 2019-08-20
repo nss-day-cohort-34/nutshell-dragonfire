@@ -11,7 +11,7 @@ API.getData().then(parsedData => {
 })
 masterContainer.innerHTML = factory.renderLogin()
 
-//Tasks filtering by UserId
+//TASKS filtering by UserId
 //make new array with data that I need and pass in to the renderTasks function
 const getRenderTasks = () => {
     tasks.getTasksData().then(parsedData => {
@@ -85,6 +85,7 @@ masterContainer.addEventListener("click", () => {
         })
     }
 })
+
 //verify it is a new user and register
 masterContainer.addEventListener("click", () => {
     if (event.target.id.startsWith("create")) {
@@ -118,6 +119,7 @@ masterContainer.addEventListener("click", () => {
         masterContainer.innerHTML = factory.renderLogin()
     }
 })
+
 //messages
 
 
@@ -174,7 +176,7 @@ masterContainer.addEventListener("click", event => {
     }
 })
 
-//tasks delete eventlistener
+//tasks delete event listener
 
 
 masterContainer.addEventListener("click", () => {
@@ -224,12 +226,10 @@ masterContainer.addEventListener("click", (event) => {
                 })
             }
         })
-
-
-        // taskCompleted()
     }
 });
 
+//Toggle button to show completed tasks
 masterContainer.addEventListener("click", (event) => {
     if (event.target.id.startsWith("delete_completed")) {
         const completedTasks = document.querySelectorAll(".checked")
