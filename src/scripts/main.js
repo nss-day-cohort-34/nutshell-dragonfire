@@ -144,18 +144,23 @@ masterContainer.addEventListener("click", () => {
         const newsTitle = document.querySelector("#editNewsTitle");
         const newsSynopsis = document.querySelector("#editNewsSynopsis");
         const newsUrl = document.querySelector("#editNewsURL");
+        const newsDate = document.querySelector("#editNewsDate");
+        const newsUserId = document.querySelector("#editNewsUserId");
         console.table(newsArticleObjectToEdit);
-        console.log(newsTitle)
+        console.log(newsArticleObjectToEdit.date)
         newsTitle.value = newsArticleObjectToEdit.title;
         newsSynopsis.value = newsArticleObjectToEdit.synopsis;
         newsUrl.value = newsArticleObjectToEdit.url;
-        console.log(newsArticleObjectToEdit.title);
+        newsDate.value = newsArticleObjectToEdit.date;
+        newsUserId.value = newsArticleObjectToEdit.userId;
+        console.log(newsArticleObjectToEdit);
       })
       .then(
         masterContainer.addEventListener("click", () => {
           if (event.target.id.startsWith("editNewsSave")) {
             const updatedNewsObject = {
-                id: newsArticleToEdit,
+                date: document.querySelector("#editNewsDate"),
+                userId: document.querySelector("#editNewsUserId"),
                 title: document.querySelector("#editNewsTitle").value,
                 synopsis: document.querySelector("#editNewsSynopsis").value,
                 url: document.querySelector("#editNewsURL")
@@ -163,7 +168,7 @@ masterContainer.addEventListener("click", () => {
             console.log(updatedNewsObject)
             console.log(newsArticleToEdit)
 
-            news.saveEditedNewsEntry(newsArticleToEdit)
+            news.saveEditedNewsEntry(updatedNewsObject, newsArticleToEdit)
           }
         })
       );
@@ -172,6 +177,8 @@ masterContainer.addEventListener("click", () => {
 
 const modalNewsEdit = () => {
   return `<dialog id="newsModalBox">
+        <input type="hidden" id="editNewsDate" value="" />
+        <input type="hidden" id="editNewsUserId" value="" />
         <input name = "editNewsTitle" type = "text" id="editNewsTitle">
         <label for="editNewsTitle">Title</label>
         <textarea wrap="soft" name="editNewsSynopsis" id="editNewsSynopsis"></textarea>

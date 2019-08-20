@@ -35,34 +35,11 @@
       "synopsis": "This is an article about this."
     },
     {
-      "id": 2
-    },
-    {
-      "title": "testing2",
-      "synopsis": "testing2",
-      "url": "testing2",
-      "id": 3
-    },
-    {
-      "title": "New Article on Monday",
-      "synopsis": "New Article on Monday",
-      "url": "New Article on Monday",
-      "userID": "1",
-      "id": 5
-    },
-    {
-      "title": "New Articlke",
-      "synopsis": "New Article",
-      "url": ".com",
-      "userID": "1",
-      "id": 6
-    },
-    {
+      "date": {},
+      "userId": {},
       "title": "testing1018",
-      "synopsis": "test",
-      "url": "test",
-      "userID": "1",
-      "date": "Mon Aug 19 2019 10:19:45 GMT-0500 (Central Daylight Time)",
+      "synopsis": "test on 7",
+      "url": {},
       "id": 7
     },
     {
@@ -70,7 +47,7 @@
       "synopsis": "test",
       "url": "test",
       "userID": "1",
-      "date": "",
+      "date": "2019-08-16",
       "id": 8
     },
     {
@@ -78,7 +55,7 @@
       "synopsis": "test for Ted",
       "url": "test for Ted",
       "userID": "3",
-      "date": "",
+      "date": "2019-08-16",
       "id": 9
     },
     {
@@ -86,7 +63,7 @@
       "synopsis": "test",
       "url": "test",
       "userID": "3",
-      "date": "",
+      "date": "2019-08-16",
       "id": 10
     },
     {
@@ -94,8 +71,16 @@
       "synopsis": "rwSDfsdf",
       "url": "asdfadf",
       "userID": "3",
-      "date": "",
+      "date": "2019-08-16",
       "id": 11
+    },
+    {
+      "title": "New Article",
+      "synopsis": "this is a new artickew",
+      "url": "www.new.com",
+      "userID": "3",
+      "date": "2019-08-16",
+      "id": 12
     }
   ],
   "events": [

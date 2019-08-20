@@ -28,7 +28,7 @@ const retrieveNewsEntry = (id) => {
     .then(response => response.json())
 }
 //* Posting edited object
-const saveEditedNewsEntry = (newsArticleToEdit) => {
+const saveEditedNewsEntry = (updatedNewsObject, id) => {
     return fetch(`http://localhost:8088/news/${id}` ,{
     method: "PUT",
     headers: {
