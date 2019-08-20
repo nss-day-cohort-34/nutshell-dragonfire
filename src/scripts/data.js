@@ -18,12 +18,15 @@ const searchAPI = (username, email) => {
     .then(entries => entries.json())
 }
 
-//Events Fetch//
+//Events Fetch
+
+// fetch that gets the events
 const getEventsData = () => {
-    return fetch("http://localhost:8088/events")
+    return fetch("http://localhost:8088/events?_sort=id&_order=desc")
     .then(entries => entries.json())
 }
 
+// fetch that saves the events
 const saveEventsData = (registerEvent) => {
     return fetch("http://localhost:8088/events", {
         method: "POST",
@@ -33,7 +36,7 @@ const saveEventsData = (registerEvent) => {
         body: JSON.stringify(registerEvent)
         }).then(response => response.json())
 }
-
+// fetch that deletes the events
 const deleteEvent = (entryId) => {
     return fetch(`http://localhost:8088/events/${entryId}`, {
             method: "DELETE",
@@ -41,7 +44,7 @@ const deleteEvent = (entryId) => {
 
 
 }
-
+// fetch that edits the events
 const editEvents = (updatedObject, id) => {
     return fetch(`http://localhost:8088/events/${id}`, {
             "method": "PUT",
@@ -53,6 +56,7 @@ const editEvents = (updatedObject, id) => {
         .then(response => response.json())
 }
 
+// fetch that will update the edit events
 const updateFormFields = (eventId) => {
     const hiddenEntryId = document.querySelector("#eventsId")
     const hiddenDate = document.querySelector("#eventDate")

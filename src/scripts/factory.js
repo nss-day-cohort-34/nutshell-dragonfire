@@ -78,18 +78,21 @@ const renderLogin = () => {
   </article>`
 }
 
-//events Factory Function
+//events factory function that will create the object into the DOM
 const createEventsHTML = (eventObject) => {
-  return ` <section>
+  return ` <section id="eventRenderContainer">
+  <div id="customDiv--${eventObject.id}">
   <h1>Event Name: ${eventObject.eventName}</h1>
   <p>Date: ${eventObject.date}</p>
   <p>Location: ${eventObject.location}</p>
   <button id="deleteEvent--${eventObject.id}">Delete Event</button>
   <button id="editEvent--${eventObject.id}">Edit Event</button>
+  </div>
 </section>`
 }
 
 
+//events render function that will display the events object into the DOM
 const renderEvents = (events) => {
   const renderEventLocation = document.querySelector("#eventRender")
   renderEventLocation.innerHTML = ""

@@ -96,48 +96,53 @@ masterContainer.addEventListener("click", () => {
 
 
 
-// event Doms and main.j
 
 
+//events section
 
-const clearForm = () => {
-    eventName.value = ""
-    location.value = ""
-}
+//created a event listener with a function that will target the save button and targeted the input fields
+masterContainer.addEventListener("click", () => {
+    if (event.target.id.startsWith("submitButton")) {
+        const date = document.querySelector("#eventDate").value
+        const userId = parseInt(sessionStorage.getItem("userId"))
+        const eventName = document.querySelector("#eventName").value
+        const location = document.querySelector("#eventLocation").value
+        const hiddenInputId = document.querySelector("#eventsId")
+        console.log("I'm POSTING")
 
-document.querySelector("#submitButton").addEventListener("click", event => {
-
-    const date = document.querySelector("#eventDate").value
-    const userId = parseInt(sessionStorage.getItem("userId"))
-    const eventName = document.querySelector("#eventName").value
-    const location = document.querySelector("#eventLocation").value
-    const hiddenInputId = document.querySelector("#eventsId")
-    console.log("I'm POSTING")
-    const newEventEntry = {
-        date: date,
-        userId: userId,
-        eventName: eventName,
-        location: location
-    };
-
-    if (hiddenInputId.value !== "") {
-        API.editEvents(newEventEntry, hiddenInputId.value).then(() => {
-            API.getEventsData(data => {
-                factory.renderEvents(data)
+    //created an object referencing the input fields
+        const newEventEntry = {
+            date: date,
+            userId: userId,
+            eventName: eventName,
+            location: location
+        };
+        //clear form function that will clear the input fields
+           const clearForm = () => {
+            eventName.value = ""
+            location.value = ""
+        }
+        // returns the fetch data parses the data and renders it to the DOM also made an if statement
+        // that will target the hidden input Id and if is not an empty string it will edit the event entry else it will save it as new entry
+        if (hiddenInputId.value !== "") {
+            API.editEvents(newEventEntry, hiddenInputId.value).then(() => {
+                API.getEventsData(data => {
+                    factory.renderEvents(data)
+                })
             })
-        })
-    } else {
-        API.saveEventsData(newEventEntry)
-            .then(API.getEventsData).then(parsedData => {
-                factory.renderEvents(parsedData)
-            }).then(clearForm)
+        } else {
+            API.saveEventsData(newEventEntry)
+                .then(API.getEventsData).then(parsedData => {
+                    factory.renderEvents(parsedData)
+                }).then(clearForm)
+        }
     }
 })
 
 
 
 
-
+// created a event listerner with a function that will target the delete button to delete an event and render the updated events
 masterContainer.addEventListener("click", () => {
     if (event.target.id.startsWith("deleteEvent--")) {
         const deleteEntry = event.target.id.split("--")[1]
@@ -149,10 +154,14 @@ masterContainer.addEventListener("click", () => {
     }
 })
 
+// created a event listener with a function that will target the edit button and reference the entries into the input fields so they will be able to be edit
+
 masterContainer.addEventListener("click", () => {
-            if (event.target.id.startsWith("editEvent")) {
-                const editEventEntry = event.target.id.split("--")[1]
-                console.log("hi im edit", editEventEntry)
-                API.updateFormFields(editEventEntry)
-            }
-            })
+    if (event.target.id.startsWith("editEvent")) {
+        const editEventEntry = event.target.id.split("--")[1]
+        console.log("hi im edit", editEventEntry)
+        API.updateFormFields(editEventEntry)
+    }
+})
+
+
