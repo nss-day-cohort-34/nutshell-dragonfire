@@ -116,16 +116,16 @@
   ],
   "friends": [
     {
-      "userId": 2,
-      "otherFriendId": 1,
-      "areFriends": true,
-      "id": 1
-    },
-    {
       "userId": 3,
       "otherFriendId": 2,
       "areFriends": true,
       "id": 3
+    },
+    {
+      "userId": 1,
+      "otherFriendId": 2,
+      "areFriends": true,
+      "id": 4
     }
   ],
   "messages": [
@@ -308,6 +308,11 @@
       "userId": 2,
       "message": "No its not",
       "id": 36
+    },
+    {
+      "userId": 1,
+      "message": "New message",
+      "id": 37
     }
   ]
 }

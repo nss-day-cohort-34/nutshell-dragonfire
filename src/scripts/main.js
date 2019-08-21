@@ -20,16 +20,27 @@ messages.getAllMessages().then(data => {
     messagesArray.push(data)
 })
 const friendInterval = () => {
+    const userId = parseInt(sessionStorage.getItem("userId"))
     friends.getAllFriends().then(data => {
-        if (friendArray.length !== data.length) {
-            getRenderFriends()
-        }
+        friendArray[0].forEach(friend => {
+            if (friendArray[0].length !== data.length) {
+                getRenderFriends()
+                friendArray = []
+                friendArray.push(data)
+            } else if (friend.areFriends === false && userId === friend.userId) {
+                getRenderFriends()
+                console.log("HH")
+                friendArray = []
+                friendArray.push(data)
+            }
+        });
     })
 }
 const messageInterval = () => {
-    friends.getAllFriends().then(data => {
-        if (messagesArray.length !== data.length) {
+    messages.getAllMessages().then(data => {
+        if (messagesArray[0].length !== data.length) {
             getRenderMessage()
+            messagesArray.push(data)
         }
     })
 }
