@@ -36,25 +36,18 @@
   ],
   "events": [
     {
-      "date": "2019-08-17",
-      "userId": 1,
-      "eventName": "Titans vs Patriots ",
-      "location": "Nashville",
-      "id": 2
-    },
-    {
-      "date": "2019-08-19",
-      "userId": 1,
-      "eventName": "Nashville Farmers Market",
-      "location": "Nashville TN",
-      "id": 3
-    },
-    {
       "date": "2019-08-22",
       "userId": 1,
-      "eventName": "Nutshell Project",
-      "location": "NSS Nashville",
-      "id": 4
+      "eventName": "Nutshell Break",
+      "location": "Nashville",
+      "id": 1
+    },
+    {
+      "date": "2019-08-25",
+      "userId": 1,
+      "eventName": "Titans vs Steelers",
+      "location": "Nashville",
+      "id": 2
     }
   ],
   "friends": [
