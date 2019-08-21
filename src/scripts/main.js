@@ -1,15 +1,78 @@
 import factory from "./factory.js"
 import API from "./data.js"
 import messages from "./messages.js"
+import friends from "./friends.js"
 import tasks from "./tasks.js"
 
 const masterContainer = document.querySelector("#masterContainer")
 let users = []
+let friendArray = []
+let messagesArray = []
+masterContainer.innerHTML = factory.renderLogin()
 
 API.getData().then(parsedData => {
     users.push(parsedData)
 })
-masterContainer.innerHTML = factory.renderLogin()
+friends.getAllFriends().then(data => {
+    friendArray.push(data)
+})
+messages.getAllMessages().then(data => {
+    messagesArray.push(data)
+})
+const friendInterval = () => {
+    friends.getAllFriends().then(data => {
+        if (friendArray.length !== data.length) {
+            getRenderFriends()
+        }
+    })
+}
+const messageInterval = () => {
+    friends.getAllFriends().then(data => {
+        if (messagesArray.length !== data.length) {
+            getRenderMessage()
+        }
+    })
+}
+setInterval(friendInterval, 3000)
+setInterval(messageInterval, 3000)
+//condense code for getting and rendering messages
+const getRenderMessage = () => {
+    messages.getAllMessages().then(parsedData => {
+        messages.renderMessage(parsedData)
+        parsedData.forEach(data => {
+            if (data.userId !== parseInt(sessionStorage.getItem("userId"))) {
+                document.getElementById(`messageEdit--${data.id}`).style.visibility = "hidden"
+            }
+        })
+    })
+}
+//to get all friends on load
+const getRenderFriends = () => {
+    friends.getAllFriends().then(data => {
+        const userId = parseInt(sessionStorage.getItem("userId"))
+        const friendsContainer = document.querySelector("#friends__container")
+        friendsContainer.innerHTML = ""
+        data.forEach(friend => {
+            if (friend.userId === userId) {
+                if (friend.areFriends === true) {
+                    const idea = users[0].find(user => user.id === friend.otherFriendId)
+                    friends.renderFriendsList(idea.username, friend.id)
+                } else if (friend.areFriends === false) {
+                    const idea = users[0].find(user => user.id === friend.otherFriendId)
+                    friends.renderFriendsListPending(idea.username, friend.id)
+                }
+            } else if (friend.otherFriendId === userId) {
+                if (friend.areFriends === true) {
+                    const idea = users[0].find(user => user.id === friend.userId)
+                    friends.renderFriendsList(idea.username, friend.id)
+                } else if (friend.areFriends === false) {
+                    const idea = users[0].find(user => user.id === friend.userId)
+                    friends.renderFriendsListAcceptButton(idea.username, friend.id)
+                }
+            }
+        })
+    })
+}
 
 //TASKS filtering by UserId
 //make new array with data that I need and pass in to the renderTasks function
@@ -28,9 +91,9 @@ const getRenderTasks = () => {
                 completedTasks.push(task)
                 tasks.renderCompletedTasks(completedTasks)
             } else if (completedTasks.length === 0) {
-                console.log(completedTasks.length)
+                // console.log(completedTasks.length)
                 tasksHTMLRender.innerHTML = ""
-                console.log(completedTasks)
+                // console.log(completedTasks)
             } else if (usersTasks.length === 0) {
                 tasksHTMLRenderCompleted.innerHTML = ""
             }
@@ -44,6 +107,8 @@ const getRenderTasks = () => {
 if (sessionStorage.length > 0) {
     masterContainer.innerHTML = ""
     masterContainer.innerHTML = factory.renderHomepage()
+    getRenderMessage()
+    getRenderFriends()
     getRenderTasks()
 
 }
@@ -75,9 +140,10 @@ masterContainer.addEventListener("click", () => {
                 window.alert("Not a vaild Login")
             } else if (data.length > 0) {
                 sessionStorage.setItem("userId", JSON.stringify(data[0].id))
-                console.log(sessionStorage.userId)
                 masterContainer.innerHTML = ""
                 masterContainer.innerHTML = factory.renderHomepage()
+                getRenderMessage()
+                getRenderFriends()
                 getRenderTasks()
 
 
@@ -104,6 +170,8 @@ masterContainer.addEventListener("click", () => {
                         users.push(parsedData)
                         masterContainer.innerHTML = ""
                         masterContainer.innerHTML = factory.renderHomepage()
+                        getRenderMessage()
+                        getRenderFriends()
                         getRenderTasks()
                     })
                 })
@@ -122,7 +190,168 @@ masterContainer.addEventListener("click", () => {
 
 //messages
 
+//submit new message
+masterContainer.addEventListener("click", () => {
+    if (event.target.id.startsWith("messages__submit")) {
+        const message = document.querySelector("#messages__input")
+        const id = parseInt(sessionStorage.getItem("userId"))
+        const newMessageObject = messages.makeMessageObject(id, message.value)
+        messages.saveMessage(newMessageObject).then(() => {
+            getRenderMessage()
+        })
+        message.value = ""
+    }
+})
 
+// open edit window
+masterContainer.addEventListener("click", () => {
+    if (event.target.id.startsWith("messageEdit")) {
+        const id = event.target.id.split("--")[1]
+        const sessionId = parseInt(sessionStorage.getItem("userId"))
+        messages.getOneMessage(id).then(parsedData => {
+            if (parseInt(parsedData[0].userId) === sessionId) {
+                const modal = document.querySelector(`#modal--${id}`)
+                modal.showModal()
+                const modalInput = document.querySelector(`#messageInput--${id}`)
+                modalInput.value = parsedData[0].message
+            }
+        })
+    }
+})
+//save edit to database and re-render
+masterContainer.addEventListener("click", () => {
+    const nameOfArray = event.target.id.split("--")[0]
+    const ifParameter = `${nameOfArray}--save`
+    if (event.target.id.startsWith(ifParameter)) {
+        const id = event.target.id.split("--")[2]
+        const locationID = `messageInput--${id}`
+        messages.edit(nameOfArray, id, locationID).then(() => {
+            getRenderMessage()
+            const modal = document.querySelector(`#modal--${id}`)
+            modal.close()
+        })
+    }
+})
+//close the dialog box
+masterContainer.addEventListener("click", () => {
+    if (event.target.id.startsWith("cancelMessage")) {
+        const id = event.target.id.split("--")[1]
+        const modal = document.querySelector(`#modal--${id}`)
+        modal.close()
+    }
+})
+
+//friends
+let clickedID = 0
+//add friend on message username click
+masterContainer.addEventListener("click", () => {
+    if (event.target.id.startsWith("invisibleButton")) {
+        const userId = parseInt(sessionStorage.getItem("userId"))
+        clickedID = parseInt(event.target.id.split("--")[1])
+        friends.getAllFriends().then(data => {
+            const filteredData = data.filter(friend => (friend.userId === userId || friend.otherFriendId === userId) && (friend.userId === clickedID || friend.otherFriendId === clickedID) && userId !== clickedID)
+            if (filteredData.length < 1 && userId !== clickedID) {
+                const usernameObject = users[0].find(user => user.id === clickedID)
+                const friendHTML = friends.friendDialogBox(usernameObject)
+                const friendBoxLocation = document.querySelector("#friendDialogBox")
+                friends.renderFriendDialogBox(friendHTML, friendBoxLocation)
+                const modal = document.querySelector("#friendModal")
+                modal.showModal()
+            }
+        })
+    }
+})
+
+//add friend
+masterContainer.addEventListener("click", () => {
+    if (event.target.id.startsWith("friends--add")) {
+        const userId = parseInt(sessionStorage.getItem("userId"))
+        const newFriendObject = friends.makeFriendObject(userId, clickedID, false)
+        friends.addFriend(newFriendObject).then(data => {
+            const modal = document.querySelector("#friendModal")
+            modal.close()
+            getRenderFriends()
+        })
+    }
+})
+
+//cancel modal
+masterContainer.addEventListener("click", () => {
+    if (event.target.id.startsWith("cancelFriend")) {
+        const modal = document.querySelector("#friendModal")
+        modal.close()
+    }
+})
+//accept friend
+masterContainer.addEventListener("click", () => {
+    if (event.target.id.startsWith("friends--acceptFriend")) {
+        const nameOfArray = event.target.id.split("--")[0]
+        const id = event.target.id.split("--")[2]
+        friends.getOneFriend(id).then(friendship => {
+            const otherFriendId = friendship[0].userId
+            messages.edit(nameOfArray, id, otherFriendId).then(() => {
+                getRenderFriends()
+            })
+        })
+    }
+})
+
+//delete friend
+masterContainer.addEventListener("click", () => {
+    if (event.target.id.startsWith("deleteFriend")) {
+        const deleteId = event.target.id.split("--")[1]
+        friends.deleteFriend(deleteId).then(() => {
+            getRenderFriends()
+        })
+    } else if (event.target.id.startsWith("denyFriend")) {
+        const deleteId = event.target.id.split("--")[1]
+        friends.deleteFriend(deleteId).then(() => {
+            getRenderFriends()
+        })
+    }
+})
+
+//add friend search
+masterContainer.addEventListener("click", () => {
+    if (event.target.id.startsWith("searchFriend")) {
+        const friendsDialogBox = friends.addFriendDialogBox()
+        const friendDialogBoxLocation = document.querySelector("#addFriendContainer")
+        friends.renderFriendDialogBox(friendsDialogBox, friendDialogBoxLocation)
+        const modal = document.querySelector("#addFriendModal")
+        modal.showModal()
+    }
+})
+
+//cancel modal
+masterContainer.addEventListener("click", () => {
+    if (event.target.id.startsWith("CancelFriendSearch")) {
+        const modal = document.querySelector("#addFriendModal")
+        modal.close()
+    }
+})
+
+//search for friend
+masterContainer.addEventListener("click", () => {
+    if (event.target.id.startsWith("friends--search")) {
+        const modal2 = document.querySelector("#addFriendModal")
+        modal2.close()
+        const textValue = document.querySelector("#searchFriend")
+        const userId = parseInt(sessionStorage.getItem("userId"))
+        const desiredFriendId = users[0].find(user => user.username === textValue.value)
+        clickedID = desiredFriendId.id
+        friends.getAllFriends().then(data => {
+            const filteredData = data.filter(friend => (friend.userId === userId || friend.otherFriendId === userId) && (friend.userId === desiredFriendId.id || friend.otherFriendId === desiredFriendId.id) && userId !== desiredFriendId.id)
+            if (filteredData.length < 1 && userId !== desiredFriendId.id) {
+                const usernameObject = users[0].find(user => user.id === desiredFriendId.id)
+                const friendHTML = friends.friendDialogBox(usernameObject)
+                const friendBoxLocation = document.querySelector("#friendDialogBox")
+                friends.renderFriendDialogBox(friendHTML, friendBoxLocation)
+                const modal = document.querySelector("#friendModal")
+                modal.showModal()
+            }
+        })
+    }
+})
 //*******************************************/
 
 
@@ -139,7 +368,7 @@ const deleteAllFields = (tasks) => {
 masterContainer.addEventListener("click", event => {
     if (event.target.id.startsWith("submit_button")) {
         const checkbox = document.querySelector(".completed").checked
-        console.log(checkbox)
+        // console.log(checkbox)
         // const checkboxValue = checkbox.value
         const taskDueDate = document.querySelector("#taskDueDate")
         const taskText = document.querySelector("#tasksText")
@@ -192,19 +421,6 @@ masterContainer.addEventListener("click", () => {
         getRenderTasks()
     }
 })
-
-// const editButton = document.querySelector("edit__Task")
-// editButton.addEventListener("keyup", (event) => {
-//     if (event.keyCode === 13) {
-//         // Cancel the default action, if needed
-//         event.preventDefault();
-//         // Trigger the button element with a click
-//         document.getElementById("edit__Task").click();
-//         console.log("keyup")
-//     }
-// });
-
-
 
 //this targets the item we want to mark completed and adds "checked" class to it that strike-throughs and lowers opacity
 masterContainer.addEventListener("click", (event) => {

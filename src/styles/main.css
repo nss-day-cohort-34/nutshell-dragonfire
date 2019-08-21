@@ -25,6 +25,7 @@ body {
 #welcome_page {
     margin: auto;
     text-align: center;
+    margin-top: 225px;
 }
 
 .masterContainer {
@@ -98,11 +99,16 @@ legend {
     background-color: #ab742c;
     border: none;
     color: white;
-    padding: 12px 12px;
+    padding: 10px 12px;
     text-align: center;
     text-decoration: none;
 
     font-size: 14px;
+}
+
+#signOut:hover {
+    background-color: rgb(161, 161, 161);
+    color: white;
 }
 
 .button {

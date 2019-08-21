@@ -45,7 +45,7 @@ button:hover {
     text-align: center;
     text-decoration: none;
     align-content: center;
-    font-size: 14px;
+    font-size: 13px;
     margin-left: 5px;
     margin-right: 5px;
 }
@@ -55,7 +55,7 @@ button:hover {
     color: white;
 }
 
-#delete_completed: hover {
+#delete_completed:hover {
     background-color: rgb(161, 161, 161);
     color: white;
 }

@@ -85,7 +85,7 @@
       "userId": 1,
       "task": "Mow the yard",
       "date": "2019-08-20",
-      "completed": false,
+      "completed": true,
       "id": 12
     }
   ],
@@ -107,11 +107,200 @@
       "location": "1234 Main Street"
     }
   ],
+  "friends": [
+    {
+      "userId": 2,
+      "otherFriendId": 1,
+      "areFriends": true,
+      "id": 1
+    },
+    {
+      "userId": 3,
+      "otherFriendId": 2,
+      "areFriends": true,
+      "id": 3
+    }
+  ],
   "messages": [
     {
       "id": 1,
       "userId": 1,
       "message": "This is a message."
+    },
+    {
+      "userId": 1,
+      "message": "1",
+      "id": 2
+    },
+    {
+      "userId": 1,
+      "message": "2",
+      "id": 3
+    },
+    {
+      "userId": 1,
+      "message": "3",
+      "id": 4
+    },
+    {
+      "userId": 1,
+      "message": "4",
+      "id": 5
+    },
+    {
+      "userId": 1,
+      "message": "5",
+      "id": 6
+    },
+    {
+      "userId": 1,
+      "message": "6",
+      "id": 7
+    },
+    {
+      "userId": 1,
+      "message": "7",
+      "id": 8
+    },
+    {
+      "userId": 1,
+      "message": "8",
+      "id": 9
+    },
+    {
+      "userId": 1,
+      "message": "9",
+      "id": 10
+    },
+    {
+      "userId": 1,
+      "message": "10",
+      "id": 11
+    },
+    {
+      "userId": 1,
+      "message": "11",
+      "id": 12
+    },
+    {
+      "userId": 1,
+      "message": "12",
+      "id": 13
+    },
+    {
+      "userId": 1,
+      "message": "13",
+      "id": 14
+    },
+    {
+      "userId": 1,
+      "message": "14",
+      "id": 15
+    },
+    {
+      "userId": 1,
+      "message": "15",
+      "id": 16
+    },
+    {
+      "userId": 1,
+      "message": "16",
+      "id": 17
+    },
+    {
+      "userId": 1,
+      "message": "17",
+      "id": 18
+    },
+    {
+      "userId": 1,
+      "message": "18",
+      "id": 19
+    },
+    {
+      "userId": 1,
+      "message": "19",
+      "id": 20
+    },
+    {
+      "userId": 1,
+      "message": "20",
+      "id": 21
+    },
+    {
+      "userId": 1,
+      "message": "21",
+      "id": 22
+    },
+    {
+      "userId": 1,
+      "message": "22",
+      "id": 23
+    },
+    {
+      "userId": 1,
+      "message": "23",
+      "id": 24
+    },
+    {
+      "userId": 1,
+      "message": "55555",
+      "id": 25
+    },
+    {
+      "userId": 1,
+      "message": "7777",
+      "id": 26
+    },
+    {
+      "userId": 1,
+      "message": "Charles Milles Manson (né Maddox, November 12, 1934 – November 19, 2017) was an American criminal and cult leader. In mid-1967, he formed what became known as the Manson Family, a quasi-commune based in California. Manson's followers committed a series of nine murders at four locations in July and August 1969. According to the Los Angeles County district attorney, Manson plotted to start a race war, though Manson and others involved long disputed this motive.[3] In 1971, he was convicted of first-degree murder and conspiracy to commit murder for the deaths of seven people. Although the prosecution conceded that Manson never literally ordered the murders, they contended that his ideology constituted an overt act of conspiracy.[4] Manson was also convicted of first-degree murder for the deaths of Gary Hinman and Donald Shea.  At the time the Manson Family began to form, Manson was an unemployed ex-convict who had spent more than half of his life in correctional institutions for a variety of offenses. Before the murders, he was a singer-songwriter on the fringe of the Los Angeles music industry, chiefly through a chance association with Dennis Wilson, drummer and founding member of the Beach Boys. In 1968, the group recorded one of Manson's songs, \"Cease to Exist\", retitled \"Never Learn Not to Love\", as a single B-side, but without a credit to Manson. The Los Angeles district attorney said that Manson was obsessed with the Beatles, particularly their 1968 self-titled album (also known as the \"White Album\"). Allegedly guided by his interpretation of the band's lyrics, Manson adopted the term \"Helter Skelter\" to describe an impending apocalyptic race war. At trial, the prosecution claimed that Manson and his followers, who were mostly young women, believed that the murders would help precipitate that war. Other contemporary interviews and those who testified during the penalty phase of Manson's original trial insisted that the motive for the Tate–LaBianca murders were copycat crimes designed to exonerate Manson's friend Bobby Beausoleil.[5][6]  From the beginning of Manson's notoriety, a pop culture arose around him in which he ultimately became an emblem of insanity, violence, and the macabre. After he was charged with the crimes of which he was later convicted, recordings of songs written and performed by Manson were released commercially, starting with Lie: The Love and Terror Cult (1970). Various musicians have covered some of his songs. Manson was originally sentenced to death, but his sentence was commuted to life with the possibility of parole after California invalidated the state's death penalty statute in 1972. He served his life sentence at California State Prison in Corcoran and died at age 83 in late 2017.",
+      "id": 27
+    },
+    {
+      "userId": 1,
+      "message": "hello",
+      "id": 28
+    },
+    {
+      "userId": 2,
+      "message": "Hello",
+      "id": 29
+    },
+    {
+      "userId": 2,
+      "message": "hhhh",
+      "id": 30
+    },
+    {
+      "userId": 3,
+      "message": "This is a hhhh",
+      "id": 31
+    },
+    {
+      "userId": 3,
+      "message": "This is a test khg",
+      "id": 32
+    },
+    {
+      "userId": 3,
+      "message": "No its not",
+      "id": 33
+    },
+    {
+      "userId": 1,
+      "message": "This is a test",
+      "id": 34
+    },
+    {
+      "userId": 3,
+      "message": "This is a test",
+      "id": 35
+    },
+    {
+      "userId": 2,
+      "message": "No its not",
+      "id": 36
     }
   ]
 }

@@ -29,6 +29,16 @@ const renderHomepage = () => {
 </header>
 <div id="flex_container">
 
+<div class="rightSideContainer">
+<h3>Messages</h3>
+<div id="friendDialogBox"></div>
+  <article class="messages__container" id="messages__container">
+  </article>
+  <section class="messages" id="messages">
+    <input class="messages__input" id="messages__input" type="text" placeholder="Enter a Message">
+    <button class="messages__submit" id="messages__submit">Submit</button>
+</section>
+</div>
 <div class="leftSideContainer">
   <article class="container news__container" id="news__container">
   <h3>News</h3>
@@ -58,14 +68,14 @@ const renderHomepage = () => {
   <article class="container events__container" id="events__container">
   <h3>Events</h3>
   </article>
-  <article class="container friends__container" id="friends__container">
+  <article class="container friends__container">
+  <header id="friendHeader">
   <h3>Friends</h3>
 
-  </article>
-</div>
-<div class="rightSideContainer">
-  <article class="messages__container" id="messages__container">
-  <h3>Messages</h3>
+  <div id="addFriendContainer"></div>
+  <button id="searchFriend">Add Friend</button>
+  </header>
+  <ul id="friends__container"></ul>
   </article>
 </div>
 </div>`
@@ -73,7 +83,7 @@ const renderHomepage = () => {
 }
 
 const renderLogin = () => {
-  return `<header id="welcome_page"><h1 id="welcome_h1">Welcome to</h1><img src="src/img/Nutshell_logo.png" ALT="some text" width=600 height=160></header>
+  return `<header id="welcome_page"><h1 id="welcome_h1">Welcome to</h1><a href="index.html"><img src="src/img/Nutshell_logo.png" ALT="some text" width=600 height=150></a></header>
   <article id="loginContainer">
     <button id="loginButton" class="button">Login</button>
     <button id="registerButton" class="button">Register</button>

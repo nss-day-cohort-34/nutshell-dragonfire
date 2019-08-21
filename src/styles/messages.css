@@ -7,3 +7,37 @@
 .messages {
     /* margin-top: 80%; */
 }
+
+.invisibleButton {
+    background: none;
+    border: none;
+    font-size: large;
+}
+
+.invisibleButton:focus {
+    outline: none;
+}
+
+#invisibleButton--1 {
+    color: red;
+}
+
+#invisibleButton--2 {
+    color: blue;
+}
+
+#invisibleButton--3 {
+    color: green;
+}
+
+#invisibleButton--4 {
+    color: purple;
+}
+
+#invisibleButton--5 {
+    color: goldenrod;
+}
+
+#invisibleButton--6 {
+    color: pink;
+}
