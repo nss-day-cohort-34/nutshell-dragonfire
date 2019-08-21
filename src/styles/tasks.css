@@ -6,6 +6,56 @@
     width: 0px;
 }
 
+.pointer {
+    cursor: pointer;
+}
+
 .hidden {
     display: inline;
+}
+
+span {
+    font-size: 13px;
+}
+
+button {
+    background-color: #ab742c;
+    border: none;
+    color: white;
+    padding: 10px, 10px;
+    text-align: center;
+    text-decoration: none;
+    align-content: center;
+    font-size: 12px;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+button:hover {
+    background-color: rgb(161, 161, 161);
+    color: white;
+}
+
+#submit_button,
+#delete_completed {
+    background-color: #ab742c;
+    border: none;
+    color: white;
+    padding: 5px 10px;
+    text-align: center;
+    text-decoration: none;
+    align-content: center;
+    font-size: 13px;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+#submit_button:hover {
+    background-color: rgb(161, 161, 161);
+    color: white;
+}
+
+#delete_completed:hover {
+    background-color: rgb(161, 161, 161);
+    color: white;
 }

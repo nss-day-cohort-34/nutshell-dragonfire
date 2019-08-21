@@ -1,6 +1,6 @@
 const createLogin = () => {
   return ` <section>
-    <h2>Please Login</h2>
+    <h2 class="Login_Text">Please Login</h2>
     <input type="text" placeholder="Username" id = "loginUsername">
     <input type="text" placeholder="Email" id = "loginEmail">
     <button id="signOnUser">Login</button>
@@ -9,7 +9,7 @@ const createLogin = () => {
 
 const createRegister = () => {
   return ` <section>
-    <h2>Please Register</h2>
+    <h2 class="Login_Text">Please Register</h2>
     <input type="text" placeholder="Enter a Username" id = "registerUsername">
     <input type="text" placeholder="Enter an Email" id = "registerEmail">
     <button id = "createUser">Submit</button>
@@ -26,8 +26,10 @@ const makeUserObject = (username, email) => {
 
 const renderHomepage = () => {
   return `<header>
-  <h1>Nutshell</h1> <button id="signOut" class="signOut">Log Out</button>
+  <img src="src/img/Nutshell_logo.png" ALT="some text" WIDTH=230 HEIGHT=60><button id="signOut" class="signOut">Log Out</button>
 </header>
+<div id="flex_container">
+
 <div class="rightSideContainer">
 <h3>Messages</h3>
 <div id="friendDialogBox"></div>
@@ -53,7 +55,6 @@ const renderHomepage = () => {
     </section>
     <section id="news__articles"></section>
   </article>
-
   <article class="container tasks__container" id="tasks__container">
   <h3>To-Dos</h3>
   <div id="tasksFormField">
@@ -69,7 +70,7 @@ const renderHomepage = () => {
   <fieldset><input type="submit" id="submit_button" value="Add">
     <input type="submit" id="delete_completed" value="Toggle Completed">
   </fieldset>
-  <h3>Your Tasks:</h3></div>
+  <h4>Your Tasks:</h4></div>
 
   <div id="tasksRender">
   </div>
@@ -100,16 +101,19 @@ const renderHomepage = () => {
   <article class="container friends__container">
   <header id="friendHeader">
   <h3>Friends</h3>
+
   <div id="addFriendContainer"></div>
   <button id="searchFriend">Add Friend</button>
   </header>
   <ul id="friends__container"></ul>
   </article>
-</div>`;
-};
+</div>
+</div>`
+
+}
 
 const renderLogin = () => {
-  return `<h1>Welcome to Nutshell!</h1>
+  return `<header id="welcome_page"><h1 id="welcome_h1">Welcome to</h1><a href="index.html"><img src="src/img/Nutshell_logo.png" ALT="some text" width=600 height=150></a></header>
   <article id="loginContainer">
     <button id="loginButton" class="button">Login</button>
     <button id="registerButton" class="button">Register</button>
@@ -134,9 +138,9 @@ const createEventsHTML = (eventObject) => {
 const renderEvents = (events) => {
   const renderEventLocation = document.querySelector("#eventRender")
   renderEventLocation.innerHTML = ""
-    events.forEach(event => {
-      const renderLocation = createEventsHTML(event)
-      renderEventLocation.innerHTML += renderLocation
+  events.forEach(event => {
+    const renderLocation = createEventsHTML(event)
+    renderEventLocation.innerHTML += renderLocation
   });
 
 }
@@ -146,5 +150,11 @@ const renderEvents = (events) => {
 
 
 export default {
-    createLogin, createRegister, makeUserObject, renderHomepage, renderLogin, createEventsHTML, renderEvents
+  createLogin,
+  createRegister,
+  makeUserObject,
+  renderHomepage,
+  renderLogin,
+  createEventsHTML,
+  renderEvents
 }

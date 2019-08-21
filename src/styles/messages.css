@@ -1,6 +1,6 @@
 .messages__container {
-    border: 1px solid goldenrod;
-    height:90%;
+    /* border: 1px solid goldenrod; */
+    height: 90%;
     overflow: scroll;
 }
 
@@ -18,26 +18,26 @@
     outline: none;
 }
 
-#invisibleButton--1{
+#invisibleButton--1 {
     color: red;
 }
 
-#invisibleButton--2{
+#invisibleButton--2 {
     color: blue;
 }
 
-#invisibleButton--3{
+#invisibleButton--3 {
     color: green;
 }
 
-#invisibleButton--4{
+#invisibleButton--4 {
     color: purple;
 }
 
-#invisibleButton--5{
+#invisibleButton--5 {
     color: goldenrod;
 }
 
-#invisibleButton--6{
+#invisibleButton--6 {
     color: pink;
 }
