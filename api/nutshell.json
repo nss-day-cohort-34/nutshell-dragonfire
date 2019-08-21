@@ -148,7 +148,7 @@
     },
     {
       "date": "2019-08-20T19:21:07.200Z",
-      "userId": "3",
+      "userId": 3,
       "title": "test1440",
       "synopsis": "test",
       "url": "test",
@@ -196,7 +196,7 @@
     },
     {
       "date": "2019-08-20T20:09:05.019Z",
-      "userId": "3",
+      "userId": 3,
       "title": "test1508",
       "synopsis": "test1508",
       "url": "test1508",
@@ -204,7 +204,7 @@
     },
     {
       "date": "2019-08-20T20:21:19.688Z",
-      "userId": "3",
+      "userId": 3,
       "title": "test1534",
       "synopsis": "test1534",
       "url": "test",
@@ -212,7 +212,7 @@
     },
     {
       "date": "2019-08-20T20:39:17.107Z",
-      "userId": "3",
+      "userId": 3,
       "title": "test1539",
       "synopsis": "test1539",
       "url": "test",
@@ -246,15 +246,9 @@
   "friends": [
     {
       "userId": 2,
-      "otherFriendId": 1,
+      "otherFriendId": 3,
       "areFriends": true,
       "id": 1
-    },
-    {
-      "userId": 3,
-      "otherFriendId": 2,
-      "areFriends": true,
-      "id": 3
     }
   ],
   "messages": [
