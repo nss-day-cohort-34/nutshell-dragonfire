@@ -9,14 +9,24 @@ Nutshell is a dashboard for people to use to organize their daily tasks, events,
 
 ### Messages
 
+### To-Do
+The To-Do area of the Nutshell dashboard to add, edit, and delete to-do items. Each individual to-do provides information on the to-item, the date due and status of completion.
 
+Adding To-Do: To add a to-do item complete the following fields:
+ - Description of task
+ - Date task is due
+ - If task has been already been completed, click on the "Toggle Compeleted" button.
+ When all fields have been completed, click on the "Add" button.
+ 
+Editing To-Do: To edit a to-do, click on the "Edit" button and make the desired changes to the to-do item. When edit has been completed, click on the "Submit" button.
 
+Deleting To-Do: To delete a to-do,  click on the "Delete" button on the desired to-do item.
 
 ### News
 The News area of the Nutshell dashboard provides functionality to add, edit and delete news.
 When news articles have been entered they will be displayed in the news area of the dashboard in descending chronological order.
 
-Adding News: To add an event the following fields need to be completed
+Adding News: To add an event the following fields need to be completed:
  - Title : title of news article
  - Synopsis: a synopsis of the news article
  - URL: a text link to the article on an external resource. 
@@ -34,7 +44,7 @@ Deleting News: To delete the news article click on the "Delete News Article" but
 
 
 
-### To-Do
+
 
 
 
