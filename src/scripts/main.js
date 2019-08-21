@@ -75,14 +75,15 @@ const getRenderMessage = () => {
 
 const getNewsByDate = () => {
     news.getNewsData().then(parsedData => {
-        const savedNewsArray = parsedData.sort((a,b) => {
-            const newsDateA = new Date(a.date), newsDateB = new Date(b.date)
+        const savedNewsArray = parsedData.sort((a, b) => {
+            const newsDateA = new Date(a.date),
+                newsDateB = new Date(b.date)
             return newsDateB - newsDateA
         })
-            news.renderToDOM(savedNewsArray)
-            // console.log(savedNewsArray)
-        })
-    }
+        news.renderToDOM(savedNewsArray)
+        // console.log(savedNewsArray)
+    })
+}
 
 //to get all friends on load
 const getRenderFriends = () => {
@@ -118,6 +119,7 @@ const getRenderTasks = () => {
     tasks.getTasksData().then(parsedData => {
         const tasksHTMLRender = document.querySelector("#tasksRender")
         const tasksHTMLRenderCompleted = document.querySelector("#completedTasks")
+        tasksHTMLRender.innerHTML = ""
         let usersTasks = []
         let completedTasks = []
         const userId = parseInt(sessionStorage.getItem("userId"))
@@ -503,88 +505,88 @@ masterContainer.addEventListener("click", (event) => {
 let newNewsEntry = "";
 
 masterContainer.addEventListener("click", () => {
-  if (event.target.id.startsWith("newsSubmit")) {
-    const title = document.querySelector("#newsTitle");
-    const synopsis = document.querySelector("#newsSynopsis");
-    const url = document.querySelector("#newsURL");
-    const newsUserID = parseInt(sessionStorage.getItem("userId"));
-    const currentDate = new Date();
-    const newsDateSubmitted = currentDate;
-    // console.log(title);
-    newNewsEntry = {
-      title: title.value,
-      synopsis: synopsis.value,
-      url: url.value,
-      userId: newsUserID,
-      date: newsDateSubmitted,
-    };
-    // console.log(newNewsEntry)
-    //* Display the new journal entry in the DOM
-    news.saveNewsEntry(newNewsEntry).then(() => {
-        getNewsByDate()
-    })
-  }
+    if (event.target.id.startsWith("newsSubmit")) {
+        const title = document.querySelector("#newsTitle");
+        const synopsis = document.querySelector("#newsSynopsis");
+        const url = document.querySelector("#newsURL");
+        const newsUserID = parseInt(sessionStorage.getItem("userId"));
+        const currentDate = new Date();
+        const newsDateSubmitted = currentDate;
+        // console.log(title);
+        newNewsEntry = {
+            title: title.value,
+            synopsis: synopsis.value,
+            url: url.value,
+            userId: newsUserID,
+            date: newsDateSubmitted,
+        };
+        // console.log(newNewsEntry)
+        //* Display the new journal entry in the DOM
+        news.saveNewsEntry(newNewsEntry).then(() => {
+            getNewsByDate()
+        })
+    }
 });
 
 // --------------------Delete News Article--------------------------
 masterContainer.addEventListener("click", () => {
-  if (event.target.id.startsWith("NewsArticleDelete")) {
-    const newsArticleToDelete = event.target.id.split("--")[1];
-    // console.log(newsArticleToDelete);
-    //* to clear the DOM
-    document.querySelector("#news__articles").innerHTML = "";
-    //* delete article
-    news.deleteNewsEntry(newsArticleToDelete);
-    //* render json news array to DOM
-    news.getNewsData().then(news.renderToDOM);
-  }
+    if (event.target.id.startsWith("NewsArticleDelete")) {
+        const newsArticleToDelete = event.target.id.split("--")[1];
+        // console.log(newsArticleToDelete);
+        //* to clear the DOM
+        document.querySelector("#news__articles").innerHTML = "";
+        //* delete article
+        news.deleteNewsEntry(newsArticleToDelete);
+        //* render json news array to DOM
+        news.getNewsData().then(news.renderToDOM);
+    }
 });
 
 // --------------------Edit News Article----------------------------
 masterContainer.addEventListener("click", () => {
-  const modal = document.querySelector("#newsModal");
-  const modalButton = document.querySelector("#editNewsSubmit");
-  if (event.target.id.startsWith("NewsArticleEdit")) {
-    const newsArticleToEdit = event.target.id.split("--")[1];
-    const newsModal = document.querySelector("#newsModal");
-    newsModal.innerHTML = modalNewsEdit();
-    const newsModalBox = document.querySelector("#newsModalBox");
-    newsModalBox.showModal();
-    news.retrieveNewsEntry(newsArticleToEdit)
-    .then(newsArticleObjectToEdit => {
-        const newsTitle = document.querySelector("#editNewsTitle");
-        const newsSynopsis = document.querySelector("#editNewsSynopsis");
-        const newsUrl = document.querySelector("#editNewsURL");
-        const newsDate = document.querySelector("#editNewsDate");
-        const newsUserId = document.querySelector("#editNewsUserId");
-        // console.table(newsArticleObjectToEdit);
-        newsTitle.value = newsArticleObjectToEdit.title;
-        newsSynopsis.value = newsArticleObjectToEdit.synopsis;
-        newsUrl.value = newsArticleObjectToEdit.url;
-        newsDate.value = newsArticleObjectToEdit.date;
-        newsUserId.value = newsArticleObjectToEdit.userId;
-      })
-      .then(
-        masterContainer.addEventListener("click", () => {
-          if (event.target.id.startsWith("editNewsSave")) {
-            const updatedNewsObject = {
-                date: document.querySelector("#editNewsDate").value,
-                userId: document.querySelector("#editNewsUserId").value,
-                title: document.querySelector("#editNewsTitle").value,
-                synopsis: document.querySelector("#editNewsSynopsis").value,
-                url: document.querySelector("#editNewsURL").value,
-            }
-            news.saveEditedNewsEntry(updatedNewsObject, newsArticleToEdit).then(getNewsByDate);
-            const newsModalBox = document.querySelector("#newsModalBox");
-            newsModalBox.close();
-          }
-        })
-      );
-  }
+    const modal = document.querySelector("#newsModal");
+    const modalButton = document.querySelector("#editNewsSubmit");
+    if (event.target.id.startsWith("NewsArticleEdit")) {
+        const newsArticleToEdit = event.target.id.split("--")[1];
+        const newsModal = document.querySelector("#newsModal");
+        newsModal.innerHTML = modalNewsEdit();
+        const newsModalBox = document.querySelector("#newsModalBox");
+        newsModalBox.showModal();
+        news.retrieveNewsEntry(newsArticleToEdit)
+            .then(newsArticleObjectToEdit => {
+                const newsTitle = document.querySelector("#editNewsTitle");
+                const newsSynopsis = document.querySelector("#editNewsSynopsis");
+                const newsUrl = document.querySelector("#editNewsURL");
+                const newsDate = document.querySelector("#editNewsDate");
+                const newsUserId = document.querySelector("#editNewsUserId");
+                // console.table(newsArticleObjectToEdit);
+                newsTitle.value = newsArticleObjectToEdit.title;
+                newsSynopsis.value = newsArticleObjectToEdit.synopsis;
+                newsUrl.value = newsArticleObjectToEdit.url;
+                newsDate.value = newsArticleObjectToEdit.date;
+                newsUserId.value = newsArticleObjectToEdit.userId;
+            })
+            .then(
+                masterContainer.addEventListener("click", () => {
+                    if (event.target.id.startsWith("editNewsSave")) {
+                        const updatedNewsObject = {
+                            date: document.querySelector("#editNewsDate").value,
+                            userId: document.querySelector("#editNewsUserId").value,
+                            title: document.querySelector("#editNewsTitle").value,
+                            synopsis: document.querySelector("#editNewsSynopsis").value,
+                            url: document.querySelector("#editNewsURL").value,
+                        }
+                        news.saveEditedNewsEntry(updatedNewsObject, newsArticleToEdit).then(getNewsByDate);
+                        const newsModalBox = document.querySelector("#newsModalBox");
+                        newsModalBox.close();
+                    }
+                })
+            );
+    }
 });
 
 const modalNewsEdit = () => {
-  return `<dialog id="newsModalBox">
+    return `<dialog id="newsModalBox">
         <input type="hidden" id="editNewsDate" value="" />
         <input type="hidden" id="editNewsUserId" value="" />
         <input name = "editNewsTitle" type = "text" id="editNewsTitle">

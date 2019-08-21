@@ -76,17 +76,10 @@
     },
     {
       "userId": 1,
-      "task": "Stop by the grocery store",
-      "date": "2019-08-19",
-      "completed": false,
-      "id": 11
-    },
-    {
-      "userId": 1,
       "task": "Mow the yard",
-      "date": "2019-08-20",
+      "date": "2019-08-28",
       "completed": true,
-      "id": 12
+      "id": 13
     }
   ],
   "news": [

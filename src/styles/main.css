@@ -33,6 +33,8 @@ body {
 
 }
 
+
+
 #flex_container {
     display: flex;
     justify-content: center;
@@ -42,6 +44,14 @@ body {
 }
 
 legend {
+    font-size: 13px;
+}
+
+label {
+    font-size: 13px;
+}
+
+fieldset {
     font-size: 13px;
 }
 

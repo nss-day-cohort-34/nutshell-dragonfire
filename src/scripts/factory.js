@@ -47,9 +47,9 @@ const renderHomepage = () => {
     <section id="news__entry">
       <fieldset>
         <input type="hidden" id="newsHiddenid" value=""/>
-        Title<input name = "newsTitle" input type = "text" id="newsTitle">
-        Synopsis<textarea wrap="soft" name="newsSynopsis" id="newsSynopsis"></textarea>
-        URL<input name = "newsURL" input type = "text" id="newsURL">
+        Title <input name = "newsTitle" input type = "text" id="newsTitle">
+        Synopsis <textarea wrap="soft" name="newsSynopsis" id="newsSynopsis"></textarea>
+        URL <input name = "newsURL" input type = "text" id="newsURL">
         <button id="newsSubmit" type="submit" value="Record News Entry">Submit</button>
       </fieldset>
     </section>
