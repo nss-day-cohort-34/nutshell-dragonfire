@@ -5,6 +5,8 @@ import friends from "./friends.js"
 import tasks from "./tasks.js"
 import news from "./news.js"
 
+
+
 const masterContainer = document.querySelector("#masterContainer")
 let users = []
 let friendArray = []
@@ -14,6 +16,18 @@ masterContainer.innerHTML = factory.renderLogin()
 API.getData().then(parsedData => {
     users.push(parsedData)
 })
+
+const getEventsByDate = () => {
+    API.getEventsData().then(parsedData => {
+        const savedSortArray = parsedData.sort((a, b) => {
+            const dateA = new Date(a.date),
+                dateB = new Date(b.date)
+            return dateA - dateB
+        })
+        factory.renderEvents(savedSortArray)
+    })
+}
+masterContainer.innerHTML = factory.renderLogin()
 friends.getAllFriends().then(data => {
     friendArray.push(data)
 })
@@ -131,6 +145,7 @@ const getRenderTasks = () => {
 if (sessionStorage.length > 0) {
     masterContainer.innerHTML = ""
     masterContainer.innerHTML = factory.renderHomepage()
+    getEventsByDate()
     getRenderMessage()
     getRenderFriends()
     getRenderTasks()
@@ -167,9 +182,11 @@ masterContainer.addEventListener("click", () => {
                 sessionStorage.setItem("userId", JSON.stringify(data[0].id))
                 masterContainer.innerHTML = ""
                 masterContainer.innerHTML = factory.renderHomepage()
+                getEventsByDate()
                 getRenderMessage()
                 getRenderFriends()
                 getRenderTasks()
+                getNewsByDate()
 
 
             }
@@ -195,9 +212,11 @@ masterContainer.addEventListener("click", () => {
                         users.push(parsedData)
                         masterContainer.innerHTML = ""
                         masterContainer.innerHTML = factory.renderHomepage()
+                        getEventsByDate()
                         getRenderMessage()
                         getRenderFriends()
                         getRenderTasks()
+                        getNewsByDate()
                     })
                 })
             }
@@ -576,4 +595,66 @@ const modalNewsEdit = () => {
     </dialog>`
 };
 
-//* -----------------End News----------------------
+// declared constants to select input fields and created a clear form function to clear inputs
+const date = document.querySelector("#eventDate")
+const eventName = document.querySelector("#eventName")
+const location = document.querySelector("#eventLocation")
+
+const clearForm = () => {
+    date.value = ""
+    eventName.value = ""
+    location.value = ""
+}
+
+
+//created a event listener with a function that will target the save button and targeted the input fields
+masterContainer.addEventListener("click", () => {
+    if (event.target.id.startsWith("submitButton")) {
+        const date = document.querySelector("#eventDate").value
+        const userId = parseInt(sessionStorage.getItem("userId"))
+        const eventName = document.querySelector("#eventName").value
+        const location = document.querySelector("#eventLocation").value
+        const hiddenInputId = document.querySelector("#eventsId")
+
+        //created an object referencing the input fields
+        const newEventEntry = {
+            date: date,
+            userId: userId,
+            eventName: eventName,
+            location: location
+        };
+        //clear form function that will clear the input fields
+        // returns the fetch data parses the data and renders it to the DOM also made an if statement
+        // that will target the hidden input Id and if is not an empty string it will edit the event entry else it will save it as new entry
+        if (hiddenInputId.value !== "") {
+            API.editEvents(newEventEntry, hiddenInputId.value).then(() => {
+                getEventsByDate()
+            }).then(clearForm)
+        } else {
+            API.saveEventsData(newEventEntry).then(getEventsByDate).then(clearForm)
+        }
+    }
+})
+
+
+
+
+// created a event listerner with a function that will target the delete button to delete an event and render the updated events
+masterContainer.addEventListener("click", () => {
+    if (event.target.id.startsWith("deleteEvent--")) {
+        const deleteEntry = event.target.id.split("--")[1]
+        API.deleteEvent(deleteEntry).then(getEventsByDate)
+
+    }
+
+})
+
+
+// created a event listener with a function that will target the edit button and reference the entries into the input fields so they will be able to be edit
+
+masterContainer.addEventListener("click", () => {
+    if (event.target.id.startsWith("editEvent")) {
+        const editEventEntry = event.target.id.split("--")[1]
+        API.updateFormFields(editEventEntry)
+    }
+})

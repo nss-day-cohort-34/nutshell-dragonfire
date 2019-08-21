@@ -77,7 +77,25 @@ const renderHomepage = () => {
   </article>
 
   <article class="container events__container" id="events__container">
+
   <h3>Events</h3>
+  <div id="eventsFormField">
+  <input type="hidden" value="" id="eventsId">
+    <fieldset>
+        <label for="eventDate">Event Date</label>
+        <input type="date" name="eventDate" id="eventDate">
+    </fieldset>
+    <fieldset>
+        <label for="eventDate">Event Name</label>
+        <input type="text" name="eventName" id="eventName" placeholder="Enter the Event Name">
+    </fieldset>
+    <fieldset>
+        <label for="eventLocation">Event Location</label>
+        <input type="text" name="eventName" id="eventLocation" placeholder="Enter the Event Location">
+    </fieldset>
+    <button id="submitButton">Save</button>
+    </div>
+    <div id="eventRender"></div>
   </article>
   <article class="container friends__container">
   <header id="friendHeader">
@@ -98,11 +116,35 @@ const renderLogin = () => {
   </article>`;
 };
 
-export default {
-  createLogin,
-  createRegister,
-  makeUserObject,
-  renderHomepage,
-  renderLogin
-};
+//events factory function that will create the object into the DOM
+const createEventsHTML = (eventObject) => {
+  return ` <section id="eventRenderContainer">
+  <h1>Event Name: ${eventObject.eventName}</h1>
+  <p>Date: ${eventObject.date}</p>
+  <p>Location: ${eventObject.location}</p>
+  <button id="deleteEvent--${eventObject.id}">Delete Event</button>
+  <button id="editEvent--${eventObject.id}">Edit Event</button>
+</section>`
+}
 
+
+
+
+//events render function that will display the events object into the DOM
+const renderEvents = (events) => {
+  const renderEventLocation = document.querySelector("#eventRender")
+  renderEventLocation.innerHTML = ""
+    events.forEach(event => {
+      const renderLocation = createEventsHTML(event)
+      renderEventLocation.innerHTML += renderLocation
+  });
+
+}
+
+
+
+
+
+export default {
+    createLogin, createRegister, makeUserObject, renderHomepage, renderLogin, createEventsHTML, renderEvents
+}

@@ -236,11 +236,18 @@
   ],
   "events": [
     {
-      "id": 1,
+      "date": "2019-08-22",
       "userId": 1,
-      "eventName": "Event Name",
-      "date": "2019-08-16",
-      "location": "1234 Main Street"
+      "eventName": "Nutshell Break",
+      "location": "Nashville",
+      "id": 1
+    },
+    {
+      "date": "2019-08-25",
+      "userId": 1,
+      "eventName": "Titans vs Steelers",
+      "location": "Nashville",
+      "id": 2
     }
   ],
   "friends": [
