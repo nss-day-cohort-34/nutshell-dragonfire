@@ -91,20 +91,156 @@
   ],
   "news": [
     {
-      "id": 1,
+      "title": "test@1132",
+      "synopsis": "test",
+      "url": "testing",
+      "userId": 3,
+      "date": "2019-08-20T16:32:18.842Z",
+      "id": 2
+    },
+    {
+      "title": "test@1136",
+      "synopsis": "test",
+      "url": "testing",
+      "userId": 3,
+      "date": "2019-08-20T16:36:57.394Z",
+      "id": 3
+    },
+    {
+      "title": "test@1138",
+      "synopsis": "test",
+      "url": "test",
+      "userId": 3,
+      "date": "2019-08-20T16:38:48.337Z",
+      "id": 5
+    },
+    {
+      "title": "test",
+      "synopsis": "test",
+      "url": "test",
+      "userId": 3,
+      "date": "2019-08-20T16:52:44.320Z",
+      "id": 6
+    },
+    {
+      "title": "test@1352",
+      "synopsis": "test",
+      "url": "test",
+      "userId": 3,
+      "date": "2019-08-20T18:53:01.264Z",
+      "id": 7
+    },
+    {
+      "title": "test@1403",
+      "synopsis": "test",
+      "url": "test",
+      "userId": 3,
+      "date": "2019-08-20T19:03:32.204Z",
+      "id": 8
+    },
+    {
+      "title": "test@1404",
+      "synopsis": "testing",
+      "url": "testing",
+      "userId": 3,
+      "date": "2019-08-20T19:04:18.823Z",
+      "id": 9
+    },
+    {
+      "date": "2019-08-20T19:21:07.200Z",
+      "userId": "3",
+      "title": "test1440",
+      "synopsis": "test",
+      "url": "test",
+      "id": 10
+    },
+    {
+      "title": "test@1429",
+      "synopsis": "test",
+      "url": "test",
+      "userId": 3,
+      "date": "2019-08-20T19:30:13.078Z",
+      "id": 11
+    },
+    {
+      "title": "test@1434",
+      "synopsis": "test",
+      "url": "test",
+      "userId": 3,
+      "date": "2019-08-20T19:34:52.380Z",
+      "id": 12
+    },
+    {
+      "title": "test1443",
+      "synopsis": "test",
+      "url": "test",
+      "userId": 3,
+      "date": "2019-08-20T19:43:28.924Z",
+      "id": 13
+    },
+    {
+      "title": "test1446",
+      "synopsis": "test",
+      "url": "test",
+      "userId": 3,
+      "date": "2019-08-20T19:46:36.825Z",
+      "id": 14
+    },
+    {
+      "title": "test1502",
+      "synopsis": "test",
+      "url": "test",
+      "userId": 3,
+      "date": "2019-08-20T20:03:03.908Z",
+      "id": 15
+    },
+    {
+      "date": "2019-08-20T20:09:05.019Z",
+      "userId": "3",
+      "title": "test1508",
+      "synopsis": "test1508",
+      "url": "test1508",
+      "id": 16
+    },
+    {
+      "date": "2019-08-20T20:21:19.688Z",
+      "userId": "3",
+      "title": "test1534",
+      "synopsis": "test1534",
+      "url": "test",
+      "id": 17
+    },
+    {
+      "date": "2019-08-20T20:39:17.107Z",
+      "userId": "3",
+      "title": "test1539",
+      "synopsis": "test1539",
+      "url": "test",
+      "id": 18
+    },
+    {
+      "title": "",
+      "synopsis": "new Synopsis",
+      "url": "test.com",
       "userId": 1,
-      "url": "news.com",
-      "title": "News article",
-      "synopsis": "This is an article about this."
+      "date": "2019-08-21T14:05:37.424Z",
+      "id": 19
     }
   ],
   "events": [
     {
-      "id": 1,
+      "date": "2019-08-22",
       "userId": 1,
-      "eventName": "Event Name",
-      "date": "2019-08-16",
-      "location": "1234 Main Street"
+      "eventName": "Nutshell Break",
+      "location": "Nashville",
+      "id": 1
+    },
+    {
+      "date": "2019-08-25",
+      "userId": 1,
+      "eventName": "Titans vs Steelers",
+      "location": "Nashville",
+      "id": 2
     }
   ],
   "friends": [

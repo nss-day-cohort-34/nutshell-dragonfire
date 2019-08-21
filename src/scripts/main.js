@@ -3,6 +3,9 @@ import API from "./data.js"
 import messages from "./messages.js"
 import friends from "./friends.js"
 import tasks from "./tasks.js"
+import news from "./news.js"
+
+
 
 const masterContainer = document.querySelector("#masterContainer")
 let users = []
@@ -13,6 +16,18 @@ masterContainer.innerHTML = factory.renderLogin()
 API.getData().then(parsedData => {
     users.push(parsedData)
 })
+
+const getEventsByDate = () => {
+    API.getEventsData().then(parsedData => {
+        const savedSortArray = parsedData.sort((a, b) => {
+            const dateA = new Date(a.date),
+                dateB = new Date(b.date)
+            return dateA - dateB
+        })
+        factory.renderEvents(savedSortArray)
+    })
+}
+masterContainer.innerHTML = factory.renderLogin()
 friends.getAllFriends().then(data => {
     friendArray.push(data)
 })
@@ -20,16 +35,27 @@ messages.getAllMessages().then(data => {
     messagesArray.push(data)
 })
 const friendInterval = () => {
+    const userId = parseInt(sessionStorage.getItem("userId"))
     friends.getAllFriends().then(data => {
-        if (friendArray.length !== data.length) {
-            getRenderFriends()
-        }
+        friendArray[0].forEach(friend => {
+            if (friendArray[0].length !== data.length) {
+                getRenderFriends()
+                friendArray = []
+                friendArray.push(data)
+            } else if (friend.areFriends === false && userId === friend.userId) {
+                getRenderFriends()
+                friendArray = []
+                friendArray.push(data)
+            }
+        });
     })
 }
 const messageInterval = () => {
-    friends.getAllFriends().then(data => {
-        if (messagesArray.length !== data.length) {
+    messages.getAllMessages().then(data => {
+        if (messagesArray[0].length !== data.length) {
             getRenderMessage()
+            messagesArray = []
+            messagesArray.push(data)
         }
     })
 }
@@ -46,6 +72,18 @@ const getRenderMessage = () => {
         })
     })
 }
+
+const getNewsByDate = () => {
+    news.getNewsData().then(parsedData => {
+        const savedNewsArray = parsedData.sort((a,b) => {
+            const newsDateA = new Date(a.date), newsDateB = new Date(b.date)
+            return newsDateB - newsDateA
+        })
+            news.renderToDOM(savedNewsArray)
+            // console.log(savedNewsArray)
+        })
+    }
+
 //to get all friends on load
 const getRenderFriends = () => {
     friends.getAllFriends().then(data => {
@@ -107,9 +145,11 @@ const getRenderTasks = () => {
 if (sessionStorage.length > 0) {
     masterContainer.innerHTML = ""
     masterContainer.innerHTML = factory.renderHomepage()
+    getEventsByDate()
     getRenderMessage()
     getRenderFriends()
     getRenderTasks()
+    getNewsByDate()
 
 }
 //click login button
@@ -142,9 +182,11 @@ masterContainer.addEventListener("click", () => {
                 sessionStorage.setItem("userId", JSON.stringify(data[0].id))
                 masterContainer.innerHTML = ""
                 masterContainer.innerHTML = factory.renderHomepage()
+                getEventsByDate()
                 getRenderMessage()
                 getRenderFriends()
                 getRenderTasks()
+                getNewsByDate()
 
 
             }
@@ -170,9 +212,11 @@ masterContainer.addEventListener("click", () => {
                         users.push(parsedData)
                         masterContainer.innerHTML = ""
                         masterContainer.innerHTML = factory.renderHomepage()
+                        getEventsByDate()
                         getRenderMessage()
                         getRenderFriends()
                         getRenderTasks()
+                        getNewsByDate()
                     })
                 })
             }
@@ -453,4 +497,164 @@ masterContainer.addEventListener("click", (event) => {
         completedTasks[0].classList.toggle("hidden")
     }
 
+})
+//* -----------------Begin News--------------------
+// ------------------Enter new News Article-------------------------
+let newNewsEntry = "";
+
+masterContainer.addEventListener("click", () => {
+  if (event.target.id.startsWith("newsSubmit")) {
+    const title = document.querySelector("#newsTitle");
+    const synopsis = document.querySelector("#newsSynopsis");
+    const url = document.querySelector("#newsURL");
+    const newsUserID = parseInt(sessionStorage.getItem("userId"));
+    const currentDate = new Date();
+    const newsDateSubmitted = currentDate;
+    // console.log(title);
+    newNewsEntry = {
+      title: title.value,
+      synopsis: synopsis.value,
+      url: url.value,
+      userId: newsUserID,
+      date: newsDateSubmitted,
+    };
+    // console.log(newNewsEntry)
+    //* Display the new journal entry in the DOM
+    news.saveNewsEntry(newNewsEntry).then(() => {
+        getNewsByDate()
+    })
+  }
+});
+
+// --------------------Delete News Article--------------------------
+masterContainer.addEventListener("click", () => {
+  if (event.target.id.startsWith("NewsArticleDelete")) {
+    const newsArticleToDelete = event.target.id.split("--")[1];
+    // console.log(newsArticleToDelete);
+    //* to clear the DOM
+    document.querySelector("#news__articles").innerHTML = "";
+    //* delete article
+    news.deleteNewsEntry(newsArticleToDelete);
+    //* render json news array to DOM
+    news.getNewsData().then(news.renderToDOM);
+  }
+});
+
+// --------------------Edit News Article----------------------------
+masterContainer.addEventListener("click", () => {
+  const modal = document.querySelector("#newsModal");
+  const modalButton = document.querySelector("#editNewsSubmit");
+  if (event.target.id.startsWith("NewsArticleEdit")) {
+    const newsArticleToEdit = event.target.id.split("--")[1];
+    const newsModal = document.querySelector("#newsModal");
+    newsModal.innerHTML = modalNewsEdit();
+    const newsModalBox = document.querySelector("#newsModalBox");
+    newsModalBox.showModal();
+    news.retrieveNewsEntry(newsArticleToEdit)
+    .then(newsArticleObjectToEdit => {
+        const newsTitle = document.querySelector("#editNewsTitle");
+        const newsSynopsis = document.querySelector("#editNewsSynopsis");
+        const newsUrl = document.querySelector("#editNewsURL");
+        const newsDate = document.querySelector("#editNewsDate");
+        const newsUserId = document.querySelector("#editNewsUserId");
+        // console.table(newsArticleObjectToEdit);
+        newsTitle.value = newsArticleObjectToEdit.title;
+        newsSynopsis.value = newsArticleObjectToEdit.synopsis;
+        newsUrl.value = newsArticleObjectToEdit.url;
+        newsDate.value = newsArticleObjectToEdit.date;
+        newsUserId.value = newsArticleObjectToEdit.userId;
+      })
+      .then(
+        masterContainer.addEventListener("click", () => {
+          if (event.target.id.startsWith("editNewsSave")) {
+            const updatedNewsObject = {
+                date: document.querySelector("#editNewsDate").value,
+                userId: document.querySelector("#editNewsUserId").value,
+                title: document.querySelector("#editNewsTitle").value,
+                synopsis: document.querySelector("#editNewsSynopsis").value,
+                url: document.querySelector("#editNewsURL").value,
+            }
+            news.saveEditedNewsEntry(updatedNewsObject, newsArticleToEdit).then(getNewsByDate);
+            const newsModalBox = document.querySelector("#newsModalBox");
+            newsModalBox.close();
+          }
+        })
+      );
+  }
+});
+
+const modalNewsEdit = () => {
+  return `<dialog id="newsModalBox">
+        <input type="hidden" id="editNewsDate" value="" />
+        <input type="hidden" id="editNewsUserId" value="" />
+        <input name = "editNewsTitle" type = "text" id="editNewsTitle">
+        <label for="editNewsTitle">Title</label>
+        <textarea wrap="soft" name="editNewsSynopsis" id="editNewsSynopsis"></textarea>
+        <input name = "editNewsURL" input type = "text" id="editNewsURL">
+        <button id="editNewsSave" type="submit" value="Record News Entry">Save</button>
+    </dialog>`
+};
+
+// declared constants to select input fields and created a clear form function to clear inputs
+const date = document.querySelector("#eventDate")
+const eventName = document.querySelector("#eventName")
+const location = document.querySelector("#eventLocation")
+
+const clearForm = () => {
+    date.value = ""
+    eventName.value = ""
+    location.value = ""
+}
+
+
+//created a event listener with a function that will target the save button and targeted the input fields
+masterContainer.addEventListener("click", () => {
+    if (event.target.id.startsWith("submitButton")) {
+        const date = document.querySelector("#eventDate").value
+        const userId = parseInt(sessionStorage.getItem("userId"))
+        const eventName = document.querySelector("#eventName").value
+        const location = document.querySelector("#eventLocation").value
+        const hiddenInputId = document.querySelector("#eventsId")
+
+        //created an object referencing the input fields
+        const newEventEntry = {
+            date: date,
+            userId: userId,
+            eventName: eventName,
+            location: location
+        };
+        //clear form function that will clear the input fields
+        // returns the fetch data parses the data and renders it to the DOM also made an if statement
+        // that will target the hidden input Id and if is not an empty string it will edit the event entry else it will save it as new entry
+        if (hiddenInputId.value !== "") {
+            API.editEvents(newEventEntry, hiddenInputId.value).then(() => {
+                getEventsByDate()
+            }).then(clearForm)
+        } else {
+            API.saveEventsData(newEventEntry).then(getEventsByDate).then(clearForm)
+        }
+    }
+})
+
+
+
+
+// created a event listerner with a function that will target the delete button to delete an event and render the updated events
+masterContainer.addEventListener("click", () => {
+    if (event.target.id.startsWith("deleteEvent--")) {
+        const deleteEntry = event.target.id.split("--")[1]
+        API.deleteEvent(deleteEntry).then(getEventsByDate)
+
+    }
+
+})
+
+
+// created a event listener with a function that will target the edit button and reference the entries into the input fields so they will be able to be edit
+
+masterContainer.addEventListener("click", () => {
+    if (event.target.id.startsWith("editEvent")) {
+        const editEventEntry = event.target.id.split("--")[1]
+        API.updateFormFields(editEventEntry)
+    }
 })
