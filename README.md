@@ -36,20 +36,17 @@ Editing News: To edit a news article click on the "Edit News Article" button on 
 
 Deleting News: To delete the news article click on the "Delete News Article" button on the news article to be deleted.
 
-
-
 ### Events
+The Events area of the Nutshell dashboard to add, edit, and delete Event items. Each individual event item provides information on the event, the date of the event and location of the event.
 
-
-
-
-
-
-
-
-
-
-
+Adding Event: To add an event the following fields need to be completed:
+ - Event Name: the name of the event
+ - Event Date: the date of the event
+ - Event Location: the location of the event
+ 
+Editing Event: To edit an event, click on the "Edit Event" button and make the appropriate changes. When editing has been completed, click on the "Submit" button
+ 
+Deleting Event: To delete an event, click on the "Delete Event" button of the event to be deleted.
 
 
 ---
