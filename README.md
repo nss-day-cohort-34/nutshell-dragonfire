@@ -10,8 +10,11 @@ To register as a user click on the "Register" button the home screen. The user w
 To login click on the "Login" button on the home screen. The user will be required to enter their username and email address. When the required information has been entered, click on the "Submit" button.
 
 ### Friends
+The Friends area allows a registered user to initiate a friend request with another registered user. The friend request will remain pending until the request has been approved.
 
-
+Friend Request: To request a friend click the "Add Friend" button in the friends area.
+Friend Approval: To approve friend request click on the "Accept" button in the Friends area.
+Friend Denial: To deny a friend request click on the "Deny" button in the Friends area.
 
 ### Messages
 
