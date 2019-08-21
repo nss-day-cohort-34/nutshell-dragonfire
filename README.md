@@ -3,6 +3,12 @@
 ### Introduction
 Nutshell is a dashboard for people to use to organize their daily tasks, events, news article, friends, and chat messages.
 
+### User Registration
+To register as a user click on the "Register" button the home screen. The user will be required to enter their name and password. When the required information has been entered, click on the "Submit" button.
+
+### User Login
+To login click on the "Login" button on the home screen. The user will be required to enter their username and email address. When the required information has been entered, click on the "Submit" button.
+
 ### Friends
 
 
