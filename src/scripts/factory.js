@@ -4,8 +4,8 @@ const createLogin = () => {
     <input type="text" placeholder="Username" id = "loginUsername">
     <input type="text" placeholder="Email" id = "loginEmail">
     <button id="signOnUser">Login</button>
-  </section>`
-}
+  </section>`;
+};
 
 const createRegister = () => {
   return ` <section>
@@ -13,15 +13,16 @@ const createRegister = () => {
     <input type="text" placeholder="Enter a Username" id = "registerUsername">
     <input type="text" placeholder="Enter an Email" id = "registerEmail">
     <button id = "createUser">Submit</button>
-  </section>`
-}
+  </section>`;
+};
 
 const makeUserObject = (username, email) => {
   return {
     username: username,
     email: email
-  }
-}
+  };
+};
+
 
 const renderHomepage = () => {
   return `<header>
@@ -40,6 +41,17 @@ const renderHomepage = () => {
 <div class="leftSideContainer">
   <article class="container news__container" id="news__container">
   <h3>News</h3>
+    <div id="newsModal"></div>
+    <section id="news__entry">
+      <fieldset>
+        <input type="hidden" id="newsHiddenid" value=""/>
+        Title<input name = "newsTitle" input type = "text" id="newsTitle">
+        Synopsis<textarea wrap="soft" name="newsSynopsis" id="newsSynopsis"></textarea>
+        URL<input name = "newsURL" input type = "text" id="newsURL">
+        <button id="newsSubmit" type="submit" value="Record News Entry">Submit</button>
+      </fieldset>
+    </section>
+    <section id="news__articles"></section>
   </article>
 
   <article class="container tasks__container" id="tasks__container">
@@ -75,16 +87,16 @@ const renderHomepage = () => {
   </header>
   <ul id="friends__container"></ul>
   </article>
-</div>`
-}
+</div>`;
+};
 
 const renderLogin = () => {
   return `<h1>Welcome to Nutshell!</h1>
   <article id="loginContainer">
     <button id="loginButton" class="button">Login</button>
     <button id="registerButton" class="button">Register</button>
-  </article>`
-}
+  </article>`;
+};
 
 export default {
   createLogin,
@@ -92,4 +104,5 @@ export default {
   makeUserObject,
   renderHomepage,
   renderLogin
-}
+};
+

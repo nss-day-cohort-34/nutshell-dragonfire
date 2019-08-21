@@ -18,6 +18,11 @@ const searchAPI = (username, email) => {
         .then(entries => entries.json())
 }
 
+
+
+
+
+
 export default {
     getData,
     register,
