@@ -1,18 +1,18 @@
-#Nutshell - dragonfire
+# Nutshell - dragonfire
 
-##Introduction
+### Introduction
 Nutshell is a dashboard for people to use to organize their daily tasks, events, news article, friends, and chat messages.
 
-##Friends
+### Friends
 
 
 
-##Messages
+### Messages
 
 
 
 
-##News
+### News
 The News area of the Nutshell dashboard provides functionality to add, edit and delete news.
 When news articles have been entered they will be displayed in the news area of the dashboard in descending chronological order.
 
@@ -28,13 +28,13 @@ Deleting News: To delete the news article click on the "Delete News Article" but
 
 
 
-##Events
+### Events
 
 
 
 
 
-##To-Do
+### To-Do
 
 
 
